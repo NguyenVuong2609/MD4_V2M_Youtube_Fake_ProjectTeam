@@ -1,4 +1,4 @@
-package rikkei.academy.demoproject;
+package rikkei.academy.controller;
 
 import java.io.*;
 import javax.servlet.http.*;
