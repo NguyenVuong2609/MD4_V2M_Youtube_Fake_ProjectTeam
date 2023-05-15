@@ -8,7 +8,7 @@ public class Channel {
     private User owner;
     private List<User> followerList;
     private List<Video> videoList;
-    private boolean status;
+    private boolean status = true;
 
     public Channel() {
     }
