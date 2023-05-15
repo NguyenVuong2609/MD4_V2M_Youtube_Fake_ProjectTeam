@@ -43,6 +43,8 @@ public class UserController extends HttpServlet {
         }
     }
 
+
+    //! Hiển thị form đăng nhập
     private void showFormLogin(HttpServletRequest request,HttpServletResponse response){
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/form-login/login.jsp");
         try {
