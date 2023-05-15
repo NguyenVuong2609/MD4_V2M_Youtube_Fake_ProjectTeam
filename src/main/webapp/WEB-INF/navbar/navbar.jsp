@@ -16,6 +16,13 @@
     <link rel="stylesheet" type="text/css" href="css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        .userLogin img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
 <!-- Top navbar -->
@@ -47,9 +54,19 @@
                         style="font-size:14px; font-weight: 600;">SIGN UP</span></a>
             </c:if>
             <c:if test='${sessionScope["userLogin"]!=null}'>
-                <div>
-                    <img src='${sessionScope["userLogin"].getAvatar()}'>
-                    <a href="#">${sessionScope["userLogin"].getName()}</a>
+                <div class="userLogin">
+                    <div class="dropdown show">
+                        <img src='${sessionScope["userLogin"].getAvatar()}'>
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${sessionScope["userLogin"].getName()}
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="">Account information</a>
+                            <a class="dropdown-item" href="/user?action=logout">Log out</a>
+                        </div>
+                    </div>
                 </div>
             </c:if>
         </div>

@@ -20,20 +20,22 @@ public class UserController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String action = request.getParameter("action");
-        if (action == null)
-            action = "";
+        if (action == null) action = "";
         switch (action) {
             case "register":
-                showFormRegister(request,response);
+                showFormRegister(request, response);
                 break;
             case "login":
-                showFormLogin(request,response);
+                showFormLogin(request, response);
                 break;
             case "trending":
                 showTrending(request, response);
                 break;
             case "history":
                 showHistory(request, response);
+                break;
+            case "logout":
+                logOut(request,response);
                 break;
         }
     }
@@ -43,14 +45,13 @@ public class UserController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String action = request.getParameter("action");
-        if (action == null)
-            action = "";
+        if (action == null) action = "";
         switch (action) {
             case "register":
                 actionRegister(request, response);
                 break;
             case "login":
-                actionLogin(request,response);
+                actionLogin(request, response);
                 break;
         }
     }
@@ -112,10 +113,10 @@ public class UserController extends HttpServlet {
 
 
     //! Hiển thị form đăng nhập
-    private void showFormLogin(HttpServletRequest request,HttpServletResponse response){
+    private void showFormLogin(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/form-login/login.jsp");
         try {
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -124,7 +125,7 @@ public class UserController extends HttpServlet {
     }
 
     //! Đăng nhập
-    private void actionLogin (HttpServletRequest request, HttpServletResponse response) {
+    private void actionLogin(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = Service.getInstance().getUserService().userLogin(username, password);
@@ -142,27 +143,41 @@ public class UserController extends HttpServlet {
         }
     }
 
-            //! Hiển thị page Trending
-            private void showTrending (HttpServletRequest request, HttpServletResponse response){
-                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/trending.jsp");
-                try {
-                    dispatcher.forward(request, response);
-                } catch (ServletException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+    //! Hiển thị page Trending
+    private void showTrending(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/trending.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-            //! Hiển thị page History
-            private void showHistory (HttpServletRequest request, HttpServletResponse response){
-                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/history.jsp");
-                try {
-                    dispatcher.forward(request, response);
-                } catch (ServletException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+    //! Hiển thị page History
+    private void showHistory(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/history.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //! Log out
+    private void logOut(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession(false); //? Check sự tồn tại của session --> nếu không có trả về null
+        if (session.getAttribute("userLogin")!= null){
+            session.removeAttribute("userLogin");
+            session.invalidate(); //? Xóa các thuộc tính bên trong session
+            try {
+                response.sendRedirect("index.jsp");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
+    }
+}
