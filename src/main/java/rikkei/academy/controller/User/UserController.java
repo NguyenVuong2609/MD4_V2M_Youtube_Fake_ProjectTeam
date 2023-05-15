@@ -130,7 +130,7 @@ public class UserController extends HttpServlet {
         User user = Service.getInstance().getUserService().userLogin(username, password);
         if (user != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+            session.setAttribute("userLogin", user);
             try {
                 response.sendRedirect("index.jsp");
             } catch (IOException e) {
