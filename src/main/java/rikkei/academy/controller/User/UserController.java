@@ -29,7 +29,12 @@ public class UserController extends HttpServlet {
             case "login":
                 showFormLogin(request,response);
                 break;
-
+            case "trending":
+                showTrending(request, response);
+                break;
+            case "history":
+                showHistory(request, response);
+                break;
         }
     }
 
@@ -119,11 +124,11 @@ public class UserController extends HttpServlet {
     }
 
     //! Đăng nhập
-    private void actionLogin (HttpServletRequest request, HttpServletResponse response){
+    private void actionLogin (HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User user = Service.getInstance().getUserService().userLogin(username,password);
-        if (user!= null){
+        User user = Service.getInstance().getUserService().userLogin(username, password);
+        if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             try {
@@ -133,7 +138,31 @@ public class UserController extends HttpServlet {
             }
         } else {
             request.setAttribute("validate", "Login failed! Please try again!");
-            showFormLogin(request,response);
+            showFormLogin(request, response);
         }
     }
-}
+
+            //! Hiển thị page Trending
+            private void showTrending (HttpServletRequest request, HttpServletResponse response){
+                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/trending.jsp");
+                try {
+                    dispatcher.forward(request, response);
+                } catch (ServletException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            //! Hiển thị page History
+            private void showHistory (HttpServletRequest request, HttpServletResponse response){
+                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/history.jsp");
+                try {
+                    dispatcher.forward(request, response);
+                } catch (ServletException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
