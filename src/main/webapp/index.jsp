@@ -30,7 +30,8 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a href="login.html" class="btn btn-outline-primary"><i class="fas fa-user-circle" style="font-size: 20px;"></i> <span style="font-size:14px; font-weight: 600;">SIGN IN</span></a>
+            <a href="/user?action=login" class="btn btn-outline-primary"><i class="fas fa-user-circle" style="font-size: 20px;"></i> <span style="font-size:14px; font-weight: 600;">SIGN IN</span></a>
+            <a href="/user?action=register" class="btn btn-outline-primary"><i class="fas fa-user-circle" style="font-size: 20px;"></i> <span style="font-size:14px; font-weight: 600;">SIGN UP</span></a>
         </div>
     </div>
 </nav>
