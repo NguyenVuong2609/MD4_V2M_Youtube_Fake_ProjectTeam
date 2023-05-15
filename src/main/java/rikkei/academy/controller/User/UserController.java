@@ -22,7 +22,12 @@ public class UserController extends HttpServlet {
             case "login":
                 showFormLogin(request,response);
                 break;
-
+            case "trending":
+                showTrending(request, response);
+                break;
+            case "history":
+                showHistory(request, response);
+                break;
         }
     }
 
@@ -47,6 +52,30 @@ public class UserController extends HttpServlet {
     //! Hiển thị form đăng nhập
     private void showFormLogin(HttpServletRequest request,HttpServletResponse response){
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/form-login/login.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //! Hiển thị page Trending
+    private void showTrending(HttpServletRequest request,HttpServletResponse response){
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/trending.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //! Hiển thị page History
+    private void showHistory(HttpServletRequest request,HttpServletResponse response){
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/history.jsp");
         try {
             dispatcher.forward(request,response);
         } catch (ServletException e) {
