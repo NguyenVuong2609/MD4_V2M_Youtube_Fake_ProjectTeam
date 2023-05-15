@@ -20,16 +20,19 @@
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
+                <c:if test="${requestScope['validate']!=null}">
+                    <label class="alert alert-danger">${requestScope['validate']}</label>
+                </c:if>
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2021/08/8f5b0b0414592cf793b74654e7fa0611.png"
+                            <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/youtube2.png?alt=media&token=9f49fd1e-fdde-4266-a553-f0835603a257"
                                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
-                                <form>
+                                <form method="post">
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -39,22 +42,20 @@
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form2Example17">Email address</label>
+                                        <label class="form-label">Username</label>
+                                        <input type="text" class="form-control form-control-lg" name="username"/>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form2Example27">Password</label>
+                                        <label class="form-label" >Password</label>
+                                        <input type="password" class="form-control form-control-lg" name="password"/>
                                     </div>
 
                                     <div class="pt-1 mb-4">
-                                        <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                     </div>
 
-                                    <a class="small text-muted" href="#!">Forgot password?</a>
-                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!"
-                                                                                                              style="color: #393f81;">Register here</a></p>
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="/user?action=register" style="color: #393f81;">Register here</a></p>
                                     <a href="#!" class="small text-muted">Terms of use.</a>
                                     <a href="#!" class="small text-muted">Privacy policy</a>
                                 </form>

@@ -10,7 +10,7 @@
 
 <body>
 
-<form method="post">
+<%--<form method="post">--%>
 
   <progress value="0" max="100" id="uploader">0%</progress>
 
@@ -20,9 +20,9 @@
 
   <div id="imgDiv"></div>
 
-  <button type="submit">Upload</button>
+<%--  <button type="submit">Upload</button>--%>
 
-</form>
+<%--</form>--%>
 
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 
@@ -61,13 +61,13 @@
 <script type="text/javascript">
 
   const firebaseConfig = {
-    apiKey : "AIzaSyDza_XPq3Zami2zynd_xgMzRYasgSBYxXk" ,
-    authDomain : "giangvan-248ea.firebaseapp.com" ,
-    projectId : "giangvan-248ea" ,
-    storageBucket : "giangvan-248ea.appspot.com" ,
-    messagingSenderId : "728493484436" ,
-    appId : "1:728493484436:web:ab963bab5ca4e2c1460781" ,
-    measurementId : "G-WVCW37ETLM"
+    apiKey: "AIzaSyA77N_ysoRaVII4Lu4JHY_c-z2Ej7mJKRs",
+    authDomain: "vuongcuti-6ce58.firebaseapp.com",
+    projectId: "vuongcuti-6ce58",
+    storageBucket: "vuongcuti-6ce58.appspot.com",
+    messagingSenderId: "268262293286",
+    appId: "1:268262293286:web:8cd35e7267375745d04be7",
+    measurementId: "G-E7PQZW5JV2"
   };
 
   firebase.initializeApp(firebaseConfig);
