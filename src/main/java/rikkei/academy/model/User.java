@@ -1,13 +1,13 @@
 package rikkei.academy.model;
 
 public class User {
-    int user_id;
-    String name;
-    String username;
-    String password;
-    String email;
-    String avatar;
-    boolean status;
+    private int user_id;
+    private String name;
+    private String username;
+    private String password;
+    private String email;
+    private String avatar;
+    private boolean status;
 
     public User() {
     }

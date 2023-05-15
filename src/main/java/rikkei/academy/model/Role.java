@@ -1,8 +1,8 @@
 package rikkei.academy.model;
 
 public class Role {
-    int id;
-    RoleName name;
+    private int id;
+    private RoleName name;
 
     public Role() {
     }
