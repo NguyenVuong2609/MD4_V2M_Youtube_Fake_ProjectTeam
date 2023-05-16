@@ -54,7 +54,7 @@
                                      src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                      class="rounded-circle">
                             </div>
-                            <div class="col-5 mt-3">
+                            <div class="col-4 mt-3">
                                 <p class="mb-2"
                                    title="Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha | Pritam, Amitabh B|Arijit Singh">
                                     Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
@@ -65,13 +65,15 @@
                                     70M views 7 months ago
                                 </p>
                             </div>
-                            <div class="col-1 mt-3"></div>
                             <div class="col-2 mt-3">
                                 <button type="button">Subscribe</button>
                             </div>
                             <div class="col-2 mt-3">
                                 <span>143N</span>
                                 <button type="button">Like</button>
+                            </div>
+                            <div class="col-2 mt-3">
+                                <button type="button">Add to Playlist</button>
                             </div>
                         </div>
                     </div>
@@ -176,7 +178,7 @@
                                 <div class="col-12 mt-3">
                                     <p class="mb-2">
                                         Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
+                                           Pritam,
                                         Amitabh B|Arijit Singh</p>
                                 </div>
                             </div>
