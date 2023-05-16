@@ -6,4 +6,5 @@ import rikkei.academy.service.IGeneric;
 
 public interface IVideoService extends IGeneric<Video> {
     Channel findChannelById(int id);
+    void updateViewById(int id);
 }
