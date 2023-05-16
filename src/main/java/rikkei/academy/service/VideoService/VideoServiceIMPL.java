@@ -4,6 +4,7 @@ import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Category;
 import rikkei.academy.model.Channel;
 import rikkei.academy.model.Video;
+import rikkei.academy.service.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String INSERT_VIDEO_CATEGORY = "INSERT INTO video_category_connection VALUES (?,?);";
     private static final String FIND_VIDEO_BY_ID = "SELECT video.video_id FROM video where video_id = ?;";
     private static final String DELETE_VIDEO = "DELETE FROM video WHERE video_id=?;";
-    private static final String SELECT_CHANNEL_BY_ID = "";
+    private static final String SELECT_CHANNEL_BY_ID = "select video.channel_id, channel_name, avatar from channel join video on channel.channel_id = video.channel_id where video_id = ?";
 
     @Override
     public List<Video> findAll() {
@@ -32,8 +33,10 @@ public class VideoServiceIMPL implements IVideoService {
                 video.setVideo_link(resultSet.getString("video_link"));
                 video.setStatus(resultSet.getBoolean("status"));
                 video.setView(resultSet.getInt("view"));
+                video.setChannel(findChannelById(resultSet.getInt("video_id")));
                 video.setImage(resultSet.getString("image"));
                 video.setVideo_date(resultSet.getDate("video_date"));
+//                video.setCategory(Service.getInstance().getCategoryService().);
                 videoList.add(video);
             }
             return videoList;
@@ -116,17 +119,20 @@ public class VideoServiceIMPL implements IVideoService {
 
     @Override
     public Channel findChannelById(int id) {
-        Channel channel = new Channel();
+        Channel channel = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CHANNEL_BY_ID);
             preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-
+                channel = new Channel();
+                channel.setChannel_id(resultSet.getInt(1));
+                channel.setChannel_name(resultSet.getString(2));
+                channel.setAvatar(resultSet.getString(3));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return channel;
     }
 }
