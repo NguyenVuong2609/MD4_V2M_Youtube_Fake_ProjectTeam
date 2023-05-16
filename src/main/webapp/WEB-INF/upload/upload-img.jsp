@@ -4,7 +4,7 @@
 
 <head>
 
-  <title>Title</title>
+    <title>Title</title>
 
 </head>
 
@@ -12,13 +12,14 @@
 
 <%--<form method="post">--%>
 
-  <progress value="0" max="100" id="uploader">0%</progress>
 
-  <input type="file" value="upload" accept=".jpg" id="fileButton">
+<progress value="0" max="100" id="uploader" style="width: 100%;">0%</progress><br>
 
-  <input name="avatar" type="text" id="avatar" style="display: none">
+<input type="file" value="upload" accept=".jpg" id="fileButton">
 
-  <div id="imgDiv"></div>
+<input name="avatar" type="text" id="avatar" style="display: none">
+
+<div id="imgDiv"></div>
 
 <%--  <button type="submit">Upload</button>--%>
 
@@ -60,55 +61,55 @@
 
 <script type="text/javascript">
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyA77N_ysoRaVII4Lu4JHY_c-z2Ej7mJKRs",
-    authDomain: "vuongcuti-6ce58.firebaseapp.com",
-    projectId: "vuongcuti-6ce58",
-    storageBucket: "vuongcuti-6ce58.appspot.com",
-    messagingSenderId: "268262293286",
-    appId: "1:268262293286:web:8cd35e7267375745d04be7",
-    measurementId: "G-E7PQZW5JV2"
-  };
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyA77N_ysoRaVII4Lu4JHY_c-z2Ej7mJKRs",
+    //     authDomain: "vuongcuti-6ce58.firebaseapp.com",
+    //     projectId: "vuongcuti-6ce58",
+    //     storageBucket: "vuongcuti-6ce58.appspot.com",
+    //     messagingSenderId: "268262293286",
+    //     appId: "1:268262293286:web:8cd35e7267375745d04be7",
+    //     measurementId: "G-E7PQZW5JV2"
+    // };
 
-  firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 
-  var image = '';
+    var image = '';
 
-  // firebase bucket name
+    // firebase bucket name
 
-  // REPLACE WITH THE ONE YOU CREATE
+    // REPLACE WITH THE ONE YOU CREATE
 
-  // ALSO CHECK STORAGE RULES IN FIREBASE CONSOLE
+    // ALSO CHECK STORAGE RULES IN FIREBASE CONSOLE
 
-  var fbBucketName = 'images';
+    var fbBucketName = 'images';
 
-  // get elements
+    // get elements
 
-  var uploader = document.getElementById('uploader');
+    var uploader = document.getElementById('uploader');
 
-  var fileButton = document.getElementById('fileButton');
+    var fileButton = document.getElementById('fileButton');
 
-  // listen for file selection
+    // listen for file selection
 
-  fileButton.addEventListener('change', function (e) {
+    fileButton.addEventListener('change', function (e) {
 
 // what happened
 
-    console.log('file upload event', e);
+        console.log('file upload event', e);
 
 // get file
 
-    var file = e.target.files[0];
+        var file = e.target.files[0];
 
 // create a storage ref
 
-    <%--var storageRef = firebase.storage().ref(`${fbBucketName}/${file.name}`);--%>
+        <%--var storageRef = firebase.storage().ref(`${fbBucketName}/${file.name}`);--%>
 
-    const storageRef = firebase.storage().ref(file.name);
+        const storageRef = firebase.storage().ref(file.name);
 
 // upload file
 
-    var uploadTask = storageRef.put(file);
+        var uploadTask = storageRef.put(file);
 
 // The part below is largely copy-pasted from the 'Full Example' section from
 
@@ -116,33 +117,33 @@
 
 // update progress bar
 
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
 
             function (snapshot) {
 
 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
 
-              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-              uploader.value = progress;
+                uploader.value = progress;
 
-              console.log('Upload is ' + progress + '% done');
+                console.log('Upload is ' + progress + '% done');
 
-              switch (snapshot.state) {
+                switch (snapshot.state) {
 
-                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    case firebase.storage.TaskState.PAUSED: // or 'paused'
 
-                  console.log('Upload is paused');
+                        console.log('Upload is paused');
 
-                  break;
+                        break;
 
-                case firebase.storage.TaskState.RUNNING: // or 'running'
+                    case firebase.storage.TaskState.RUNNING: // or 'running'
 
-                  console.log('Upload is running');
+                        console.log('Upload is running');
 
-                  break;
+                        break;
 
-              }
+                }
 
             }, function (error) {
 
@@ -150,27 +151,27 @@
 
 // https://firebase.google.com/docs/storage/web/handle-errors
 
-              switch (error.code) {
+                switch (error.code) {
 
-                case 'storage/unauthorized':
+                    case 'storage/unauthorized':
 
 // User doesn't have permission to access the object
 
-                  break;
+                        break;
 
-                case 'storage/canceled':
+                    case 'storage/canceled':
 
 // User canceled the upload
 
-                  break;
+                        break;
 
-                case 'storage/unknown':
+                    case 'storage/unknown':
 
 // Unknown error occurred, inspect error.serverResponse
 
-                  break;
+                        break;
 
-              }
+                }
 
             }, function () {
 
@@ -178,39 +179,39 @@
 
 // save this link somewhere, e.g. put it in an input field
 
-              var downloadURL = uploadTask.snapshot.downloadURL;
+                var downloadURL = uploadTask.snapshot.downloadURL;
 
-              image = downloadURL;
+                image = downloadURL;
 
-              console.log('downloadURL ===>', downloadURL);
+                console.log('downloadURL ===>', downloadURL);
 
-              let divLocation = document.getElementById("imgDiv");
+                let divLocation = document.getElementById("imgDiv");
 
-              let imgElement = document.createElement("img");
+                let imgElement = document.createElement("img");
 
-              imgElement.src = downloadURL
+                imgElement.src = downloadURL
 
-              imgElement.width = 100;
+                imgElement.width = 100;
 
-              imgElement.height = 100;
+                imgElement.height = 100;
 
-              console.log('pic ==', downloadURL)
+                console.log('pic ==', downloadURL)
 
-              divLocation.append(imgElement);
+                divLocation.append(imgElement);
 
-              document.getElementById('avatar').value = downloadURL;
+                document.getElementById('avatar').value = downloadURL;
 
             });
 
-  });
+    });
 
-  // function resultImage(){
+    // function resultImage(){
 
-  // console.log('image resulte -->', image)
+    // console.log('image resulte -->', image)
 
-  // return image;
+    // return image;
 
-  // }
+    // }
 
 </script>
 
