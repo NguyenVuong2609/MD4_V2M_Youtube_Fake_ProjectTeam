@@ -1,5 +1,6 @@
 package rikkei.academy.controller.User;
 
+import rikkei.academy.model.Channel;
 import rikkei.academy.model.Role;
 import rikkei.academy.model.RoleName;
 import rikkei.academy.model.User;
@@ -20,8 +21,7 @@ public class UserController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String action = request.getParameter("action");
-        if (action == null)
-            action = "";
+        if (action == null) action = "";
         switch (action) {
             case "register":
                 showFormRegister(request, response);
@@ -35,6 +35,8 @@ public class UserController extends HttpServlet {
             case "history":
                 showHistory(request, response);
                 break;
+            case "logout":
+                logOut(request,response);
             case "detail":
                 showDetail(request, response);
                 break;
@@ -46,8 +48,7 @@ public class UserController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String action = request.getParameter("action");
-        if (action == null)
-            action = "";
+        if (action == null) action = "";
         switch (action) {
             case "register":
                 actionRegister(request, response);
@@ -168,7 +169,10 @@ public class UserController extends HttpServlet {
         User user = Service.getInstance().getUserService().userLogin(username, password);
         if (user != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+            int channelId = Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
+            Channel channel = Service.getInstance().getChannelService().findById(channelId);
+            user.setChannel(channel);
+            session.setAttribute("userLogin", user);
             try {
                 response.sendRedirect("index.jsp");
             } catch (IOException e) {
@@ -180,4 +184,23 @@ public class UserController extends HttpServlet {
         }
     }
 
+    //! Log out
+    private void logOut(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession(false); //? Check sự tồn tại của session --> nếu không có trả về null
+        if (session.getAttribute("userLogin")!= null){
+            session.removeAttribute("userLogin");
+            session.invalidate(); //? Xóa các thuộc tính bên trong session
+            try {
+                response.sendRedirect("index.jsp");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    //! Check channel exist
+    public int findChannelByUserId(User user){
+        return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
+    }
 }
+
