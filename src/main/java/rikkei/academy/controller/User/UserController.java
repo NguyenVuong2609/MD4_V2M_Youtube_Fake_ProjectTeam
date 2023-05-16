@@ -1,9 +1,6 @@
 package rikkei.academy.controller.User;
 
-import rikkei.academy.model.Channel;
-import rikkei.academy.model.Role;
-import rikkei.academy.model.RoleName;
-import rikkei.academy.model.User;
+import rikkei.academy.model.*;
 import rikkei.academy.service.Service;
 
 import java.io.*;
@@ -173,10 +170,9 @@ public class UserController extends HttpServlet {
             int channelId = Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
             Channel channel = Service.getInstance().getChannelService().findById(channelId);
             user.setChannel(channel);
-            System.out.println("channel from login --> " + channel);
             session.setAttribute("userLogin", user);
             try {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("/");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -193,7 +189,7 @@ public class UserController extends HttpServlet {
             session.removeAttribute("userLogin");
             session.invalidate(); //? Xóa các thuộc tính bên trong session
             try {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("/");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -204,5 +200,6 @@ public class UserController extends HttpServlet {
     public int findChannelByUserId(User user){
         return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
     }
+
 }
 

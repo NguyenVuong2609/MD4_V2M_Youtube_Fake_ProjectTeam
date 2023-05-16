@@ -61,7 +61,7 @@ public class VideoController extends HttpServlet {
         User user = (User) session.getAttribute("userLogin");
         int channelId = Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
         Channel channel = Service.getInstance().getChannelService().findById(channelId);
-        Category category = Service.getInstance().;
+        Category category = Service.getInstance().getCategoryService().findByName(category_name);
         Video video = new Video(video_name, video_link, video_avatar, channel, category);
         Service.getInstance().getVideoService().save(video);
         try {
