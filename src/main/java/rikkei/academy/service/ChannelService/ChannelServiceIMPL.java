@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ChannelServiceIMPL implements IChannelService{
     private Connection connection = ConnectToMySQL.getConnection();
-    private final String INSERT_INTO_CHANNEL = "insert into channel (channel_name, status, user_id) values (?,?,?)";
+    private final String INSERT_INTO_CHANNEL = "insert into channel (channel_name,avatar, user_id) values (?,?,?)";
 
     @Override
     public List<Channel> findAll() {
@@ -21,11 +21,15 @@ public class ChannelServiceIMPL implements IChannelService{
     public void save(Channel channel) {
         try {
             connection.setAutoCommit(false);
+            System.out.println(channel);
+            System.out.println(channel.getAvatar());
+            System.out.println(channel.getOwner());
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_CHANNEL);
             preparedStatement.setString(1,channel.getChannel_name());
-            preparedStatement.setBoolean(2,true);
+            preparedStatement.setString(2,channel.getAvatar());
             preparedStatement.setInt(3,channel.getOwner().getUser_id());
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

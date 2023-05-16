@@ -64,6 +64,7 @@
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="">Account information</a>
+                            <a class="dropdown-item" href="/channel?action=create">Create your channel</a>
                             <a class="dropdown-item" href="/user?action=logout">Log out</a>
                         </div>
                     </div>
