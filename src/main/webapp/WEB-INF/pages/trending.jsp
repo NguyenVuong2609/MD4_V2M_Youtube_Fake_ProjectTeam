@@ -32,34 +32,8 @@
     <div class="col-md-10">
         <!-- content section -->
         <div class="container-fluid">
-            <div class="border-bottom slide">
-                <a href="#">
-                    <img class="rounded-circle" alt="" width="100%"
-                         src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/music.png?alt=media&token=b6d91a3d-2d24-487f-adb1-b4a6d9fa3c03">
-                    <p class="text-center" style="color:#606060;">Music</p>
-                </a>
-
-                <a href="#">
-                    <img class="rounded-circle" alt="" width="100%"
-                         src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/gaming.png?alt=media&token=fc30f16e-a36b-495e-b8d0-0fc87f0caac8">
-                    <p class="text-center" style="color:#606060;">Gaming</p>
-                </a>
-
-                <a href="#">
-                    <img class="rounded-circle" alt="" width="100%"
-                         src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/news.png?alt=media&token=2f85b6a1-1dc6-4485-b289-d79bd665e4aa">
-                    <p class="text-center" style="color:#606060;">News</p>
-                </a>
-
-                <a href="#">
-                    <img class="rounded-circle" alt="" width="100%"
-                         src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/movies.png?alt=media&token=a53514a0-720e-4083-aba3-9f34c7c245df">
-                    <p class="text-center" style="color:#606060;">Movies</p>
-                </a>
-
-            </div>
-
             <div class="container-fluid mt-4 pl-2">
+                <h3>Trending Videos</h3>
                 <a href="#">
                     <div class="card">
                         <div class="row">

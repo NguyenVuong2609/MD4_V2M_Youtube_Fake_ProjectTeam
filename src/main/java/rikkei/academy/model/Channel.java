@@ -1,5 +1,6 @@
 package rikkei.academy.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Channel {
@@ -7,19 +8,20 @@ public class Channel {
     private String channel_name;
     private User owner;
     private List<User> followerList;
-    private List<Video> videoList;
+    private List<Video> videoList = new ArrayList<>();
     private boolean status = true;
     private String avatar = "https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/images.png?alt=media&token=568b3bcc-c852-4669-9cd3-d4684ce4ad70";
 
+
     public Channel() {
     }
+
 
     public Channel(int channel_id, String channel_name, User owner, List<User> followerList, List<Video> videoList, boolean status, String avatar) {
         this.channel_id = channel_id;
         this.channel_name = channel_name;
         this.owner = owner;
         this.followerList = followerList;
-        this.videoList = videoList;
         this.status = status;
         this.avatar = avatar;
     }
