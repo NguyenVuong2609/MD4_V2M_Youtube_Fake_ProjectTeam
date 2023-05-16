@@ -30,10 +30,11 @@ public class Video {
         this.likeList = likeList;
     }
 
-    public Video(String videoName, String videoLink, String videoAvatar) {
+    public Video(String videoName, String videoLink, String videoAvatar, Channel channel) {
         this.video_name = videoName;
         this.video_link = videoLink;
         this.image = videoAvatar;
+        this.channel = channel;
     }
 
     public int getVideo_id() {

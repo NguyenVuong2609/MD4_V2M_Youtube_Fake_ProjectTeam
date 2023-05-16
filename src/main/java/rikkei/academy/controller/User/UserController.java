@@ -172,6 +172,7 @@ public class UserController extends HttpServlet {
             int channelId = Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
             Channel channel = Service.getInstance().getChannelService().findById(channelId);
             user.setChannel(channel);
+            System.out.println("channel from login --> " + channel);
             session.setAttribute("userLogin", user);
             try {
                 response.sendRedirect("index.jsp");

@@ -12,13 +12,14 @@ To change this template use File | Settings | File Templates.
 </head>
 <body>
 
-<form method="post">
-    <progress value="0" max="100" id="uploader">0%</progress>
-    <input type="file" value="upload" accept=".jpg" id="fileButton">
+<%--<form method="post">--%>
+    <label for="videoLink">Video</label>
+    <progress value="0" max="100" id="uploaderVideo">0%</progress>
+    <input type="file" value="uploadVideo" accept=".mp4" id="fileButtonVideo">
     <input name="videoLink" type="text" id="videoLink" style="display: none">
     <div id="videoDiv"></div>
-    <button type="submit">Upload</button>
-</form>
+<%--    <button type="submit">Upload</button>--%>
+<%--</form>--%>
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <%--<script>--%>
 
@@ -58,8 +59,8 @@ To change this template use File | Settings | File Templates.
     var fbBucketName = 'images';
 
     // get elements
-    var uploader = document.getElementById('uploader');
-    var fileButton = document.getElementById('fileButton');
+    var uploader = document.getElementById('uploaderVideo');
+    var fileButton = document.getElementById('fileButtonVideo');
 
     // listen for file selection
     fileButton.addEventListener('change', function (e) {
