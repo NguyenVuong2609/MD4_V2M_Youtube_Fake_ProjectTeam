@@ -29,14 +29,14 @@
         <div class="container-fluid">
             <div class="grid_title">Recommended</div>
             <div class="row">
-                <div class="col-md-3 col-sx-10 p-2">
-                    <a href="">
+                <div class="col-md-3 p-2">
+                    <a href="/user?action=detail">
                         <div class="card">
                             <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity.jpg?alt=media&token=04439fab-f8fc-40b9-a45c-d61e751baab6"
-                                 height="174"/>
+                                 alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -62,7 +62,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -88,7 +88,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -114,7 +114,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -140,7 +140,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -166,7 +166,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -192,7 +192,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -218,7 +218,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -254,7 +254,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -280,7 +280,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -306,7 +306,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -332,7 +332,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -358,7 +358,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -384,7 +384,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -410,7 +410,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>
@@ -436,7 +436,7 @@
                                  alt="image" height="174"/>
                             <div class="row">
                                 <div class="col-2 mt-3">
-                                    <img id="img" width="48"
+                                    <img width="48"
                                          src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
                                          class="rounded-circle">
                                 </div>

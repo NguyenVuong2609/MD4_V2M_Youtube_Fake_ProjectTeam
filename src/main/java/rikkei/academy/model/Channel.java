@@ -1,5 +1,6 @@
 package rikkei.academy.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Channel {
@@ -7,18 +8,17 @@ public class Channel {
     private String channel_name;
     private User owner;
     private List<User> followerList;
-    private List<Video> videoList;
+    private List<Video> videoList = new ArrayList<>();
     private boolean status;
 
     public Channel() {
     }
 
-    public Channel(int channel_id, String channel_name, User owner, List<User> followerList, List<Video> videoList, boolean status) {
+    public Channel(int channel_id, String channel_name, User owner, List<User> followerList, boolean status) {
         this.channel_id = channel_id;
         this.channel_name = channel_name;
         this.owner = owner;
         this.followerList = followerList;
-        this.videoList = videoList;
         this.status = status;
     }
 
