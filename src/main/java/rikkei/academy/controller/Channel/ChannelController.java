@@ -59,6 +59,7 @@ public class ChannelController extends HttpServlet {
         String name = request.getParameter("channel_name");
         String avatar = request.getParameter("avatar");
         Channel channel = new Channel(name,avatar,user);
+        user.setChannel(channel);
         Service.getInstance().getChannelService().save(channel);
         try {
             response.sendRedirect("/index.jsp");

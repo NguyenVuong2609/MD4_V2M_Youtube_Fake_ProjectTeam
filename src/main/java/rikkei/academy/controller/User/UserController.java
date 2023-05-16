@@ -37,6 +37,7 @@ public class UserController extends HttpServlet {
                 break;
             case "logout":
                 logOut(request,response);
+                break;
             case "detail":
                 showDetail(request, response);
                 break;
