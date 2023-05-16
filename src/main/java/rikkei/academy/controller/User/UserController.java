@@ -1,5 +1,6 @@
 package rikkei.academy.controller.User;
 
+import rikkei.academy.model.Channel;
 import rikkei.academy.model.Role;
 import rikkei.academy.model.RoleName;
 import rikkei.academy.model.User;
@@ -36,6 +37,9 @@ public class UserController extends HttpServlet {
                 break;
             case "logout":
                 logOut(request,response);
+                break;
+            case "detail":
+                showDetail(request, response);
                 break;
         }
     }
@@ -124,25 +128,6 @@ public class UserController extends HttpServlet {
         }
     }
 
-    //! Đăng nhập
-    private void actionLogin(HttpServletRequest request, HttpServletResponse response) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        User user = Service.getInstance().getUserService().userLogin(username, password);
-        if (user != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("userLogin", user);
-            try {
-                response.sendRedirect("index.jsp");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            request.setAttribute("validate", "Login failed! Please try again!");
-            showFormLogin(request, response);
-        }
-    }
-
     //! Hiển thị page Trending
     private void showTrending(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/trending.jsp");
@@ -167,6 +152,40 @@ public class UserController extends HttpServlet {
         }
     }
 
+    private void showDetail(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //! Đăng nhập
+    private void actionLogin(HttpServletRequest request, HttpServletResponse response) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = Service.getInstance().getUserService().userLogin(username, password);
+        if (user != null) {
+            HttpSession session = request.getSession();
+            int channelId = Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
+            Channel channel = Service.getInstance().getChannelService().findById(channelId);
+            user.setChannel(channel);
+            System.out.println("channel from login --> " + channel);
+            session.setAttribute("userLogin", user);
+            try {
+                response.sendRedirect("index.jsp");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            request.setAttribute("validate", "Login failed! Please try again!");
+            showFormLogin(request, response);
+        }
+    }
+
     //! Log out
     private void logOut(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession(false); //? Check sự tồn tại của session --> nếu không có trả về null
@@ -180,4 +199,10 @@ public class UserController extends HttpServlet {
             }
         }
     }
+
+    //! Check channel exist
+    public int findChannelByUserId(User user){
+        return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
+    }
 }
+

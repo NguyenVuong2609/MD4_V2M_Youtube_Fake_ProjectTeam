@@ -8,6 +8,7 @@ public class Video {
     private String video_link;
     private String video_date;
     private int view = 0;
+    private String image;
     private boolean status;
     private Channel channel;
     private List<Comment> commentList;
@@ -16,16 +17,24 @@ public class Video {
     public Video() {
     }
 
-    public Video(int video_id, String video_name, String video_link, String video_date, int view, boolean status, Channel channel, List<Comment> commentList, List<Like> likeList) {
+    public Video(int video_id, String video_name, String video_link, String video_date, int view, String image, boolean status, Channel channel, List<Comment> commentList, List<Like> likeList) {
         this.video_id = video_id;
         this.video_name = video_name;
         this.video_link = video_link;
         this.video_date = video_date;
         this.view = view;
+        this.image = image;
         this.status = status;
         this.channel = channel;
         this.commentList = commentList;
         this.likeList = likeList;
+    }
+
+    public Video(String videoName, String videoLink, String videoAvatar, Channel channel) {
+        this.video_name = videoName;
+        this.video_link = videoLink;
+        this.image = videoAvatar;
+        this.channel = channel;
     }
 
     public int getVideo_id() {
@@ -66,6 +75,14 @@ public class Video {
 
     public void setView(int view) {
         this.view = view;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public boolean isStatus() {
