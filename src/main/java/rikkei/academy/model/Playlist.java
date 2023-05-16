@@ -20,6 +20,12 @@ public class Playlist {
         this.user = user;
     }
 
+    public Playlist(String playlistName, User user) {
+        this.playlist_name = playlistName;
+        this.user = user;
+    }
+
+
     public int getPlaylist_id() {
         return playlist_id;
     }
