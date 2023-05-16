@@ -47,9 +47,9 @@ public class ChannelServiceIMPL implements IChannelService {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 channel = new Channel();
-                channel.setChannel_id(resultSet.getInt("channel_id"));
-                channel.setChannel_name(resultSet.getString("channel_name"));
-                channel.setAvatar(resultSet.getString("avatar"));
+                channel.setChannel_id(resultSet.getInt(1));
+                channel.setChannel_name(resultSet.getString(2));
+                channel.setAvatar(resultSet.getString(5));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
