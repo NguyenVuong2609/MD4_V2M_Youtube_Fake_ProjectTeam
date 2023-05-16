@@ -40,23 +40,22 @@ public class ChannelServiceIMPL implements IChannelService {
 
     @Override
     public Channel findById(int id) {
-        Channel channel = new Channel();
+        Channel channel = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CHANNEL_BY_ID);
             preparedStatement.setInt(1, id);
+            System.out.println(id + " channel service");
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                while (resultSet.next()) {
-                    channel.setChannel_id(resultSet.getInt(1));
-                    channel.setChannel_name(resultSet.getString(2));
-                    channel.setAvatar(resultSet.getString(5));
-                }
-                return channel;
+            while (resultSet.next()) {
+                channel = new Channel();
+                channel.setChannel_id(resultSet.getInt(1));
+                channel.setChannel_name(resultSet.getString(2));
+                channel.setAvatar(resultSet.getString(5));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return channel;
     }
 
     @Override
