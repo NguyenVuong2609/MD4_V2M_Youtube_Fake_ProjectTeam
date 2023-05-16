@@ -2,6 +2,7 @@ package rikkei.academy.service.VideoService;
 
 import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Category;
+import rikkei.academy.model.Channel;
 import rikkei.academy.model.Video;
 
 import java.sql.*;
@@ -16,6 +17,7 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String INSERT_VIDEO_CATEGORY = "INSERT INTO video_category_connection VALUES (?,?);";
     private static final String FIND_VIDEO_BY_ID = "SELECT video.video_id FROM video where video_id = ?;";
     private static final String DELETE_VIDEO = "DELETE FROM video WHERE video_id=?;";
+    private static final String SELECT_CHANNEL_BY_ID = "";
 
     @Override
     public List<Video> findAll() {
@@ -31,6 +33,7 @@ public class VideoServiceIMPL implements IVideoService {
                 video.setStatus(resultSet.getBoolean("status"));
                 video.setView(resultSet.getInt("view"));
                 video.setImage(resultSet.getString("image"));
+                video.setVideo_date(resultSet.getDate("video_date"));
                 videoList.add(video);
             }
             return videoList;
@@ -113,5 +116,21 @@ public class VideoServiceIMPL implements IVideoService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Channel findChannelById(int id) {
+        Channel channel = new Channel();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CHANNEL_BY_ID);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 }

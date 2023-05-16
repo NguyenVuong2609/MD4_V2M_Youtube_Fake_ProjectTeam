@@ -52,19 +52,17 @@ public class VideoController extends HttpServlet {
     }
 
     private void actionCreateVideo(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(Service.getInstance().getVideoService().findAll());
         String video_name = request.getParameter("videoName");
         String video_avatar = request.getParameter("avatar");
         String video_link = request.getParameter("videoLink");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLogin");
         int channelId = Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
-        System.out.println("chanel from user --> " + user.getChannel());
         Channel channel = Service.getInstance().getChannelService().findById(channelId);
         Video video = new Video(video_name, video_link, video_avatar, channel);
         Service.getInstance().getVideoService().save(video);
         try {
-            response.sendRedirect("WEB-INF/upload/upload-video-form.jsp");
+            response.sendRedirect("index.jsp");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

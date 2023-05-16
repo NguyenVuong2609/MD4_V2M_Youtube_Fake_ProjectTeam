@@ -44,7 +44,6 @@ public class ChannelServiceIMPL implements IChannelService {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CHANNEL_BY_ID);
             preparedStatement.setInt(1, id);
-            System.out.println(id + " channel service");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 channel = new Channel();
