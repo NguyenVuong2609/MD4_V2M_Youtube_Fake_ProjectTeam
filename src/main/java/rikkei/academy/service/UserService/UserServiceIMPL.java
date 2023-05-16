@@ -40,7 +40,8 @@ public class UserServiceIMPL implements IUserService{
             //! Set User_id and Role_id into user_role table
             PreparedStatement preparedStatement1 = connection.prepareStatement(INSERT_INTO_USERROLE);
             Set<Role> roleSet = user.getRoleSet();
-            List<Role> roleList = new ArrayList<>(roleSet); //! convert Set --> List
+            List<Role> roleList = new ArrayList<>(roleSet);
+            //! convert Set --> List
             List<Integer> listRoleId = new ArrayList<>();
             for (int i = 0; i < roleList.size(); i++) {
                 listRoleId.add(roleList.get(i).getId());

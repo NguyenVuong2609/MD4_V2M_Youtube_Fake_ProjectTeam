@@ -4,10 +4,7 @@ import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Category;
 import rikkei.academy.model.Video;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +19,21 @@ public class VideoServiceIMPL implements IVideoService {
 
     @Override
     public List<Video> findAll() {
+        List<Video> videoList = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_VIDEO_LIST);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return (List<Video>) resultSet;
+            while (resultSet.next()){
+                Video video = new Video();
+                video.setVideo_id(resultSet.getInt("video_id"));
+                video.setVideo_name(resultSet.getString("video_name"));
+                video.setVideo_link(resultSet.getString("video_link"));
+                video.setStatus(resultSet.getBoolean("status"));
+                video.setView(resultSet.getInt("view"));
+                video.setImage(resultSet.getString("image"));
+                videoList.add(video);
+            }
+            return videoList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -36,7 +44,7 @@ public class VideoServiceIMPL implements IVideoService {
         if (findById(video.getVideo_id()) == null) {
             try {
                 connection.setAutoCommit(false);
-                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_VIDEO);
+                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_VIDEO, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, video.getVideo_name());
                 preparedStatement.setString(2, video.getVideo_link());
                 preparedStatement.setInt(3, video.getChannel().getChannel_id());
