@@ -23,7 +23,7 @@ public class VideoServiceIMPL implements IVideoService {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_VIDEO_LIST);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Video video = new Video();
                 video.setVideo_id(resultSet.getInt("video_id"));
                 video.setVideo_name(resultSet.getString("video_name"));
@@ -31,6 +31,7 @@ public class VideoServiceIMPL implements IVideoService {
                 video.setStatus(resultSet.getBoolean("status"));
                 video.setView(resultSet.getInt("view"));
                 video.setImage(resultSet.getString("image"));
+                video.setCategory();
                 videoList.add(video);
             }
             return videoList;
@@ -52,20 +53,15 @@ public class VideoServiceIMPL implements IVideoService {
                 preparedStatement.executeUpdate();
                 int video_id = 0;
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     video_id = resultSet.getInt(1);
                 }
                 PreparedStatement preparedStatement1 = connection.prepareStatement(INSERT_VIDEO_CATEGORY);
-                List<Category> categoryList = new ArrayList<>();
-                List<Integer> listCategoryID  = new ArrayList<>();
-                for (int i = 0; i < categoryList.size(); i++) {
-                    listCategoryID.add(categoryList.get(i).getId());
-                }
-                for (int i = 0; i < listCategoryID.size(); i++) {
-                    preparedStatement1.setInt(1,video_id);
-                    preparedStatement1.setInt(2,listCategoryID.get(i));
-                    preparedStatement1.executeUpdate();
-                }
+                Category category = video.getCategory();
+                int category_id = category.getId();
+                preparedStatement1.setInt(1, video_id);
+                preparedStatement1.setInt(2, category_id);
+                preparedStatement1.executeUpdate();
                 connection.commit();
             } catch (SQLException e) {
                 throw new RuntimeException(e);

@@ -34,12 +34,12 @@
     </div>
     <div class="col-md-4">
         <label for="inputState" class="form-label">Category</label>
-        <select id="inputState" class="form-select">
+        <select name="category" id="inputState" class="form-select">
             <option selected>Choose...</option>
-            <option name="movies">Movies</option>
-            <option name="sport">Sports</option>
-            <option name="news">News</option>
-            <option name="kids">Kids</option>
+            <option value="movies">Movies</option>
+            <option value="sport">Sports</option>
+            <option value="news">News</option>
+            <option value="kids">Kids</option>
         </select>
     </div>
     <div class="col-md-1"></div>

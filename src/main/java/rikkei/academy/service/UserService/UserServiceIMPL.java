@@ -11,6 +11,8 @@ import java.util.Set;
 
 public class UserServiceIMPL implements IUserService{
     private Connection connection = ConnectToMySQL.getConnection();
+    private final String SELECT_ALL_USER = "SELECT * FROM user;";
+    private final String SELECT_USER_BY_ID = "SELECT user.usr_id FROM user WHERE user_id = ?";
     private final String SELECT_ALL_USERNAME = "select username from user";
     private final String SELECT_ALL_EMAIL = "select email from user";
     private final String INSERT_INTO_USER = "insert into user (name, username, email, password, avatar) values (?,?,?,?,?)";
@@ -18,7 +20,24 @@ public class UserServiceIMPL implements IUserService{
     private final String SELECT_USER_LOGIN = "select * from user where (username = ? and convert(password using utf8mb4) collate utf8mb4_bin = ?)";
     @Override
     public List<User> findAll() {
-        return null;
+        List<User> userList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USER);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                User user = new User();
+                user.setUser_id(resultSet.getInt("user_id"));
+                user.setUsername(resultSet.getString("username"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAvatar(resultSet.getString("avatar"));
+                user.setStatus(resultSet.getBoolean("status"));
+                userList.add(user);
+            }
+            return userList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -59,6 +78,22 @@ public class UserServiceIMPL implements IUserService{
 
     @Override
     public User findById(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int user_id = 0;
+            while (resultSet.next()){
+                user_id = resultSet.getInt(1);
+            }
+            for (int i = 0; i < findAll().size(); i++) {
+                if(findAll().get(i).getUser_id() == user_id) {
+                    return findAll().get(i);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
