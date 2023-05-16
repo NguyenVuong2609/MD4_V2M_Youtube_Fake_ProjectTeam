@@ -20,13 +20,15 @@
     <jsp:param name="articleId" value=""/>
 </jsp:include>
 
-
 <!-- main content -->
 <div class="row main_container">
     <div class="col-md-2"></div>
     <div class="col-md-10">
         <!-- Recommended section -->
         <div class="container-fluid">
+
+            <a href="/category">=======   CATEGORY   =======</a>
+
             <div class="grid_title">Recommended</div>
             <div class="row">
                 <div class="col-md-3 col-sx-10 p-2">

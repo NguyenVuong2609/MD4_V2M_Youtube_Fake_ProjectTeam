@@ -12,7 +12,12 @@ public class User {
     private boolean status;
     private Set<Role> roleSet;
 
-    public User() {
+    public User(String name, String username, String password, String email, String avatar) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.avatar = avatar;
     }
 
     public User(int user_id, String name, String username, String password, String email, String avatar, boolean status, Set<Role> roleSet) {
