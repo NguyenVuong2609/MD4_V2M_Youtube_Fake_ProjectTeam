@@ -18,6 +18,7 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String FIND_VIDEO_BY_ID = "SELECT video.video_id FROM video where video_id = ?;";
     private static final String DELETE_VIDEO = "DELETE FROM video WHERE video_id=?;";
     private static final String SELECT_CHANNEL_BY_ID = "select video.channel_id, channel_name, avatar from channel join video on channel.channel_id = video.channel_id where video_id = ?";
+    private static final String UPDATE_VIEW_BY_ID = "update video set view = (view + 1) where video_id = ?";
 
     @Override
     public List<Video> findAll() {
@@ -136,5 +137,16 @@ public class VideoServiceIMPL implements IVideoService {
             throw new RuntimeException(e);
         }
         return channel;
+    }
+
+    @Override
+    public void updateViewById(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_VIEW_BY_ID);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
