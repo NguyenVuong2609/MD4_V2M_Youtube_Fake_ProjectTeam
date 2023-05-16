@@ -4,7 +4,9 @@ import rikkei.academy.model.*;
 import rikkei.academy.service.Service;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -150,6 +152,14 @@ public class UserController extends HttpServlet {
     }
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Video video = Service.getInstance().getVideoService().findById(id);
+        Channel channel = Service.getInstance().getVideoService().findChannelById(id);
+        video.setChannel(channel);
+        List<Video> videoList = new ArrayList<>();
+        videoList.add(video);
+        System.out.println(video.getVideo_link());
+        request.setAttribute("videoDetail",videoList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {
             dispatcher.forward(request, response);
@@ -172,7 +182,7 @@ public class UserController extends HttpServlet {
             user.setChannel(channel);
             session.setAttribute("userLogin", user);
             try {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("/");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -189,7 +199,7 @@ public class UserController extends HttpServlet {
             session.removeAttribute("userLogin");
             session.invalidate(); //? Xóa các thuộc tính bên trong session
             try {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("/");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

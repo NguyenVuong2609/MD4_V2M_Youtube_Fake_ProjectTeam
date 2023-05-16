@@ -40,44 +40,43 @@
     <div class="col-md-2"></div>
     <div class="col-md-7">
         <!-- History section -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 col-sx-10 p-2">
-                    <div class="card">
-                        <video controls autoplay>
-                            <source src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/video%2FEVERTON%200-3%20MAN%20CITY%20_%20Premier%20League%20highlights.mp4?alt=media&token=5e236221-c195-4a84-8b74-e52cb31404ff"
-                                    type="video/mp4">
-                        </video>
-                        <div class="row">
-                            <div class="col-2 mt-3">
-                                <img width="48"
-                                     src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
-                                     class="rounded-circle">
-                            </div>
-                            <div class="col-5 mt-3">
-                                <p class="mb-2"
-                                   title="Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha | Pritam, Amitabh B|Arijit Singh">
-                                    Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                    Pritam,
-                                    Amitabh B|Arijit Singh</p>
-                                <p style="color:#606060;">
-                                    T-Series <i class="fas fa-check-circle"></i><br>
-                                    70M views 7 months ago
-                                </p>
-                            </div>
-                            <div class="col-1 mt-3"></div>
-                            <div class="col-2 mt-3">
-                                <button type="button">Subscribe</button>
-                            </div>
-                            <div class="col-2 mt-3">
-                                <span>143N</span>
-                                <button type="button">Like</button>
+        <c:forEach var="video" items="${videoDetail}">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-sx-10 p-2">
+                        <div class="card">
+                            <video controls autoplay>
+                                <source src="${video.video_link}"
+                                        type="video/mp4">
+                            </video>
+                            <div class="row">
+                                <div class="col-2 mt-3">
+                                    <img width="48"
+                                         src="${video.channel.getAvatar()}"
+                                         class="rounded-circle">
+                                </div>
+                                <div class="col-5 mt-3">
+                                    <p class="mb-2">
+                                            ${video.video_name}</p>
+                                    <p style="color:#606060;">
+                                            ${video.channel.getChannel_name()} <i class="fas fa-check-circle"></i><br>
+                                            ${video.view} views - ${video.video_date}
+                                    </p>
+                                </div>
+                                <div class="col-1 mt-3"></div>
+                                <div class="col-2 mt-3">
+                                    <button type="button">Subscribe</button>
+                                </div>
+                                <div class="col-2 mt-3">
+                                    <span>143N</span>
+                                    <button type="button">Like</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </c:forEach>
 
         <!-- History Section -->
         <p><br></p>
