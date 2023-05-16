@@ -10,6 +10,7 @@ public class User {
     private String email;
     private String avatar = "https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/images.png?alt=media&token=568b3bcc-c852-4669-9cd3-d4684ce4ad70";
     private boolean status;
+    private Channel channel;
     private Set<Role> roleSet;
 
     public User() {
@@ -103,6 +104,14 @@ public class User {
 
     public void setRoleSet(Set<Role> roleSet) {
         this.roleSet = roleSet;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
     }
 
     @Override

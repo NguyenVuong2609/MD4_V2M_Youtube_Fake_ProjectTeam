@@ -1,5 +1,6 @@
 package rikkei.academy.controller.User;
 
+import rikkei.academy.model.Channel;
 import rikkei.academy.model.Role;
 import rikkei.academy.model.RoleName;
 import rikkei.academy.model.User;
@@ -168,6 +169,9 @@ public class UserController extends HttpServlet {
         User user = Service.getInstance().getUserService().userLogin(username, password);
         if (user != null) {
             HttpSession session = request.getSession();
+            int channelId = Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
+            Channel channel = Service.getInstance().getChannelService().findById(channelId);
+            user.setChannel(channel);
             session.setAttribute("userLogin", user);
             try {
                 response.sendRedirect("index.jsp");
@@ -192,6 +196,11 @@ public class UserController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    //! Check channel exist
+    public int findChannelByUserId(User user){
+        return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
     }
 }
 
