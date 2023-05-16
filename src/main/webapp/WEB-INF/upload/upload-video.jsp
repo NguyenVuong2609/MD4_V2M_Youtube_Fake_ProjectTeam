@@ -9,12 +9,15 @@ To change this template use File | Settings | File Templates.
 <html>
 <head>
     <title>Title</title>
+    <style>
+
+    </style>
 </head>
 <body>
 
 <%--<form method="post">--%>
-    <label for="videoLink">Video</label>
-    <progress value="0" max="100" id="uploaderVideo">0%</progress>
+
+    <progress value="0" max="100" id="uploaderVideo" style="width: 100%;">0%</progress><br>
     <input type="file" value="uploadVideo" accept=".mp4" id="fileButtonVideo">
     <input name="videoLink" type="text" id="videoLink" style="display: none">
     <div id="videoDiv"></div>
@@ -41,29 +44,29 @@ To change this template use File | Settings | File Templates.
 <%--</script>--%>
 
 <script type="text/javascript">
-    const firebaseConfig = {
-        apiKey: "AIzaSyA77N_ysoRaVII4Lu4JHY_c-z2Ej7mJKRs",
-        authDomain: "vuongcuti-6ce58.firebaseapp.com",
-        projectId: "vuongcuti-6ce58",
-        storageBucket: "vuongcuti-6ce58.appspot.com",
-        messagingSenderId: "268262293286",
-        appId: "1:268262293286:web:8cd35e7267375745d04be7",
-        measurementId: "G-E7PQZW5JV2"
-    };
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyA77N_ysoRaVII4Lu4JHY_c-z2Ej7mJKRs",
+    //     authDomain: "vuongcuti-6ce58.firebaseapp.com",
+    //     projectId: "vuongcuti-6ce58",
+    //     storageBucket: "vuongcuti-6ce58.appspot.com",
+    //     messagingSenderId: "268262293286",
+    //     appId: "1:268262293286:web:8cd35e7267375745d04be7",
+    //     measurementId: "G-E7PQZW5JV2"
+    // };
     firebase.initializeApp(firebaseConfig);
 
-    var image = '';
+    var video = '';
     // firebase bucket name
     // REPLACE WITH THE ONE YOU CREATE
     // ALSO CHECK STORAGE RULES IN FIREBASE CONSOLE
     var fbBucketName = 'images';
 
     // get elements
-    var uploader = document.getElementById('uploaderVideo');
-    var fileButton = document.getElementById('fileButtonVideo');
+    var uploaderVideo = document.getElementById('uploaderVideo');
+    var fileButtonVideo = document.getElementById('fileButtonVideo');
 
     // listen for file selection
-    fileButton.addEventListener('change', function (e) {
+    fileButtonVideo.addEventListener('change', function (e) {
 
         // what happened
         console.log('file upload event', e);
@@ -85,7 +88,7 @@ To change this template use File | Settings | File Templates.
             function (snapshot) {
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                 var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                uploader.value = progress;
+                uploaderVideo.value = progress;
                 console.log('Upload is ' + progress + '% done');
                 switch (snapshot.state) {
                     case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -116,7 +119,7 @@ To change this template use File | Settings | File Templates.
                 // Upload completed successfully, now we can get the download URL
                 // save this link somewhere, e.g. put it in an input field
                 var downloadURL = uploadTask.snapshot.downloadURL;
-                image = downloadURL;
+                video = downloadURL;
                 console.log('downloadURL ===>', downloadURL);
                 let divLocation = document.getElementById("videoDiv");
                 // let imgElement = document.createElement("img");

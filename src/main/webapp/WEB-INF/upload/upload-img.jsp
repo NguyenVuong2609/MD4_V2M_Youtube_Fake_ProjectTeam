@@ -12,8 +12,8 @@
 
 <%--<form method="post">--%>
 
-<label for="avatar">Image for Video</label>
-<progress value="0" max="100" id="uploader">0%</progress>
+
+<progress value="0" max="100" id="uploader" style="width: 100%;">0%</progress><br>
 
 <input type="file" value="upload" accept=".jpg" id="fileButton">
 
@@ -61,15 +61,15 @@
 
 <script type="text/javascript">
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyA77N_ysoRaVII4Lu4JHY_c-z2Ej7mJKRs",
-        authDomain: "vuongcuti-6ce58.firebaseapp.com",
-        projectId: "vuongcuti-6ce58",
-        storageBucket: "vuongcuti-6ce58.appspot.com",
-        messagingSenderId: "268262293286",
-        appId: "1:268262293286:web:8cd35e7267375745d04be7",
-        measurementId: "G-E7PQZW5JV2"
-    };
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyA77N_ysoRaVII4Lu4JHY_c-z2Ej7mJKRs",
+    //     authDomain: "vuongcuti-6ce58.firebaseapp.com",
+    //     projectId: "vuongcuti-6ce58",
+    //     storageBucket: "vuongcuti-6ce58.appspot.com",
+    //     messagingSenderId: "268262293286",
+    //     appId: "1:268262293286:web:8cd35e7267375745d04be7",
+    //     measurementId: "G-E7PQZW5JV2"
+    // };
 
     firebase.initializeApp(firebaseConfig);
 
