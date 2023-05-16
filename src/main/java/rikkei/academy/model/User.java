@@ -9,19 +9,21 @@ public class User {
     private String password;
     private String email;
     private String avatar = "https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/images.png?alt=media&token=568b3bcc-c852-4669-9cd3-d4684ce4ad70";
+    private Channel channel;
     private boolean status;
     private Set<Role> roleSet;
 
     public User() {
     }
 
-    public User(int user_id, String name, String username, String password, String email, String avatar, boolean status, Set<Role> roleSet) {
+    public User(int user_id, String name, String username, String password, String email, String avatar, Channel channel, boolean status, Set<Role> roleSet) {
         this.user_id = user_id;
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
         this.avatar = avatar;
+        this.channel = channel;
         this.status = status;
         this.roleSet = roleSet;
     }
@@ -87,6 +89,14 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
     }
 
     public boolean isStatus() {
