@@ -80,6 +80,30 @@
                 </div>
             </div>
         </c:forEach>
+        <c:forEach var="comment" items="${commentList}">
+            <div class="card p-3 mt-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="user d-flex flex-row align-items-center">
+                        <img src="${comment.getUser().getAvatar()}" width="30" class="user-img rounded-circle mr-2">
+                        <span><small class="font-weight-bold text-primary">${comment.getUser().getName()}</small>
+                            <small class="font-weight-bold">${comment.getComment_content()} </small></span>
+                    </div>
+                    <small>${comment.getDate()}</small>
+                </div>
+                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                    <div class="reply px-4">
+                        <small>Remove</small>
+                        <span class="dots"></span>
+                        <small>Reply</small>
+                        <span class="dots"></span>
+                        <small>Translate</small>
+                    </div>
+                    <div class="icons align-items-center">
+                        <i class="fa fa-check-circle-o check-icon text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
 
         <!-- History Section -->
         <p><br></p>
@@ -178,7 +202,7 @@
                                 <div class="col-12 mt-3">
                                     <p class="mb-2">
                                         Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                           Pritam,
+                                        Pritam,
                                         Amitabh B|Arijit Singh</p>
                                 </div>
                             </div>

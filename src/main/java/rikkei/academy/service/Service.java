@@ -4,6 +4,8 @@ import rikkei.academy.service.CategoryService.CategoryServiceIMPL;
 import rikkei.academy.service.CategoryService.ICategoryService;
 import rikkei.academy.service.ChannelService.ChannelServiceIMPL;
 import rikkei.academy.service.ChannelService.IChannelService;
+import rikkei.academy.service.CommentService.CommentServiceIMPL;
+import rikkei.academy.service.CommentService.ICommentService;
 import rikkei.academy.service.Playlist.IPlaylist;
 import rikkei.academy.service.Playlist.PlaylistServiceIMPL;
 import rikkei.academy.service.RoleService.IRoleService;
@@ -21,7 +23,7 @@ public class Service {
     private static final IVideoService videoService = new VideoServiceIMPL();
     private static final ICategoryService categoryService = new CategoryServiceIMPL();
     private static final IPlaylist playlistService = new PlaylistServiceIMPL();
-
+    private static final ICommentService commentService = new CommentServiceIMPL();
 
     public IRoleService getRoleService() {
         return roleService;
@@ -38,6 +40,9 @@ public class Service {
         return categoryService;
     }
     public IPlaylist getPlaylistService(){return playlistService;}
+    public ICommentService getCommentService(){
+        return commentService;
+    }
 
 
     public static synchronized Service getInstance() {

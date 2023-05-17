@@ -158,8 +158,10 @@ public class UserController extends HttpServlet {
         Channel channel = Service.getInstance().getVideoService().findChannelById(id);
         video.setChannel(channel);
         List<Video> videoList = new ArrayList<>();
+        List<Comment> commentList = Service.getInstance().getCommentService().findListCommentByVideoId(id);
         videoList.add(video);
         request.setAttribute("videoDetail",videoList);
+        request.setAttribute("commentList", commentList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {
             dispatcher.forward(request, response);

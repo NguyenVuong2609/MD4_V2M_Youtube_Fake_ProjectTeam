@@ -1,19 +1,23 @@
 package rikkei.academy.model;
 
+import java.util.Date;
+
 public class Comment {
     private int comment_id;
     private String comment_content;
     private User user;
     private Video video;
+    private Date date;
 
     public Comment() {
     }
 
-    public Comment(int comment_id, String comment_content, User user, Video video) {
+    public Comment(int comment_id, String comment_content, User user, Video video, Date date) {
         this.comment_id = comment_id;
         this.comment_content = comment_content;
         this.user = user;
         this.video = video;
+        this.date = date;
     }
 
     public int getComment_id() {
@@ -46,6 +50,14 @@ public class Comment {
 
     public void setVideo(Video video) {
         this.video = video;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override
