@@ -114,7 +114,7 @@
                                     </c:if>
                                 </div>
                                 <div class="col-2 mt-3">
-                                    <span>143N</span>
+                                    <span>${requestScope['countLike']}</span>
                                     <c:if test="${sessionScope['userLogin'] == null}">
                                         <a href="/user?action=login">
                                             <button type="button">Like</button>

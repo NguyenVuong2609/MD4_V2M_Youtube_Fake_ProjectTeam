@@ -172,12 +172,14 @@ public class UserController extends HttpServlet {
         List<Comment> commentList = Service.getInstance().getCommentService().findListCommentByVideoId(id);
         List<Playlist> listHavingVideo;
         List<Playlist> listNotHavingVideo;
+        int countLike = countLikeByVideoId(id);
         videoList.add(video);
         request.setAttribute("commentList", commentList);
         request.setAttribute("checkLike", checkLike);
         request.setAttribute("checkSubscribe", checkSubscribe);
         request.setAttribute("videoDetail",videoList);
         request.setAttribute("listPlaylist", listPlaylist);
+        request.setAttribute("countLike", countLike);
         if(user!=null){
             listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id,user.getUser_id());
             listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id,user.getUser_id());
@@ -234,6 +236,11 @@ public class UserController extends HttpServlet {
     //! Check channel exist
     private int findChannelByUserId(User user) {
         return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
+    }
+
+    //! Count like
+    private int countLikeByVideoId(int video_id){
+        return Service.getInstance().getLikeService().countLikeByVideoId(video_id);
     }
 }
 
