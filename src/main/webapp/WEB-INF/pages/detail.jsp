@@ -96,7 +96,11 @@
                                 </div>
                                 <div class="col-2 mt-3">
                                     <c:if test='${sessionScope["userLogin"]!=null}'>
-                                        <button type="button">Subscribe</button></c:if>
+                                       <a href="/user?action=detail&id=${video.video_id}"><button type="button">Subscribe</button></a>
+                                    </c:if>
+                                    <c:if test='${sessionScope["userLogin"]==null}'>
+                                       <a href="/user?action=login"><button type="button">Subscribe</button></a>
+                                    </c:if>
                                 </div>
                                 <div class="col-2 mt-3">
                                     <span>143N</span>
