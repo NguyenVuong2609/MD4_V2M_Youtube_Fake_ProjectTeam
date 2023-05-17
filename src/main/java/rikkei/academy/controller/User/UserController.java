@@ -35,12 +35,22 @@ public class UserController extends HttpServlet {
                 showHistory(request, response);
                 break;
             case "logout":
-                logOut(request,response);
+                logOut(request, response);
                 break;
             case "detail":
                 showDetail(request, response);
                 break;
 
+        }
+        String like = request.getParameter("like");
+        if (like == null) like = "";
+        switch (like) {
+            case "like":
+                likeVideo(request, response);
+                break;
+            case "unlike":
+                unlikeVideo(request, response);
+                break;
         }
     }
 
@@ -153,21 +163,28 @@ public class UserController extends HttpServlet {
     }
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLogin");
+        boolean checkLike = false;
         int id = Integer.parseInt(request.getParameter("id"));
+        if (user != null) {
+            checkLike = Service.getInstance().getLikeService().checkLike(id, user.getUser_id());
+        }
         Service.getInstance().getVideoService().updateViewById(id);
         Video video = Service.getInstance().getVideoService().findById(id);
         Channel channel = Service.getInstance().getVideoService().findChannelById(id);
         List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
         video.setChannel(channel);
         List<Video> videoList = new ArrayList<>();
+        List<Comment> commentList = Service.getInstance().getCommentService().findListCommentByVideoId(id);
+        List<Playlist> listHavingVideo;
+        List<Playlist> listNotHavingVideo;
         videoList.add(video);
-        HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("userLogin");
-        List<Playlist> listHavingVideo = new ArrayList<>();
-        List<Playlist> listNotHavingVideo = new ArrayList<>();
+        request.setAttribute("commentList", commentList);
+        request.setAttribute("checkLike", checkLike);
         request.setAttribute("videoDetail",videoList);
         request.setAttribute("listPlaylist", listPlaylist);
-        if(session.getAttribute("userLogin")!=null){
+        if(user!=null){
             listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id,user.getUser_id());
             listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id,user.getUser_id());
             request.setAttribute("listHavingVideo",listHavingVideo);
@@ -223,9 +240,9 @@ public class UserController extends HttpServlet {
     }
 
     //! Log out
-    private void logOut(HttpServletRequest request, HttpServletResponse response){
+    private void logOut(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false); //? Check sự tồn tại của session --> nếu không có trả về null
-        if (session.getAttribute("userLogin")!= null){
+        if (session.getAttribute("userLogin") != null) {
             session.removeAttribute("userLogin");
             session.invalidate(); //? Xóa các thuộc tính bên trong session
             try {
@@ -237,11 +254,31 @@ public class UserController extends HttpServlet {
     }
 
     //! Check channel exist
-    private int findChannelByUserId(User user){
+    private int findChannelByUserId(User user) {
         return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
     }
 
+    //! Like
+    private void likeVideo(HttpServletRequest request, HttpServletResponse response) {
+        int video_id = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLogin");
+        Video video = Service.getInstance().getVideoService().findById(video_id);
+        Like like = new Like(user, video);
+        Service.getInstance().getLikeService().save(like);
+    }
 
-
+    //! Unlike
+    private void unlikeVideo(HttpServletRequest request, HttpServletResponse response) {
+        int video_id = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLogin");
+        Service.getInstance().getLikeService().deleteByVideoIdAndUserId(video_id, user.getUser_id());
+        try {
+            response.sendRedirect("/user?action=detail&id=" + video_id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 

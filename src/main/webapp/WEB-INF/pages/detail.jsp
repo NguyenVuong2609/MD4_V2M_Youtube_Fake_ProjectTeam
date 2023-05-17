@@ -104,7 +104,23 @@
                                 </div>
                                 <div class="col-2 mt-3">
                                     <span>143N</span>
-                                    <button type="button">Like</button>
+                                    <c:if test="${sessionScope['userLogin'] == null}">
+                                        <a href="/user?action=login">
+                                            <button type="button">Like</button>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${sessionScope['userLogin'] != null}">
+                                        <c:if test='${requestScope["checkLike"]!=true}'>
+                                            <a href="/user?action=detail&id=${video.video_id}&like=like">
+                                                <button type="button">Like</button>
+                                            </a>
+                                        </c:if>
+                                        <c:if test='${requestScope["checkLike"]==true}'>
+                                            <a href="/user?action=detail&id=${video.video_id}&like=unlike">
+                                                <button type="button">Unlike</button>
+                                            </a>
+                                        </c:if>
+                                    </c:if>
                                 </div>
                                 <div class="col-2 mt-3">
                                     <div class="btn-group dropend">
@@ -138,6 +154,30 @@
                             </div>
 
                         </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+        <c:forEach var="comment" items="${commentList}">
+            <div class="card p-3 mt-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="user d-flex flex-row align-items-center">
+                        <img src="${comment.getUser().getAvatar()}" width="30" class="user-img rounded-circle mr-2">
+                        <span><small class="font-weight-bold text-primary">${comment.getUser().getName()}</small>
+                            <small class="font-weight-bold">${comment.getComment_content()} </small></span>
+                    </div>
+                    <small>${comment.getDate()}</small>
+                </div>
+                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                    <div class="reply px-4">
+                        <small>Remove</small>
+                        <span class="dots"></span>
+                        <small>Reply</small>
+                        <span class="dots"></span>
+                        <small>Translate</small>
+                    </div>
+                    <div class="icons align-items-center">
+                        <i class="fa fa-check-circle-o check-icon text-primary"></i>
                     </div>
                 </div>
             </div>
