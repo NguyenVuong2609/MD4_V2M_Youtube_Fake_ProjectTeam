@@ -1,5 +1,6 @@
 package rikkei.academy.controller;
 
+import rikkei.academy.model.Playlist;
 import rikkei.academy.model.Video;
 import rikkei.academy.service.Service;
 
@@ -23,6 +24,7 @@ public class RenderController extends HttpServlet {
         switch (action) {
             default:
                 listVideo(request,response);
+//                listPlaylist(request,response);
         }
     }
     @Override
@@ -44,4 +46,6 @@ public class RenderController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+
 }

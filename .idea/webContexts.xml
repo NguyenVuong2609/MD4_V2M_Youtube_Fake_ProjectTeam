@@ -7,9 +7,16 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/history.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/trending/trending.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/trending" />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/upload/upload-video-form.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/upload" />
 =======
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+>>>>>>> dev
+=======
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+=======
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/upload/upload-video-form.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/upload" />
+>>>>>>> van
 >>>>>>> dev
       </map>
     </option>

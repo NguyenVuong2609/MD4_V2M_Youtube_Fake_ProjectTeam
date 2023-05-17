@@ -40,6 +40,7 @@ public class UserController extends HttpServlet {
             case "detail":
                 showDetail(request, response);
                 break;
+
         }
     }
 
@@ -153,13 +154,25 @@ public class UserController extends HttpServlet {
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
+        Service.getInstance().getVideoService().updateViewById(id);
         Video video = Service.getInstance().getVideoService().findById(id);
         Channel channel = Service.getInstance().getVideoService().findChannelById(id);
+        List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
         video.setChannel(channel);
         List<Video> videoList = new ArrayList<>();
         videoList.add(video);
-        System.out.println(video.getVideo_link());
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("userLogin");
+        List<Playlist> listHavingVideo = new ArrayList<>();
+        List<Playlist> listNotHavingVideo = new ArrayList<>();
         request.setAttribute("videoDetail",videoList);
+        request.setAttribute("listPlaylist", listPlaylist);
+        if(session.getAttribute("userLogin")!=null){
+            listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id,user.getUser_id());
+            listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id,user.getUser_id());
+            request.setAttribute("listHavingVideo",listHavingVideo);
+            request.setAttribute("listNotHavingVideo",listNotHavingVideo);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {
             dispatcher.forward(request, response);
@@ -169,6 +182,23 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    private void checkExistVideo (HttpServletRequest request, HttpServletResponse response){
+
+    }
+
+//    private void listPlaylist (HttpServletRequest request, HttpServletResponse response) {
+//        List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
+//        request.setAttribute("listPlaylist", listPlaylist);
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
+//        try {
+//            dispatcher.forward(request,response);
+//        } catch (ServletException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     //! Đăng nhập
     private void actionLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -207,9 +237,11 @@ public class UserController extends HttpServlet {
     }
 
     //! Check channel exist
-    public int findChannelByUserId(User user){
+    private int findChannelByUserId(User user){
         return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
     }
+
+
 
 }
 

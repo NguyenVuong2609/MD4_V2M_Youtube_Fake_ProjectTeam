@@ -12,7 +12,7 @@ import java.util.Set;
 public class UserServiceIMPL implements IUserService{
     private Connection connection = ConnectToMySQL.getConnection();
     private final String SELECT_ALL_USER = "SELECT * FROM user;";
-    private final String SELECT_USER_BY_ID = "SELECT user.usr_id FROM user WHERE user_id = ?";
+    private final String SELECT_USER_BY_ID = "SELECT user.user_id FROM user WHERE user_id = ?";
     private final String SELECT_ALL_USERNAME = "select username from user";
     private final String SELECT_ALL_EMAIL = "select email from user";
     private final String INSERT_INTO_USER = "insert into user (name, username, email, password, avatar) values (?,?,?,?,?)";

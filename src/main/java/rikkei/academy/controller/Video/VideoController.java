@@ -64,9 +64,6 @@ public class VideoController extends HttpServlet {
         Category category = Service.getInstance().getCategoryService().findByName(category_name);
         Video video = new Video(video_name, video_link, video_avatar, channel, category);
         Service.getInstance().getVideoService().save(video);
-//        Category category = Service.getInstance().;
-//        Video video = new Video(video_name, video_link, video_avatar, channel, category);
-//        Service.getInstance().getVideoService().save(video);
         try {
             response.sendRedirect("index.jsp");
         } catch (IOException e) {

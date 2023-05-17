@@ -17,9 +17,30 @@
     <link rel="stylesheet" type="text/css" href="/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <%--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>--%>
+    <%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>--%>
     <style>
         .card video {
             max-width: 100%;
+        }
+
+        .dropend button {
+            background-color: #f0f0f0;
+            color: black;
+            padding: 1px 6px;
+            /*border-color: black;*/
+            border: 2px black solid;
+            border-radius: 0%;
+        }
+
+        .dropdown-menu li a {
+            color: black;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -39,6 +60,16 @@
 <div class="row main_container">
     <div class="col-md-2"></div>
     <div class="col-md-7">
+        <c:if test='${requestScope["validate"]=="success"}'>
+            <div class="alert alert-success" role="alert">
+                Added to playlist
+            </div>
+        </c:if>
+        <c:if test='${requestScope["validate"]=="exist"}'>
+            <div class="alert alert-warning" role="alert">
+                Video already in your playlist
+            </div>
+        </c:if>
         <!-- History section -->
         <c:forEach var="video" items="${videoDetail}">
             <div class="container-fluid">
@@ -55,7 +86,7 @@
                                          src="${video.channel.getAvatar()}"
                                          class="rounded-circle">
                                 </div>
-                                <div class="col-5 mt-3">
+                                <div class="col-3 mt-3">
                                     <p class="mb-2">
                                             ${video.video_name}</p>
                                     <p style="color:#606060;">
@@ -63,18 +94,45 @@
                                             ${video.view} views - ${video.video_date}
                                     </p>
                                 </div>
-                                <div class="col-1 mt-3"></div>
                                 <div class="col-2 mt-3">
-                                    <button type="button">Subscribe</button>
+                                    <c:if test='${sessionScope["userLogin"]!=null}'>
+                                        <button type="button">Subscribe</button></c:if>
                                 </div>
                                 <div class="col-2 mt-3">
                                     <span>143N</span>
                                     <button type="button">Like</button>
                                 </div>
+                                <div class="col-2 mt-3">
+                                    <div class="btn-group dropend">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            Add to Playlist
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <c:if test='${sessionScope["userLogin"]!=null}'>
+                                                <c:forEach var="playlist" items='${listHavingVideo}'>
+                                                    <li>
+                                                        <a href="/playlist?action=delete&id=${video.video_id}&idPL=${playlist.playlist_id}">
+                                                           Remove from ${playlist.playlist_name}
+                                                        </a>
+                                                    </li>
+                                                </c:forEach>
+                                                <c:forEach var="playlist" items='${listNotHavingVideo}'>
+                                                    <li>
+                                                        <a href="/playlist?action=add&id=${video.video_id}&idPL=${playlist.playlist_id}">
+                                                                ${playlist.playlist_name}
+                                                        </a>
+                                                    </li>
+                                                </c:forEach>
+                                            </c:if>
+                                            <c:if test='${sessionScope["userLogin"]==null}'>
+                                                <li><a href="/user?action=login">Please Login First</a></li>
+                                            </c:if>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-2 mt-3">
-                                <button type="button">Add to Playlist</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -178,7 +236,7 @@
                                 <div class="col-12 mt-3">
                                     <p class="mb-2">
                                         Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                           Pritam,
+                                        Pritam,
                                         Amitabh B|Arijit Singh</p>
                                 </div>
                             </div>

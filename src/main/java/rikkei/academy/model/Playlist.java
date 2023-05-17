@@ -1,12 +1,13 @@
 package rikkei.academy.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Playlist {
     private int playlist_id;
     private String playlist_name;
     private boolean status;
-    private List<Video> videoList;
+    private List<Video> videoList = new ArrayList<>();
     private User user;
 
     public Playlist() {
