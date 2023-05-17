@@ -40,6 +40,7 @@ public class UserController extends HttpServlet {
             case "detail":
                 showDetail(request, response);
                 break;
+
         }
         String like = request.getParameter("like");
         if (like == null) like = "";
@@ -172,13 +173,23 @@ public class UserController extends HttpServlet {
         Service.getInstance().getVideoService().updateViewById(id);
         Video video = Service.getInstance().getVideoService().findById(id);
         Channel channel = Service.getInstance().getVideoService().findChannelById(id);
+        List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
         video.setChannel(channel);
         List<Video> videoList = new ArrayList<>();
         List<Comment> commentList = Service.getInstance().getCommentService().findListCommentByVideoId(id);
+        List<Playlist> listHavingVideo;
+        List<Playlist> listNotHavingVideo;
         videoList.add(video);
-        request.setAttribute("videoDetail", videoList);
         request.setAttribute("commentList", commentList);
         request.setAttribute("checkLike", checkLike);
+        request.setAttribute("videoDetail",videoList);
+        request.setAttribute("listPlaylist", listPlaylist);
+        if(user!=null){
+            listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id,user.getUser_id());
+            listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id,user.getUser_id());
+            request.setAttribute("listHavingVideo",listHavingVideo);
+            request.setAttribute("listNotHavingVideo",listNotHavingVideo);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {
             dispatcher.forward(request, response);
@@ -188,6 +199,23 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    private void checkExistVideo (HttpServletRequest request, HttpServletResponse response){
+
+    }
+
+//    private void listPlaylist (HttpServletRequest request, HttpServletResponse response) {
+//        List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
+//        request.setAttribute("listPlaylist", listPlaylist);
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
+//        try {
+//            dispatcher.forward(request,response);
+//        } catch (ServletException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     //! Đăng nhập
     private void actionLogin(HttpServletRequest request, HttpServletResponse response) {

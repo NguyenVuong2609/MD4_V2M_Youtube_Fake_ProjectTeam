@@ -19,8 +19,6 @@ public class Video {
     public Video() {
     }
 
-
-
     public Video(int video_id, String video_name, String video_link, Date video_date, int view, String image, boolean status, Channel channel, List<Comment> commentList, List<Like> likeList, Category category) {
         this.video_id = video_id;
         this.video_name = video_name;

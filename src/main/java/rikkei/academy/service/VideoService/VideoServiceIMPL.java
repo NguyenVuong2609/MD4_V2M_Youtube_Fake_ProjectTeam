@@ -4,6 +4,7 @@ import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Category;
 import rikkei.academy.model.Channel;
 import rikkei.academy.model.Video;
+import rikkei.academy.service.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class VideoServiceIMPL implements IVideoService {
                 video.setChannel(findChannelById(resultSet.getInt("video_id")));
                 video.setImage(resultSet.getString("image"));
                 video.setVideo_date(resultSet.getDate("video_date"));
+//                video.setCategory(Service.getInstance().getCategoryService().);
                 videoList.add(video);
             }
             return videoList;

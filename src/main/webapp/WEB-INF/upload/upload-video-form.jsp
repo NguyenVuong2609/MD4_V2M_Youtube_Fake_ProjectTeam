@@ -38,9 +38,6 @@
             <input type="text" class="form-control" id="inputEmail4" name="videoName">
         </div>
     </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     <div class="col-md-4">
         <label for="inputState" class="form-label">Category</label>
         <select name="category" id="inputState" class="form-select">
@@ -51,7 +48,6 @@
             <option value="kids">Kids</option>
         </select>
     </div>
->>>>>>> van
     <div class="col-md-12">
         <div class="col-md-1"></div>
         <div class="col-md-10 uploadFile">
@@ -64,22 +60,8 @@
                 <jsp:param name="articleId" value=""/>
             </jsp:include>
             <div class="col-md-1"></div>
-<<<<<<< HEAD
-=======
-    <div class="col-md-4">
-        <label for="inputState" class="form-label">Category</label>
-        <select name="category" id="inputState" class="form-select">
-            <option selected>Choose...</option>
-            <option value="movies">Movies</option>
-            <option value="sport">Sports</option>
-            <option value="news">News</option>
-            <option value="kids">Kids</option>
-        </select>
->>>>>>> van
-    </div>
-=======
+
         </div>
->>>>>>> van
     </div>
     <div class="col-12" style="text-align: center">
         <button type="submit" class="btn btn-primary">Create</button>
