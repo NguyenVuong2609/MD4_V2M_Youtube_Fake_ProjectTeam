@@ -7,7 +7,7 @@ public class Channel {
     private int channel_id;
     private String channel_name;
     private User owner;
-    private List<User> followerList;
+    private List<User> followerList = new ArrayList<>();
     private List<Video> videoList = new ArrayList<>();
     private boolean status = true;
     private String avatar = "https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/images.png?alt=media&token=568b3bcc-c852-4669-9cd3-d4684ce4ad70";

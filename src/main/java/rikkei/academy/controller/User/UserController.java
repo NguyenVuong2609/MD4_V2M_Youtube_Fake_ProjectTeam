@@ -155,6 +155,7 @@ public class UserController extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLogin");
         boolean checkLike = false;
+        boolean checkSubscribe = false;
         int id = Integer.parseInt(request.getParameter("id"));
         if (user != null) {
             checkLike = Service.getInstance().getLikeService().checkLike(id, user.getUser_id());
@@ -162,6 +163,9 @@ public class UserController extends HttpServlet {
         Service.getInstance().getVideoService().updateViewById(id);
         Video video = Service.getInstance().getVideoService().findById(id);
         Channel channel = Service.getInstance().getVideoService().findChannelById(id);
+        if(user !=null) {
+            checkSubscribe = Service.getInstance().getChannelService().checkSubscribe(channel.getChannel_id(), user.getUser_id());
+        }
         List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
         video.setChannel(channel);
         List<Video> videoList = new ArrayList<>();
@@ -171,6 +175,7 @@ public class UserController extends HttpServlet {
         videoList.add(video);
         request.setAttribute("commentList", commentList);
         request.setAttribute("checkLike", checkLike);
+        request.setAttribute("checkSubscribe", checkSubscribe);
         request.setAttribute("videoDetail",videoList);
         request.setAttribute("listPlaylist", listPlaylist);
         if(user!=null){
@@ -189,22 +194,6 @@ public class UserController extends HttpServlet {
         }
     }
 
-    private void checkExistVideo (HttpServletRequest request, HttpServletResponse response){
-
-    }
-
-//    private void listPlaylist (HttpServletRequest request, HttpServletResponse response) {
-//        List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
-//        request.setAttribute("listPlaylist", listPlaylist);
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
-//        try {
-//            dispatcher.forward(request,response);
-//        } catch (ServletException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     //! Đăng nhập
     private void actionLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -246,7 +235,5 @@ public class UserController extends HttpServlet {
     private int findChannelByUserId(User user) {
         return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
     }
-
-
 }
 
