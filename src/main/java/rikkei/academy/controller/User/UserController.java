@@ -40,17 +40,6 @@ public class UserController extends HttpServlet {
             case "detail":
                 showDetail(request, response);
                 break;
-
-        }
-        String like = request.getParameter("like");
-        if (like == null) like = "";
-        switch (like) {
-            case "like":
-                likeVideo(request, response);
-                break;
-            case "unlike":
-                unlikeVideo(request, response);
-                break;
         }
     }
 
@@ -258,27 +247,6 @@ public class UserController extends HttpServlet {
         return Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
     }
 
-    //! Like
-    private void likeVideo(HttpServletRequest request, HttpServletResponse response) {
-        int video_id = Integer.parseInt(request.getParameter("id"));
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("userLogin");
-        Video video = Service.getInstance().getVideoService().findById(video_id);
-        Like like = new Like(user, video);
-        Service.getInstance().getLikeService().save(like);
-    }
 
-    //! Unlike
-    private void unlikeVideo(HttpServletRequest request, HttpServletResponse response) {
-        int video_id = Integer.parseInt(request.getParameter("id"));
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("userLogin");
-        Service.getInstance().getLikeService().deleteByVideoIdAndUserId(video_id, user.getUser_id());
-        try {
-            response.sendRedirect("/user?action=detail&id=" + video_id);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
 

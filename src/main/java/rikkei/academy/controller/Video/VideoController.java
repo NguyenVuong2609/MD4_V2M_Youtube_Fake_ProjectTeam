@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(value = "/video")
 public class VideoController extends HttpServlet {
@@ -42,6 +43,8 @@ public class VideoController extends HttpServlet {
     }
 
     private void showFormCreateVideo(HttpServletRequest request, HttpServletResponse response) {
+        List<Category> categoryList = Service.getInstance().getCategoryService().findAll();
+        request.setAttribute("categoryList", categoryList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/upload/upload-video-form.jsp");
         try {
             dispatcher.forward(request, response);

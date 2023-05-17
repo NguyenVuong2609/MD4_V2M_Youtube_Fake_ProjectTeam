@@ -111,12 +111,12 @@
                                     </c:if>
                                     <c:if test="${sessionScope['userLogin'] != null}">
                                         <c:if test='${requestScope["checkLike"]!=true}'>
-                                            <a href="/user?action=detail&id=${video.video_id}&like=like">
+                                            <a href="/like?action=like&id=${video.video_id}">
                                                 <button type="button">Like</button>
                                             </a>
                                         </c:if>
                                         <c:if test='${requestScope["checkLike"]==true}'>
-                                            <a href="/user?action=detail&id=${video.video_id}&like=unlike">
+                                            <a href="/like?action=unlike&id=${video.video_id}">
                                                 <button type="button">Unlike</button>
                                             </a>
                                         </c:if>
