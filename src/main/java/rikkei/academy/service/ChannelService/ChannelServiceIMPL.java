@@ -14,6 +14,10 @@ public class ChannelServiceIMPL implements IChannelService {
     private final String INSERT_INTO_CHANNEL = "insert into channel (channel_name,avatar, user_id) values (?,?,?)";
     private final String SELECT_CHANNEL_BY_USER_ID = "select channel_id from channel where user_id = ?";
     private final String SELECT_CHANNEL_BY_ID = "select * from channel where channel_id = ?";
+    private final String INSERT_INTO_SUBSCRIBER = "INSERT INTO subscriber VALUES (?,?);";
+    private final String DELETE_FROM_SUBSCRIBER = "DELETE FROM subscriber WHERE channel_id = ? and user_id = ?;";
+    private final String CHECK_SUBSCRIBE = "SELECT * FROM subscriber JOIN user u on u.user_id = subscriber.user_id WHERE channel_id = ? and u.user_id = ?;";
+
 
     @Override
     public List<Channel> findAll() {
@@ -78,6 +82,41 @@ public class ChannelServiceIMPL implements IChannelService {
 
     @Override
     public void addSubscriber(int channel_id, int user_id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_SUBSCRIBER);
+            preparedStatement.setInt(1,channel_id);
+            preparedStatement.setInt(2,user_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @Override
+    public void unSubscribe(int channel_id, int user_id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_SUBSCRIBER);
+            preparedStatement.setInt(1,channel_id);
+            preparedStatement.setInt(2,user_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean checkSubscribe(int channel_id, int user_id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(CHECK_SUBSCRIBE);
+            preparedStatement.setInt(1,channel_id);
+            preparedStatement.setInt(2,user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 }

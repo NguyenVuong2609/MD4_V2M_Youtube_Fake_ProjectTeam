@@ -96,10 +96,21 @@
                                 </div>
                                 <div class="col-2 mt-3">
                                     <c:if test='${sessionScope["userLogin"]!=null}'>
-                                       <a href="/user?action=detail&id=${video.video_id}"><button type="button">Subscribe</button></a>
+                                        <c:if test="${requestScope['checkSubscribe']==false}">
+                                            <a href="/channel?action=add&id=${video.video_id}&idc=${video.channel.getChannel_id()}">
+                                                <button type="button">Subscribe</button>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${requestScope['checkSubscribe']}">
+                                            <a href="/channel?action=remove&id=${video.video_id}&idc=${video.channel.getChannel_id()}">
+                                                <button type="button">Unsubscribe</button>
+                                            </a>
+                                        </c:if>
                                     </c:if>
                                     <c:if test='${sessionScope["userLogin"]==null}'>
-                                       <a href="/user?action=login"><button type="button">Subscribe</button></a>
+                                        <a href="/user?action=login">
+                                            <button type="button">Subscribe</button>
+                                        </a>
                                     </c:if>
                                 </div>
                                 <div class="col-2 mt-3">
@@ -111,12 +122,12 @@
                                     </c:if>
                                     <c:if test="${sessionScope['userLogin'] != null}">
                                         <c:if test='${requestScope["checkLike"]!=true}'>
-                                            <a href="/user?action=detail&id=${video.video_id}&like=like">
+                                            <a href="/like?action=like&id=${video.video_id}">
                                                 <button type="button">Like</button>
                                             </a>
                                         </c:if>
                                         <c:if test='${requestScope["checkLike"]==true}'>
-                                            <a href="/user?action=detail&id=${video.video_id}&like=unlike">
+                                            <a href="/like?action=unlike&id=${video.video_id}">
                                                 <button type="button">Unlike</button>
                                             </a>
                                         </c:if>
@@ -133,7 +144,7 @@
                                                 <c:forEach var="playlist" items='${listHavingVideo}'>
                                                     <li>
                                                         <a href="/playlist?action=delete&id=${video.video_id}&idPL=${playlist.playlist_id}">
-                                                           Remove from ${playlist.playlist_name}
+                                                            Remove from ${playlist.playlist_name}
                                                         </a>
                                                     </li>
                                                 </c:forEach>

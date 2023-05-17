@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
 <head>
@@ -39,17 +39,20 @@
         </div>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> dev
     <div class="col-md-4">
+=======
+    <div class="col-md-4 uploadFile">
+>>>>>>> dev
         <label for="inputState" class="form-label">Category</label>
         <select name="category" id="inputState" class="form-select">
             <option selected>Choose...</option>
-            <option value="movies">Movies</option>
-            <option value="sport">Sports</option>
-            <option value="news">News</option>
-            <option value="kids">Kids</option>
+            <c:forEach var="category" items="${categoryList}">
+                <option value="${category.getName()}" style="text-transform: capitalize">${category.getName()}</option>
+            </c:forEach>
         </select>
     </div>
 <<<<<<< HEAD
