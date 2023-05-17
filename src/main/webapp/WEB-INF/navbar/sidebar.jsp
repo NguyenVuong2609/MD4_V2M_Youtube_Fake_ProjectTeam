@@ -22,7 +22,7 @@
 <nav class="main-nav">
     <ul>
         <li class="">
-            <a href="index.jsp">
+            <a href="/">
           	<span class="fa fa-2x">
 	            <svg style="display: block; height: 24px; width: 24px;margin: auto;" viewBox="0 0 24 24">
 				   <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8" fill="red"></path>

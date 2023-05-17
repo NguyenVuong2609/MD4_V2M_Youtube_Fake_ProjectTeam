@@ -153,12 +153,12 @@ public class UserController extends HttpServlet {
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
+        Service.getInstance().getVideoService().updateViewById(id);
         Video video = Service.getInstance().getVideoService().findById(id);
         Channel channel = Service.getInstance().getVideoService().findChannelById(id);
         video.setChannel(channel);
         List<Video> videoList = new ArrayList<>();
         videoList.add(video);
-        System.out.println(video.getVideo_link());
         request.setAttribute("videoDetail",videoList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {

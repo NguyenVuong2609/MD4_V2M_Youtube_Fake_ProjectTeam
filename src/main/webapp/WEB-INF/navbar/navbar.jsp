@@ -70,6 +70,7 @@
                             <c:if test='${sessionScope["userLogin"].getChannel()!= null}'>
                                 <a class="dropdown-item" href="/video?action=create">Create Video</a>
                             </c:if>
+                            <a class="dropdown-item" href="/playlist?action=create">Create Playlist</a>
                             <a class="dropdown-item" href="/user?action=logout">Log out</a>
                         </div>
                     </div>

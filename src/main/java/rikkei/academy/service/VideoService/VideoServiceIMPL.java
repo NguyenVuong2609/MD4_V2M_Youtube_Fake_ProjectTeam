@@ -13,11 +13,12 @@ public class VideoServiceIMPL implements IVideoService {
     private Connection connection = ConnectToMySQL.getConnection();
     private static final String SELECT_VIDEO_LIST = "SELECT * FROM video;";
     private static final String INSERT_INTO_VIDEO = "INSERT INTO video (video_name, video_link,channel_id,image) VALUES (?,?,?,?);";
-    private static final String UPDATE_VIDEO = "UPDATE video SET video_name = ? AND image = ? WHERE video_id=?;";
+    private static final String UPDATE_VIDEO = "UPDATE video SET video_name = ? AND image = ? AND status = ? WHERE video_id=?;";
     private static final String INSERT_VIDEO_CATEGORY = "INSERT INTO video_category_connection VALUES (?,?);";
     private static final String FIND_VIDEO_BY_ID = "SELECT video.video_id FROM video where video_id = ?;";
     private static final String DELETE_VIDEO = "DELETE FROM video WHERE video_id=?;";
     private static final String SELECT_CHANNEL_BY_ID = "select video.channel_id, channel_name, avatar from channel join video on channel.channel_id = video.channel_id where video_id = ?";
+    private static final String UPDATE_VIEW_BY_ID = "update video set view = (view + 1) where video_id = ?";
 
     @Override
     public List<Video> findAll() {
@@ -35,7 +36,10 @@ public class VideoServiceIMPL implements IVideoService {
                 video.setChannel(findChannelById(resultSet.getInt("video_id")));
                 video.setImage(resultSet.getString("image"));
                 video.setVideo_date(resultSet.getDate("video_date"));
+
 //                video.setCategory();
+
+
                 videoList.add(video);
             }
             return videoList;
@@ -75,7 +79,8 @@ public class VideoServiceIMPL implements IVideoService {
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_VIDEO);
                 preparedStatement.setString(1, video.getVideo_name());
                 preparedStatement.setString(2, video.getImage());
-                preparedStatement.setInt(3, video.getVideo_id());
+                preparedStatement.setBoolean(3, video.isStatus());
+                preparedStatement.setInt(4, video.getVideo_id());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -131,5 +136,16 @@ public class VideoServiceIMPL implements IVideoService {
             throw new RuntimeException(e);
         }
         return channel;
+    }
+
+    @Override
+    public void updateViewById(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_VIEW_BY_ID);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

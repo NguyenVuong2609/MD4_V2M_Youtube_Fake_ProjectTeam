@@ -37,18 +37,24 @@
             <label for="inputEmail4" class="form-label">Video Name</label>
             <input type="text" class="form-control" id="inputEmail4" name="videoName">
         </div>
-        <div class="col-md-4">
-            <label for="inputState" class="form-label">Category</label>
-            <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
-                <option name="movies">Movies</option>
-                <option name="sport">Sports</option>
-                <option name="news">News</option>
-                <option name="kids">Kids</option>
-            </select>
-        </div>
-
     </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <div class="col-md-4">
+        <label for="inputState" class="form-label">Category</label>
+        <select name="category" id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option value="movies">Movies</option>
+            <option value="sport">Sports</option>
+            <option value="news">News</option>
+            <option value="kids">Kids</option>
+        </select>
+    </div>
+>>>>>>> van
+>>>>>>> dev
     <div class="col-md-12">
         <div class="col-md-1"></div>
         <div class="col-md-10 uploadFile">
@@ -61,7 +67,25 @@
                 <jsp:param name="articleId" value=""/>
             </jsp:include>
             <div class="col-md-1"></div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    <div class="col-md-4">
+        <label for="inputState" class="form-label">Category</label>
+        <select name="category" id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option value="movies">Movies</option>
+            <option value="sport">Sports</option>
+            <option value="news">News</option>
+            <option value="kids">Kids</option>
+        </select>
+>>>>>>> van
+>>>>>>> dev
     </div>
+=======
+        </div>
+>>>>>>> van
     </div>
     <div class="col-12" style="text-align: center">
         <button type="submit" class="btn btn-primary">Create</button>

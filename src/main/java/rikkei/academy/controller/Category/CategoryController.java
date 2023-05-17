@@ -21,9 +21,7 @@ public class CategoryController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
-        System.out.println("---goi doGet");
         String action = req.getParameter("action");
-        System.out.println("action" + action);
         if (action == null){
             action = "";
         }
@@ -48,9 +46,7 @@ public class CategoryController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
-        System.out.println("---goi doPost");
         String action = req.getParameter("action");
-        System.out.println("action doPost----->" + action);
         if (action == null){
             action = "";
         }
@@ -106,10 +102,8 @@ public class CategoryController extends HttpServlet {
 
     public void showCategoryById(HttpServletRequest request,HttpServletResponse response){
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println("id----->"+ id);
         Category category = categoryService.findById(id);
         request.setAttribute("category",category);
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/category/detail.jsp");
         try {
             dispatcher.forward(request,response);
