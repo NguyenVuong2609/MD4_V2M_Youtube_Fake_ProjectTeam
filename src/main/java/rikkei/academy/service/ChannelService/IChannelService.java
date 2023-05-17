@@ -6,4 +6,6 @@ import rikkei.academy.service.IGeneric;
 public interface IChannelService extends IGeneric<Channel> {
     int findChannelByUserId(int id);
     void addSubscriber (int channel_id, int user_id);
+    void unSubscribe (int channel_id, int user_id);
+    boolean checkSubscribe(int channel_id, int user_id);
 }
