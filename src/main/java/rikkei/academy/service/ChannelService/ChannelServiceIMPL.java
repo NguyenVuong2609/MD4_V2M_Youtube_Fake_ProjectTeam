@@ -24,9 +24,6 @@ public class ChannelServiceIMPL implements IChannelService {
     public void save(Channel channel) {
         try {
             connection.setAutoCommit(false);
-            System.out.println(channel);
-            System.out.println(channel.getAvatar());
-            System.out.println(channel.getOwner());
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_CHANNEL);
             preparedStatement.setString(1, channel.getChannel_name());
             preparedStatement.setString(2, channel.getAvatar());

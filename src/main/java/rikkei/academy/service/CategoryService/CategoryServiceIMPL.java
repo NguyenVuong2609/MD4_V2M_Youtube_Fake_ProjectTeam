@@ -2,14 +2,14 @@ package rikkei.academy.service.CategoryService;
 
 import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Category;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
-
 
 public class CategoryServiceIMPL implements ICategoryService{
     private Connection connection = ConnectToMySQL.getConnection();
-    private final String INSERT_INTO_CATEGORY = "INSERT INTO category(category_name) VALUES (?)";
+    private static final String INSERT_INTO_CATEGORY = "insert into category (category_name) values (?)";
     @Override
     public List<Category> findAll() {
         return null;
@@ -18,12 +18,9 @@ public class CategoryServiceIMPL implements ICategoryService{
     @Override
     public void save(Category category) {
         try {
-            // chuan bi cau query
-           PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_CATEGORY);
-           //dien tham so vao cau query
-           preparedStatement.setString(1,category.getName());
-           // thuc hien cau lenh query
-           preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_CATEGORY);
+            preparedStatement.setString(1,category.getName());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -38,4 +35,3 @@ public class CategoryServiceIMPL implements ICategoryService{
     public void deleteById(int id) {
     }
 }
-

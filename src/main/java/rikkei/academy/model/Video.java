@@ -1,23 +1,26 @@
 package rikkei.academy.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class Video {
     private int video_id;
     private String video_name;
     private String video_link;
-    private String video_date;
+    private Date video_date;
     private int view = 0;
     private String image;
     private boolean status;
     private Channel channel;
+    private Category category;
     private List<Comment> commentList;
     private List<Like> likeList;
 
     public Video() {
     }
 
-    public Video(int video_id, String video_name, String video_link, String video_date, int view, String image, boolean status, Channel channel, List<Comment> commentList, List<Like> likeList) {
+
+    public Video(int video_id, String video_name, String video_link, Date video_date, int view, String image, boolean status, Channel channel, Category category, List<Comment> commentList, List<Like> likeList) {
         this.video_id = video_id;
         this.video_name = video_name;
         this.video_link = video_link;
@@ -26,15 +29,17 @@ public class Video {
         this.image = image;
         this.status = status;
         this.channel = channel;
+        this.category = category;
         this.commentList = commentList;
         this.likeList = likeList;
     }
 
-    public Video(String videoName, String videoLink, String videoAvatar, Channel channel) {
+    public Video(String videoName, String videoLink, String videoAvatar, Channel channel, Category category) {
         this.video_name = videoName;
         this.video_link = videoLink;
         this.image = videoAvatar;
         this.channel = channel;
+        this.category = category;
     }
 
     public int getVideo_id() {
@@ -61,11 +66,11 @@ public class Video {
         this.video_link = video_link;
     }
 
-    public String getVideo_date() {
+    public Date getVideo_date() {
         return video_date;
     }
 
-    public void setVideo_date(String video_date) {
+    public void setVideo_date(Date video_date) {
         this.video_date = video_date;
     }
 
@@ -101,6 +106,14 @@ public class Video {
         this.channel = channel;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public List<Comment> getCommentList() {
         return commentList;
     }
@@ -122,7 +135,9 @@ public class Video {
         return "Video{" +
                 "video_id=" + video_id +
                 ", video_name='" + video_name + '\'' +
-                ", status=" + status +
+                ", video_date='" + video_date + '\'' +
+                ", view=" + view +
                 '}';
     }
 }
+

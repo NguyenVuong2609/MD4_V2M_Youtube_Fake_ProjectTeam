@@ -2,6 +2,7 @@ package rikkei.academy.service.VideoService;
 
 import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Category;
+import rikkei.academy.model.Channel;
 import rikkei.academy.model.Video;
 
 import java.sql.*;
@@ -16,6 +17,7 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String INSERT_VIDEO_CATEGORY = "INSERT INTO video_category_connection VALUES (?,?);";
     private static final String FIND_VIDEO_BY_ID = "SELECT video.video_id FROM video where video_id = ?;";
     private static final String DELETE_VIDEO = "DELETE FROM video WHERE video_id=?;";
+    private static final String SELECT_CHANNEL_BY_ID = "select video.channel_id, channel_name, avatar from channel join video on channel.channel_id = video.channel_id where video_id = ?";
 
     @Override
     public List<Video> findAll() {
@@ -23,14 +25,17 @@ public class VideoServiceIMPL implements IVideoService {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_VIDEO_LIST);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Video video = new Video();
                 video.setVideo_id(resultSet.getInt("video_id"));
                 video.setVideo_name(resultSet.getString("video_name"));
                 video.setVideo_link(resultSet.getString("video_link"));
                 video.setStatus(resultSet.getBoolean("status"));
                 video.setView(resultSet.getInt("view"));
+                video.setChannel(findChannelById(resultSet.getInt("video_id")));
                 video.setImage(resultSet.getString("image"));
+                video.setVideo_date(resultSet.getDate("video_date"));
+//                video.setCategory();
                 videoList.add(video);
             }
             return videoList;
@@ -52,20 +57,15 @@ public class VideoServiceIMPL implements IVideoService {
                 preparedStatement.executeUpdate();
                 int video_id = 0;
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     video_id = resultSet.getInt(1);
                 }
                 PreparedStatement preparedStatement1 = connection.prepareStatement(INSERT_VIDEO_CATEGORY);
-                List<Category> categoryList = new ArrayList<>();
-                List<Integer> listCategoryID  = new ArrayList<>();
-                for (int i = 0; i < categoryList.size(); i++) {
-                    listCategoryID.add(categoryList.get(i).getId());
-                }
-                for (int i = 0; i < listCategoryID.size(); i++) {
-                    preparedStatement1.setInt(1,video_id);
-                    preparedStatement1.setInt(2,listCategoryID.get(i));
-                    preparedStatement1.executeUpdate();
-                }
+                Category category = video.getCategory();
+                int category_id = category.getId();
+                preparedStatement1.setInt(1, video_id);
+                preparedStatement1.setInt(2, category_id);
+                preparedStatement1.executeUpdate();
                 connection.commit();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -113,5 +113,23 @@ public class VideoServiceIMPL implements IVideoService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Channel findChannelById(int id) {
+        Channel channel = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CHANNEL_BY_ID);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                channel = new Channel();
+                channel.setChannel_id(resultSet.getInt(1));
+                channel.setChannel_name(resultSet.getString(2));
+                channel.setAvatar(resultSet.getString(3));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return channel;
     }
 }
