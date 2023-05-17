@@ -14,6 +14,12 @@ public class Like {
         this.video = video;
     }
 
+    public Like(User user, Video video) {
+        this.user = user;
+        this.video = video;
+    }
+
+
     public int getLike_id() {
         return like_id;
     }

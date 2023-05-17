@@ -69,7 +69,23 @@
                                 </div>
                                 <div class="col-2 mt-3">
                                     <span>143N</span>
-                                    <button type="button">Like</button>
+                                    <c:if test="${sessionScope['userLogin'] == null}">
+                                        <a href="/user?action=login">
+                                            <button type="button">Like</button>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${sessionScope['userLogin'] != null}">
+                                        <c:if test='${requestScope["checkLike"]!=true}'>
+                                            <a href="/user?action=detail&id=${video.video_id}&like=like">
+                                                <button type="button">Like</button>
+                                            </a>
+                                        </c:if>
+                                        <c:if test='${requestScope["checkLike"]==true}'>
+                                            <a href="/user?action=detail&id=${video.video_id}&like=unlike">
+                                                <button type="button">Unlike</button>
+                                            </a>
+                                        </c:if>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="col-2 mt-3">
