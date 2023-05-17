@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VideoServiceIMPL implements IVideoService {
-    private Connection connection = ConnectToMySQL.getConnection();
+    private final Connection connection = ConnectToMySQL.getConnection();
     private static final String SELECT_VIDEO_LIST = "SELECT * FROM video;";
     private static final String INSERT_INTO_VIDEO = "INSERT INTO video (video_name, video_link,channel_id,image) VALUES (?,?,?,?);";
     private static final String UPDATE_VIDEO = "UPDATE video SET video_name = ? AND image = ? AND status = ? WHERE video_id=?;";
