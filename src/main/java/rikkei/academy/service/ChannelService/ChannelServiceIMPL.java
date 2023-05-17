@@ -75,4 +75,9 @@ public class ChannelServiceIMPL implements IChannelService {
         }
         return channel_id;
     }
+
+    @Override
+    public void addSubscriber(int channel_id, int user_id) {
+
+    }
 }
