@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Youtube</title>
@@ -32,176 +33,36 @@
     <div class="col-md-10">
         <!-- content section -->
         <div class="container-fluid">
-            <div class="container-fluid mt-4 pl-2">
-                <h3>Trending Videos</h3>
-                <a href="#">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity.jpg?alt=media&token=04439fab-f8fc-40b9-a45c-d61e751baab6"
-                                     alt="image" width="100%"
-                                     height="138"/>
-                            </div>
-                            <div class="col-md-7 p-0 pt-2">
+            <div class="grid_title">Treding Videos</div>
+            <div class="row">
+                <c:forEach var="video" items='${requestScope["trendingList"]}'>
+                    <div class="col-md-3 col-sx-10 p-2">
+                        <a href="/user?action=detail&id=${video.video_id}">
+                            <div class="card">
+                                <img src="${video.getImage()}"
+                                     height="174"/>
                                 <div class="row">
-                                    <div class="col-1 ml-2 mr-3 desc_hide">
+                                    <div class="col-2 mt-3">
                                         <img width="48"
-                                             src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity.jpg?alt=media&token=04439fab-f8fc-40b9-a45c-d61e751baab6"
+                                             src="${video.getChannel().getAvatar()}"
                                              class="rounded-circle">
                                     </div>
-                                    <div class="col-10">
-                                        <p class="mb-1 title"
-                                           title="Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha | Pritam, Amitabh B|Arijit Singh">
-                                            Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                            Pritam, Amitabh B|Arijit Singh</p>
-                                        <p class="subtitle">
-                                            T-Series <i class="fas fa-check-circle"></i>
-                                            70M views • 7 months ago
+                                    <div class="col-10 mt-3">
+                                        <p class="mb-2"
+                                           title="${video.getVideo_name()}">
+                                                ${video.getVideo_name()}</p>
+                                        <p style="color:#606060;">
+                                                ${video.getChannel().getChannel_name()} <i
+                                                class="fas fa-check-circle"></i><br>
+                                                ${video.getView()} views ${video.getVideo_date()}
                                         </p>
-                                        <div class="short_description">
-                                            Modi Govt has announced 20 Lakh Crore Package to help the people in these
-                                            times of economic slowdown and recession. It was announced on 12th May but
-                                            details were released in 5 parts across
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                </a>
+                </c:forEach>
             </div>
-            <div class="container-fluid mt-2 pl-2">
-                <a href="#">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity.jpg?alt=media&token=04439fab-f8fc-40b9-a45c-d61e751baab6"
-                                     width="100%"
-                                     height="138"/>
-                            </div>
-                            <div class="col-md-7 p-0 pt-2">
-                                <div class="row">
-                                    <div class="col-1 ml-2 mr-3 desc_hide">
-                                        <img width="48"
-                                             src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
-                                             class="rounded-circle">
-                                    </div>
-                                    <div class="col-10">
-                                        <p class="mb-1 title"
-                                           title="Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha | Pritam, Amitabh B|Arijit Singh">
-                                            Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                            Pritam,
-                                            Amitabh B|Arijit Singh</p>
-                                        <p class="subtitle">
-                                            T-Series <i class="fas fa-check-circle"></i>
-                                            70M views • 7 months ago
-                                        </p>
-                                        <div class="short_description">
-                                            Modi Govt has announced 20 Lakh Crore Package to help the people in these
-                                            times
-                                            of economic slowdown and recession. It was announced on 12th May but details
-                                            were released in 5 parts across
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="container-fluid mt-2 pl-2">
-                <a href="#">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity.jpg?alt=media&token=04439fab-f8fc-40b9-a45c-d61e751baab6"
-                                     alt="image" width="100%" height="138"/>
-                            </div>
-                            <div class="col-md-7 p-0 pt-2">
-                                <div class="row">
-                                    <div class="col-1 ml-2 mr-3 desc_hide">
-                                        <img width="48"
-                                             src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
-                                             class="rounded-circle">
-                                    </div>
-                                    <div class="col-10">
-                                        <p class="mb-1 title"
-                                           title="Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha | Pritam, Amitabh B|Arijit Singh">
-                                            Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                            Pritam,
-                                            Amitabh B|Arijit Singh</p>
-                                        <p class="subtitle">
-                                            T-Series <i class="fas fa-check-circle"></i>
-                                            70M views • 7 months ago
-                                        </p>
-                                        <div class="short_description">
-                                            Modi Govt has announced 20 Lakh Crore Package to help the people in these
-                                            times
-                                            of
-                                            economic slowdown and recession. It was announced on 12th May but details
-                                            were
-                                            released in 5 parts across
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="container-fluid mt-2 pl-2">
-                <a href="#">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img class="main_img"
-                                     src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity.jpg?alt=media&token=04439fab-f8fc-40b9-a45c-d61e751baab6"
-                                     alt="image" width="100%"
-                                     height="138"/>
-                            </div>
-                            <div class="col-md-7 p-0 pt-2">
-                                <div class="row">
-                                    <div class="col-1 ml-2 mr-3 desc_hide">
-                                        <img width="48"
-                                             src="https://yt3.ggpht.com/a-/AOh14GinKFFtcXMMwrPfhFbie8tgLV0vMzfvVFSMlw=s68-c-k-c0x00ffffff-no-rj-mo"
-                                             class="rounded-circle">
-                                    </div>
-                                    <div class="col-10">
-                                        <p class="mb-1 title"
-                                           title="Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha | Pritam, Amitabh B|Arijit Singh">
-                                            Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                            Pritam,
-                                            Amitabh
-                                            B|Arijit Singh</p>
-                                        <p class="subtitle">
-                                            T-Series <i class="fas fa-check-circle"></i>
-                                            70M views • 7 months ago
-                                        </p>
-                                        <div class="short_description">
-                                            Modi Govt has announced 20 Lakh Crore Package to help the people in these
-                                            times
-                                            of
-                                            economic slowdown and recession. It was announced on 12th May but details
-                                            were
-                                            released
-                                            in 5 parts across
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!-- content Section -->
-
-            <p><br></p>
-            <p><br></p>
-
         </div>
     </div>
 </div>

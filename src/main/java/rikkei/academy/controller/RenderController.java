@@ -36,6 +36,9 @@ public class RenderController extends HttpServlet {
     private void listVideo(HttpServletRequest request, HttpServletResponse response){
         List<Video> videoList = Service.getInstance().getVideoService().findAll();
         request.setAttribute("videoList", videoList);
+        List<Video> trendingList = Service.getInstance().getVideoService().showTrendingList();
+        System.out.println(videoList);
+        request.setAttribute("trendingList",trendingList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         try {
             dispatcher.forward(request,response);

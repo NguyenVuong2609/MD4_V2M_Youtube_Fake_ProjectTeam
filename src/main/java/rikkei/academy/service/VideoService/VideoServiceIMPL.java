@@ -21,6 +21,7 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String SELECT_CHANNEL_BY_ID = "select video.channel_id, channel_name, avatar from channel join video on channel.channel_id = video.channel_id where video_id = ?";
     private static final String UPDATE_VIEW_BY_ID = "update video set view = (view + 1) where video_id = ?";
     private static final String SELECT_LIST_RELATED_VIDEO_BY_CATEGORY = "select v.video_id, v.video_name, v.video_link, v.image, v.channel_id, v.status, v.video_date, v.view from video v join video_category_connection vcc on v.video_id = vcc.video_id where vcc.category_id = ? and vcc.video_id <> ?";
+    private static final String SELECT_TRENDING_VIDEO = "SELECT video_id FROM video ORDER BY view DESC;";
 
     @Override
     public List<Video> findAll() {
@@ -174,5 +175,20 @@ public class VideoServiceIMPL implements IVideoService {
             throw new RuntimeException(e);
         }
         return relatedList;
+    }
+
+    @Override
+    public List<Video> showTrendingList() {
+        List<Video> videoList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_TRENDING_VIDEO);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                videoList.add(findById(resultSet.getInt(1)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+            return videoList;
     }
 }
