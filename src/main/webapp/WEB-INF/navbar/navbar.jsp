@@ -29,7 +29,7 @@
 <nav class="container-fluid fixed-top bg-white pt-2" id="top_nav">
     <div class="row">
         <div class="col-4 pl-4">
-            <a class="navbar-brand" href=""><img
+            <a class="navbar-brand" href="/"><img
                     src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/logo.png?alt=media&token=ea07d5cc-ec42-4e5e-839c-22b6558e49ae"
                     width="10%"><span> MeTUBE</span></a>
         </div>
