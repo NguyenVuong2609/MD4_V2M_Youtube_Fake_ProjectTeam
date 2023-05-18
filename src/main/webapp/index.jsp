@@ -32,33 +32,6 @@
         <div class="container-fluid">
             <div class="grid_title">Recommended</div>
             <div class="row">
-                <%--                <c:forEach var="video" items="${videoList}">--%>
-                <%--                    <div class="col-md-3 p-2">--%>
-                <%--                        <a href="/user?action=detail&id=${video.video_id}">--%>
-                <%--                            <div class="card">--%>
-                <%--                                <img src="${video.image}"--%>
-                <%--                                     alt="image" height="174"/>--%>
-                <%--                                <div class="row">--%>
-                <%--                                    <div class="col-2 mt-3">--%>
-                <%--                                        <img width="40" height="40" style="border-radius: 50%"--%>
-                <%--                                             src="${video.channel.getAvatar()}">--%>
-                <%--                                    </div>--%>
-                <%--                                    <div class="col-10 mt-3">--%>
-                <%--                                        <p class="mb-2">--%>
-                <%--                                                ${video.video_name}</p>--%>
-                <%--                                        <p style="color:#606060;">--%>
-                <%--                                                ${video.channel.getChannel_name()} <i--%>
-                <%--                                                class="fas fa-check-circle"></i><br>--%>
-                <%--                                                ${video.view} views - ${video.video_date}--%>
-                <%--                                        </p>--%>
-                <%--                                    </div>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                        </a>--%>
-                <%--                    </div>--%>
-                <%--                </c:forEach>--%>
-                <!-- Recommended Section -->
-
                 <%--                Pagination--%>
 
                 <c:forEach var="video" items="${videoList}">
