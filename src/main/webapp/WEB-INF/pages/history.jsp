@@ -41,7 +41,7 @@
                 <div class="row">
                     <c:forEach var="video" items='${requestScope["videoList"]}'>
                         <div class="col-md-3 col-sx-10 p-2">
-                            <a href="">
+                            <a href="/user?action=detail&id=${video.video_id}">
                                 <div class="card">
                                     <img src="${video.getImage()}"
                                          height="174"/>
