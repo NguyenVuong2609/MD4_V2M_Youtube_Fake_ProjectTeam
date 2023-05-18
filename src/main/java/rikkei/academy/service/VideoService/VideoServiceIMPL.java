@@ -20,6 +20,7 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String DELETE_VIDEO = "DELETE FROM video WHERE video_id=?;";
     private static final String SELECT_CHANNEL_BY_ID = "select video.channel_id, channel_name, avatar from channel join video on channel.channel_id = video.channel_id where video_id = ?";
     private static final String UPDATE_VIEW_BY_ID = "update video set view = (view + 1) where video_id = ?";
+    private static final String SELECT_LIST_RELATED_VIDEO_BY_CATEGORY = "select v.video_id, v.video_name, v.video_link, v.image, v.channel_id, v.status, v.video_date, v.view from video v join video_category_connection vcc on v.video_id = vcc.video_id where vcc.category_id = ? and vcc.video_id <> ?";
 
     @Override
     public List<Video> findAll() {
@@ -37,7 +38,7 @@ public class VideoServiceIMPL implements IVideoService {
                 video.setChannel(findChannelById(resultSet.getInt("video_id")));
                 video.setImage(resultSet.getString("image"));
                 video.setVideo_date(resultSet.getDate("video_date"));
-//                video.setCategory(Service.getInstance().getCategoryService().);
+                video.setCategory(Service.getInstance().getCategoryService().findByVideoId(resultSet.getInt("video_id")));
                 videoList.add(video);
             }
             return videoList;
@@ -146,5 +147,32 @@ public class VideoServiceIMPL implements IVideoService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<Video> findListRelatedVideoByCategoryId(int category_id, int video_id) {
+        List<Video> relatedList = new ArrayList<>();
+        Video video;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LIST_RELATED_VIDEO_BY_CATEGORY);
+            preparedStatement.setInt(1,category_id);
+            preparedStatement.setInt(2,video_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                video = new Video();
+                video.setVideo_id(resultSet.getInt(1));
+                video.setVideo_name(resultSet.getString(2));
+                video.setVideo_link(resultSet.getString(3));
+                video.setImage(resultSet.getString(4));
+                video.setChannel(Service.getInstance().getChannelService().findById(resultSet.getInt(5)));
+                video.setStatus(resultSet.getBoolean(6));
+                video.setVideo_date(resultSet.getDate(7));
+                video.setView(resultSet.getInt(8));
+                relatedList.add(video);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return relatedList;
     }
 }

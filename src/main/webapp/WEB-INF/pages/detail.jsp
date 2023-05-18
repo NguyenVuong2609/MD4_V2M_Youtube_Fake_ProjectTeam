@@ -42,8 +42,12 @@
             color: black;
             text-decoration: none;
         }
+
         .comment-card {
             font-size: 16px;
+        }
+        .related-videos img{
+            max-height: 140px;
         }
     </style>
 </head>
@@ -232,107 +236,28 @@
     </div>
     <div class="col-md-3">
         <!-- Related Videos -->
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
+        <div class="grid_title">Related Videos</div>
+        <c:forEach var="video" items="${relatedVideos}">
+            <div class="container-fluid related-videos">
+                <a href="/user?action=detail&id=${video.video_id}">
+                    <div class="row" style="width: 100%;">
+                        <div class="col-md-12 col-sx-10 p-2">
+                            <div class="card">
+                                <img src="${video.image}">
+                                <div class="row">
+                                    <div class="col-12 mt-3">
+                                        <p class="mb-2" style="font-weight: bold; font-size: 16px">
+                                            ${video.video_name}</p>
+                                        <p class="mb-2" style="font-size: 14px; color:#606060;">${video.channel.getChannel_name()}</p>
+                                        <p class="mb-2" style="color:#606060;">${video.view} views</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-
+                </a>
+            </div>
+        </c:forEach>
         <!-- History Section -->
         <p><br></p>
         <p><br></p>

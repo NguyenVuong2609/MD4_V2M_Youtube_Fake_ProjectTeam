@@ -24,7 +24,6 @@ public class RenderController extends HttpServlet {
         switch (action) {
             default:
                 listVideo(request,response);
-//                listPlaylist(request,response);
         }
     }
     @Override
@@ -46,6 +45,4 @@ public class RenderController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
-
 }
