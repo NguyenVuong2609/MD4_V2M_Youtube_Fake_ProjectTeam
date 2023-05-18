@@ -27,6 +27,9 @@ public class VideoController extends HttpServlet {
             case "create":
                 showFormCreateVideo(request, response);
                 break;
+            case "trending":
+                showTrending(request, response);
+                break;
         }
     }
 
@@ -73,5 +76,17 @@ public class VideoController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
+    private void showTrending(HttpServletRequest request, HttpServletResponse response) {
+        List<Video> videoList = Service.getInstance().getVideoService().showTrendingList();
+        System.out.println(videoList);
+        request.setAttribute("trendingList",videoList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/trending.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
