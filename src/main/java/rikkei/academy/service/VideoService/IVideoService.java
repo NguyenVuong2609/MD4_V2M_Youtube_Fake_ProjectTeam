@@ -11,4 +11,5 @@ public interface IVideoService extends IGeneric<Video> {
     void updateViewById(int id);
     List<Video> findListRelatedVideoByCategoryId(int category_id, int video_id);
     List<Video> showTrendingList ();
+    List<Video> searchForVideo(String searchContent);
 }
