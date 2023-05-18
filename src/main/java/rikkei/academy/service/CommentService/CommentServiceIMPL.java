@@ -15,7 +15,7 @@ public class CommentServiceIMPL implements ICommentService{
     private final Connection connection = ConnectToMySQL.getConnection();
     private final String INSERT_INTO_COMMENT = "insert into comment (comment_content, user_id, video_id) values (?,?,?)";
     private final String DELETE_COMMENT_BY_ID = "delete from comment where comment_id = ?";
-    private final String FIND_LIST_COMMENT_BY_VIDEO_ID = "select c.comment_id, c.comment_content, u.user_id, u.name, u.avatar, c.comment_date from comment c join user u on c.user_id = u.user_id\n where c.video_id = ?;";
+    private final String FIND_LIST_COMMENT_BY_VIDEO_ID = "select c.comment_id, c.comment_content, u.user_id, u.name, u.avatar, c.comment_date from comment c join user u on c.user_id = u.user_id\n where c.video_id = ? order by c.comment_date DESC;";
 
     @Override
     public void save(Comment comment) {

@@ -12,19 +12,12 @@ public class User {
     private Channel channel;
     private boolean status;
     private Set<Role> roleSet;
+    private History history;
 
     public User() {
     }
 
-    public User(String name, String username, String password, String email, String avatar) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.avatar = avatar;
-    }
-
-    public User(int user_id, String name, String username, String password, String email, String avatar, Channel channel, boolean status, Set<Role> roleSet) {
+    public User(int user_id, String name, String username, String password, String email, String avatar, Channel channel, boolean status, Set<Role> roleSet, History history) {
         this.user_id = user_id;
         this.name = name;
         this.username = username;
@@ -34,6 +27,7 @@ public class User {
         this.channel = channel;
         this.status = status;
         this.roleSet = roleSet;
+        this.history = history;
     }
 
     public User(String name, String username, String email, String password, Set<Role> roleSet) {
@@ -122,6 +116,14 @@ public class User {
 
     public void setChannel(Channel channel) {
         this.channel = channel;
+    }
+
+    public History getHistory() {
+        return history;
+    }
+
+    public void setHistory(History history) {
+        this.history = history;
     }
 
     @Override

@@ -42,6 +42,13 @@
             color: black;
             text-decoration: none;
         }
+
+        .comment-card {
+            font-size: 16px;
+        }
+        .related-videos img{
+            max-height: 140px;
+        }
     </style>
 </head>
 <body>
@@ -80,14 +87,14 @@
                                 <source src="${video.video_link}"
                                         type="video/mp4">
                             </video>
-                            <div class="row">
+                            <div class="row" style="border: 1px solid #005cbf; border-radius: 8px; margin-top: 10px">
                                 <div class="col-2 mt-3">
                                     <img width="48"
                                          src="${video.channel.getAvatar()}"
                                          class="rounded-circle">
                                 </div>
                                 <div class="col-3 mt-3">
-                                    <p class="mb-2">
+                                    <p class="mb-2" style="font-size: 16px">
                                             ${video.video_name}</p>
                                     <p style="color:#606060;">
                                             ${video.channel.getChannel_name()} <i class="fas fa-check-circle"></i><br>
@@ -169,8 +176,37 @@
                 </div>
             </div>
         </c:forEach>
+
+        <%--         Comment form--%>
+        <c:if test="${sessionScope['userLogin'] != null}">
+            <c:forEach var="video" items="${videoDetail}">
+                <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                    <form action="/comment?action=post&id=${video.video_id}" method="post">
+                        <div class="d-flex flex-start w-100">
+                            <img class="rounded-circle shadow-1-strong me-3"
+                                 src="${sessionScope['userLogin'].getAvatar()}" alt="avatar" width="40"
+                                 height="40"/>
+                            <div class="form-outline w-100">
+                <textarea class="form-control" id="textAreaExample" rows="4"
+                          style="background: #fff;" name="content" placeholder="Write something..."></textarea>
+                                <label class="form-label" for="textAreaExample"
+                                       style="font-size: 16px; font-style: italic">You are comment as <span
+                                        style="color: #005cbf">${sessionScope['userLogin'].getName()}</span></label>
+                            </div>
+                        </div>
+                        <div class="float-end mt-2 pt-1">
+                            <button type="submit" class="btn btn-primary btn-sm">Post comment</button>
+                        </div>
+                    </form>
+                </div>
+
+            </c:forEach>
+        </c:if>
+        <br><br>
+
+        <%--        Show list comment--%>
         <c:forEach var="comment" items="${commentList}">
-            <div class="card p-3 mt-2">
+            <div class="card p-3 mt-2 comment-card">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="user d-flex flex-row align-items-center">
                         <img src="${comment.getUser().getAvatar()}" width="30" class="user-img rounded-circle mr-2">
@@ -200,107 +236,28 @@
     </div>
     <div class="col-md-3">
         <!-- Related Videos -->
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
+        <div class="grid_title">Related Videos</div>
+        <c:forEach var="video" items="${relatedVideos}">
+            <div class="container-fluid related-videos">
+                <a href="/user?action=detail&id=${video.video_id}">
+                    <div class="row" style="width: 100%;">
+                        <div class="col-md-12 col-sx-10 p-2">
+                            <div class="card">
+                                <img src="${video.image}">
+                                <div class="row">
+                                    <div class="col-12 mt-3">
+                                        <p class="mb-2" style="font-weight: bold; font-size: 16px">
+                                            ${video.video_name}</p>
+                                        <p class="mb-2" style="font-size: 14px; color:#606060;">${video.channel.getChannel_name()}</p>
+                                        <p class="mb-2" style="color:#606060;">${video.view} views</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="grid_title">Related Videos</div>
-            <a href="#">
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12 col-sx-10 p-2">
-                        <div class="card">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/giangvan-248ea.appspot.com/o/mancity2.webp?alt=media&token=a19ccb54-ef92-4eb3-bf16-27f853e13bf5">
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <p class="mb-2">
-                                        Full Song: KHAIRIYAT (BONUS TRACK) | CHHICHHORE | Sushant, Shraddha |
-                                        Pritam,
-                                        Amitabh B|Arijit Singh</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-
+                </a>
+            </div>
+        </c:forEach>
         <!-- History Section -->
         <p><br></p>
         <p><br></p>

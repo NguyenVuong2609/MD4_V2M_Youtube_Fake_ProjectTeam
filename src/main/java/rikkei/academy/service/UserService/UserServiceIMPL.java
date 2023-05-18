@@ -18,6 +18,9 @@ public class UserServiceIMPL implements IUserService{
     private final String INSERT_INTO_USER = "insert into user (name, username, email, password, avatar) values (?,?,?,?,?)";
     private final String INSERT_INTO_USERROLE = "insert into user_role values (?,?)";
     private final String SELECT_USER_LOGIN = "select * from user where (username = ? and convert(password using utf8mb4) collate utf8mb4_bin = ?)";
+    private final String INSERT_INTO_HISTORY = "INSERT INTO history (user_id) VALUES (?);";
+
+
     @Override
     public List<User> findAll() {
         List<User> userList = new ArrayList<>();
@@ -69,6 +72,13 @@ public class UserServiceIMPL implements IUserService{
                 preparedStatement1.setInt(1,user_id);
                 preparedStatement1.setInt(2,listRoleId.get(i));
                 preparedStatement1.executeUpdate();
+            }
+            try {
+                PreparedStatement preparedStatement2 = connection.prepareStatement(INSERT_INTO_HISTORY);
+                preparedStatement2.setInt(1, user_id);
+                preparedStatement2.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
             connection.commit();
         } catch (SQLException e) {

@@ -14,6 +14,7 @@ public class CategoryServiceIMPL implements ICategoryService{
     private static final String INSERT_INTO_CATEGORY = "insert into category (category_name) values (?)";
     private static final String SELECT_CATEGORY_BY_NAME = "SELECT  * FROM category WHERE category_name = ?";
     private static final String SELECT_ALL_CATEGORY = "SELECT * FROM category";
+    private static final String SELECT_CATEGORY_BY_VIDEO_ID = "select c.category_id, category_name from category c join video_category_connection vcc on c.category_id = vcc.category_id\n where video_id = ?";
     @Override
     public List<Category> findAll() {
         List<Category> categoryList = new ArrayList<>();
@@ -73,5 +74,23 @@ public class CategoryServiceIMPL implements ICategoryService{
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    @Override
+    public Category findByVideoId(int video_id) {
+        Category category = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CATEGORY_BY_VIDEO_ID);
+            preparedStatement.setInt(1,video_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                category = new Category();
+                category.setId(resultSet.getInt(1));
+                category.setName(resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return category;
     }
 }

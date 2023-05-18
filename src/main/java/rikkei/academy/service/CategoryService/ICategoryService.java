@@ -5,4 +5,5 @@ import rikkei.academy.service.IGeneric;
 
 public interface ICategoryService extends IGeneric<Category> {
     Category findByName(String name);
+    Category findByVideoId(int video_id);
 }

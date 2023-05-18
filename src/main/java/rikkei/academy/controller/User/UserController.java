@@ -163,7 +163,7 @@ public class UserController extends HttpServlet {
         Service.getInstance().getVideoService().updateViewById(id);
         Video video = Service.getInstance().getVideoService().findById(id);
         Channel channel = Service.getInstance().getVideoService().findChannelById(id);
-        if(user !=null) {
+        if (user != null) {
             checkSubscribe = Service.getInstance().getChannelService().checkSubscribe(channel.getChannel_id(), user.getUser_id());
         }
         List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
@@ -172,20 +172,23 @@ public class UserController extends HttpServlet {
         List<Comment> commentList = Service.getInstance().getCommentService().findListCommentByVideoId(id);
         List<Playlist> listHavingVideo;
         List<Playlist> listNotHavingVideo;
+        List<Video> relatedVideos = relatedVideos(video.getCategory().getId(),id);
         int countLike = countLikeByVideoId(id);
         videoList.add(video);
         request.setAttribute("commentList", commentList);
         request.setAttribute("checkLike", checkLike);
         request.setAttribute("checkSubscribe", checkSubscribe);
-        request.setAttribute("videoDetail",videoList);
+        request.setAttribute("videoDetail", videoList);
         request.setAttribute("listPlaylist", listPlaylist);
         request.setAttribute("countLike", countLike);
-        if(user!=null){
-            listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id,user.getUser_id());
-            listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id,user.getUser_id());
-            request.setAttribute("listHavingVideo",listHavingVideo);
-            request.setAttribute("listNotHavingVideo",listNotHavingVideo);
+        request.setAttribute("relatedVideos", relatedVideos);
+        if (user != null) {
+            listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id, user.getUser_id());
+            listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id, user.getUser_id());
+            request.setAttribute("listHavingVideo", listHavingVideo);
+            request.setAttribute("listNotHavingVideo", listNotHavingVideo);
         }
+        Service.getInstance().getHistoryService().addVideo(id,user.getUser_id());
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {
             dispatcher.forward(request, response);
@@ -239,8 +242,13 @@ public class UserController extends HttpServlet {
     }
 
     //! Count like
-    private int countLikeByVideoId(int video_id){
+    private int countLikeByVideoId(int video_id) {
         return Service.getInstance().getLikeService().countLikeByVideoId(video_id);
+    }
+
+    //! Show related videos
+    private List<Video> relatedVideos(int category_id, int video_id) {
+        return Service.getInstance().getVideoService().findListRelatedVideoByCategoryId(category_id, video_id);
     }
 }
 
