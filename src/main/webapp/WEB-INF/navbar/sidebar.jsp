@@ -47,7 +47,6 @@
             </span>
             </a>
         </li>
-
         <li class="has-subnav mb-2">
             <a href="subscription.html">
            <span class="fa fa-2x">

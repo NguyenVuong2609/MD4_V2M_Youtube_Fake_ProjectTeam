@@ -39,9 +39,9 @@
                     width="10%"><span> MeTUBE</span></a>
         </div>
         <div class="col-4">
-            <form action="result.html" method="get">
+            <form action="/video?action=search" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control search" placeholder="Search">
+                    <input type="text" class="form-control search" placeholder="Search" name="search">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-outline-secondary" data-toggle="tooltip"
                                 data-placement="bottom" title="Search!"><i class="fas fa-search"></i></button>
