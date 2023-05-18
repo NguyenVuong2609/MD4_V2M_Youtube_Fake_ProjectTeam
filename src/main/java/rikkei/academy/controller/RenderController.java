@@ -22,7 +22,6 @@ public class RenderController extends HttpServlet {
         if (action == null) action = "";
         switch (action) {
             default:
-//                listVideo(request,response);
                 pageGridVideoRecommend(request, response);
         }
     }
@@ -31,22 +30,6 @@ public class RenderController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-    }
-
-    //! Render video list
-    private void listVideo(HttpServletRequest request, HttpServletResponse response) {
-        List<Video> videoList = Service.getInstance().getVideoService().findAll();
-        request.setAttribute("videoList", videoList);
-        List<Video> trendingList = Service.getInstance().getVideoService().showTrendingList();
-        request.setAttribute("trendingList", trendingList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     //! Pagination
