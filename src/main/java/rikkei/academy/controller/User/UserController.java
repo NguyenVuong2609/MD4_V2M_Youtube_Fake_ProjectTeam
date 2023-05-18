@@ -178,7 +178,6 @@ public class UserController extends HttpServlet {
             request.setAttribute("listHavingVideo", listHavingVideo);
             request.setAttribute("listNotHavingVideo", listNotHavingVideo);
             checkHistory = Service.getInstance().getHistoryService().checkExistVideo(id,user.getUser_id());
-            System.out.println(checkHistory);
             if(!checkHistory){
                 Service.getInstance().getHistoryService().addVideo(id, user.getUser_id());
             }
