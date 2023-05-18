@@ -11,5 +11,6 @@ public interface IHistoryService extends IGeneric<History> {
     int findHistoryByUserId(int user_id);
     void addVideo (int video_id, int user_id);
     void deleteVideo (User user);
+    boolean checkExistVideo(int video_id, int user_id);
     List<Video> findListVideoInHistory (int user_id);
 }

@@ -31,9 +31,6 @@ public class UserController extends HttpServlet {
             case "trending":
                 showTrending(request, response);
                 break;
-            case "history":
-                showHistory(request, response);
-                break;
             case "logout":
                 logOut(request, response);
                 break;
@@ -139,23 +136,13 @@ public class UserController extends HttpServlet {
         }
     }
 
-    //! Hiển thị page History
-    private void showHistory(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/history.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLogin");
         boolean checkLike = false;
         boolean checkSubscribe = false;
+        boolean checkHistory = false;
         int id = Integer.parseInt(request.getParameter("id"));
         if (user != null) {
             checkLike = Service.getInstance().getLikeService().checkLike(id, user.getUser_id());
@@ -187,8 +174,12 @@ public class UserController extends HttpServlet {
             listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id, user.getUser_id());
             request.setAttribute("listHavingVideo", listHavingVideo);
             request.setAttribute("listNotHavingVideo", listNotHavingVideo);
+            checkHistory = Service.getInstance().getHistoryService().checkExistVideo(id,user.getUser_id());
+            System.out.println(checkHistory);
+            if(!checkHistory){
+                Service.getInstance().getHistoryService().addVideo(id, user.getUser_id());
+            }
         }
-        Service.getInstance().getHistoryService().addVideo(id,user.getUser_id());
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {
             dispatcher.forward(request, response);
