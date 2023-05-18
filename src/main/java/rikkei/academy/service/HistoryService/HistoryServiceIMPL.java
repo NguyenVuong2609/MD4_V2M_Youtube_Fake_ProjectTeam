@@ -22,6 +22,8 @@ public class HistoryServiceIMPL implements IHistoryService {
     private final String DELETE_FROM_HISTORY = "DELETE FROM history where history_id = ?";
     private final String SELECT_VIDEO = "SELECT vhn.video_id from video_history_connection vhn JOIN history h on vhn.history_id = h.history_id " +
             "WHERE h.user_id = ?;";
+    private final String CHECK_HISTORY = "SELECT vhn.video_id, vhn.history_id from video_history_connection vhn JOIN history h on vhn.history_id = h.history_id " +
+            "WHERE h.user_id = ? AND vhn.video_id=?;";
 
 
     @Override
@@ -86,6 +88,23 @@ public class HistoryServiceIMPL implements IHistoryService {
     }
 
     @Override
+    public boolean checkExistVideo(int video_id, int user_id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(CHECK_HISTORY);
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setInt(2, video_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                System.out.println(1234);
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    @Override
     public List<Video> findListVideoInHistory(int user_id) {
         List<Video> videoList = new ArrayList<>();
         try {
@@ -100,4 +119,5 @@ public class HistoryServiceIMPL implements IHistoryService {
         }
         return videoList;
     }
+
 }

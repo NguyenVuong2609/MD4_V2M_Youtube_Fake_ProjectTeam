@@ -31,9 +31,6 @@ public class UserController extends HttpServlet {
             case "trending":
                 showTrending(request, response);
                 break;
-            case "history":
-                showHistory(request, response);
-                break;
             case "logout":
                 logOut(request, response);
                 break;
@@ -139,23 +136,13 @@ public class UserController extends HttpServlet {
         }
     }
 
-    //! Hiển thị page History
-    private void showHistory(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/history.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLogin");
         boolean checkLike = false;
         boolean checkSubscribe = false;
+        boolean checkHistory = false;
         int id = Integer.parseInt(request.getParameter("id"));
         if (user != null) {
             checkLike = Service.getInstance().getLikeService().checkLike(id, user.getUser_id());
@@ -163,7 +150,7 @@ public class UserController extends HttpServlet {
         Service.getInstance().getVideoService().updateViewById(id);
         Video video = Service.getInstance().getVideoService().findById(id);
         Channel channel = Service.getInstance().getVideoService().findChannelById(id);
-        if(user !=null) {
+        if (user != null) {
             checkSubscribe = Service.getInstance().getChannelService().checkSubscribe(channel.getChannel_id(), user.getUser_id());
         }
         List<Playlist> listPlaylist = Service.getInstance().getPlaylistService().findAll();
@@ -177,16 +164,20 @@ public class UserController extends HttpServlet {
         request.setAttribute("commentList", commentList);
         request.setAttribute("checkLike", checkLike);
         request.setAttribute("checkSubscribe", checkSubscribe);
-        request.setAttribute("videoDetail",videoList);
+        request.setAttribute("videoDetail", videoList);
         request.setAttribute("listPlaylist", listPlaylist);
         request.setAttribute("countLike", countLike);
-        if(user!=null){
-            listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id,user.getUser_id());
-            listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id,user.getUser_id());
-            request.setAttribute("listHavingVideo",listHavingVideo);
-            request.setAttribute("listNotHavingVideo",listNotHavingVideo);
+        if (user != null) {
+            listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id, user.getUser_id());
+            listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id, user.getUser_id());
+            request.setAttribute("listHavingVideo", listHavingVideo);
+            request.setAttribute("listNotHavingVideo", listNotHavingVideo);
+            checkHistory = Service.getInstance().getHistoryService().checkExistVideo(id,user.getUser_id());
+            System.out.println(checkHistory);
+            if(!checkHistory){
+                Service.getInstance().getHistoryService().addVideo(id, user.getUser_id());
+            }
         }
-        Service.getInstance().getHistoryService().addVideo(id,user.getUser_id());
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {
             dispatcher.forward(request, response);
@@ -240,7 +231,7 @@ public class UserController extends HttpServlet {
     }
 
     //! Count like
-    private int countLikeByVideoId(int video_id){
+    private int countLikeByVideoId(int video_id) {
         return Service.getInstance().getLikeService().countLikeByVideoId(video_id);
     }
 }
