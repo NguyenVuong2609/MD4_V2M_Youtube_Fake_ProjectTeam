@@ -24,24 +24,26 @@ public class HistoryController extends HttpServlet {
         if (action == null) action = "";
         switch (action) {
             case "show":
-                showListVideoFromHistory(request,response);
+                showListVideoFromHistory(request, response);
                 break;
-        };
+        }
+        ;
 
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-//    private void showHistory(HttpServletRequest request, HttpServletResponse response) {
-//
-//    }
-    private void showListVideoFromHistory(HttpServletRequest request, HttpServletResponse response){
+
+    private void showListVideoFromHistory(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLogin");
-        if(user!=null){
-            List<Video> videoList = Service.getInstance().getHistoryService().findListVideoInHistory(user.getUser_id());
-            request.setAttribute("videoList",videoList);
+        List<Video> videoList = null;
+        if (user != null) {
+            videoList = Service.getInstance().getHistoryService().findListVideoInHistory(user.getUser_id());
+            request.setAttribute("videoList", videoList);
+
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/history.jsp");
         try {
