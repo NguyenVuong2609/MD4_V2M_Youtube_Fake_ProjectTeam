@@ -149,6 +149,7 @@ public class UserController extends HttpServlet {
         List<Playlist> listNotHavingVideo;
         List<Video> relatedVideos = relatedVideos(video.getCategory().getId(),id);
         int countLike = countLikeByVideoId(id);
+        int countFollower = countFollower(video.getChannel().getChannel_id());
         videoList.add(video);
         request.setAttribute("commentList", commentList);
         request.setAttribute("checkLike", checkLike);
@@ -156,6 +157,7 @@ public class UserController extends HttpServlet {
         request.setAttribute("videoDetail", videoList);
         request.setAttribute("listPlaylist", listPlaylist);
         request.setAttribute("countLike", countLike);
+        request.setAttribute("countFollower", countFollower);
         request.setAttribute("relatedVideos", relatedVideos);
         if (user != null) {
             listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id, user.getUser_id());
@@ -228,6 +230,11 @@ public class UserController extends HttpServlet {
     //! Show related videos
     private List<Video> relatedVideos(int category_id, int video_id) {
         return Service.getInstance().getVideoService().findListRelatedVideoByCategoryId(category_id, video_id);
+    }
+
+    //! Count follower
+    private int countFollower(int channel_id){
+        return Service.getInstance().getChannelService().countFollower(channel_id);
     }
 }
 
