@@ -21,7 +21,7 @@ public class HistoryServiceIMPL implements IHistoryService {
     private final String SELECT_HISTORY_BY_USER_ID = "SELECT history_id from history WHERE user_id = ?;";
     private final String DELETE_FROM_HISTORY = "DELETE FROM history where history_id = ?";
     private final String SELECT_VIDEO = "SELECT vhn.video_id from video_history_connection vhn JOIN history h on vhn.history_id = h.history_id " +
-            "WHERE h.user_id = ?;";
+            "WHERE h.user_id = ? order by vhn.video_id DESC ;";
 
 
     @Override
