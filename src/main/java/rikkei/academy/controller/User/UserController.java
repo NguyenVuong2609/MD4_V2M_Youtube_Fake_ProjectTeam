@@ -28,9 +28,6 @@ public class UserController extends HttpServlet {
             case "login":
                 showFormLogin(request, response);
                 break;
-            case "trending":
-                showTrending(request, response);
-                break;
             case "logout":
                 logOut(request, response);
                 break;
@@ -140,16 +137,7 @@ public class UserController extends HttpServlet {
     }
 
     //! Hiển thị page Trending
-    private void showTrending(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/trending.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {

@@ -1,6 +1,5 @@
 package rikkei.academy.controller;
 
-import rikkei.academy.model.Playlist;
 import rikkei.academy.model.Video;
 import rikkei.academy.service.Service;
 
@@ -23,22 +22,43 @@ public class RenderController extends HttpServlet {
         if (action == null) action = "";
         switch (action) {
             default:
-                listVideo(request,response);
+                pageGridVideoRecommend(request, response);
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
     }
 
-    //! Render video list
-    private void listVideo(HttpServletRequest request, HttpServletResponse response){
-        List<Video> videoList = Service.getInstance().getVideoService().findAll();
+    //! Pagination
+    private void pageGridVideoRecommend(HttpServletRequest request, HttpServletResponse response) {
+        int pageNumber = 1;
+        if (request.getParameter("page") != null) {
+            pageNumber = Integer.parseInt(request.getParameter("page"));
+        }
+        System.out.println("pageNumber --->" + pageNumber);
+        int elementOfPage = 4;
+        int sumOfPage = 1;
+        int start = (pageNumber - 1) * elementOfPage;
+        List<Video> videoList = Service.getInstance().getVideoService().findAll(start, elementOfPage);
+        int totalElement = Service.getInstance().getVideoService().getNoOfRecords();
+        if (totalElement > elementOfPage) {
+            if (totalElement % elementOfPage == 0) {
+                sumOfPage = (int) Math.ceil(totalElement / elementOfPage);
+            } else {
+                sumOfPage = (int) Math.ceil(totalElement / elementOfPage) + 1;
+            }
+        }
         request.setAttribute("videoList", videoList);
+        request.setAttribute("sumOfPage", sumOfPage);
+        request.setAttribute("pageNumber", pageNumber);
+        List<Video> trendingList = Service.getInstance().getVideoService().showTrendingList();
+        request.setAttribute("trendingList", trendingList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         try {
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
