@@ -19,7 +19,7 @@ public class PlaylistServiceIMPL implements IPlaylist {
     private final String SELECT_VIDEO_INCLUDED_IN_PLAYLIST = "select p.playlist_id, playlist_name from playlist p " +
             "join user u on u.user_id = p.user_id " +
             "join video_playlist_connection vpc on p.playlist_id = vpc.playlist_id where video_id = ? and p.user_id = ?;";
-    private final String SELECT_VIDEO_NOT_INCLUDED_IN_PLAYLIST = "select p.playlist_id, playlist_name from playlist p join user u on u.user_id = p.user_id where not exists(select 1 from video_playlist_connection vpc where vpc.playlist_id = p.playlist_id)";
+    private final String SELECT_VIDEO_NOT_INCLUDED_IN_PLAYLIST = "select p.playlist_id, playlist_name from playlist p join user u on u.user_id = p.user_id where not exists(select 1 from video_playlist_connection vpc where vpc.playlist_id = p.playlist_id) and p.user_id = ?";
     private final String DELETE_FROM_VIDEO_PLAYLIST_CONNECTION = "DELETE FROM video_playlist_connection WHERE video_id = ? and playlist_id = ?;";
 
     @Override
@@ -142,6 +142,7 @@ public class PlaylistServiceIMPL implements IPlaylist {
         Playlist playlist;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_VIDEO_NOT_INCLUDED_IN_PLAYLIST);
+            preparedStatement.setInt(1,user_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 playlist = new Playlist();

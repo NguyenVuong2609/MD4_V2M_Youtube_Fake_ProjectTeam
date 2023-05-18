@@ -14,6 +14,10 @@ public class LikeServiceIMPL implements ILikeService{
     private String DELETE_LIKE_BY_ID = "delete from user_like where video_id = ? and user_id = ?";
     private String CHECK_LIKE = "select * from user_like join user u on u.user_id = user_like.user_id where video_id = ? and u.user_id = ?";
 
+
+
+    private String COUNT_LIKE = "select count(like_id) from user_like where video_id = ?";
+
     @Override
     public void save(Like like) {
         try {
@@ -52,6 +56,22 @@ public class LikeServiceIMPL implements ILikeService{
             throw new RuntimeException(e);
         }
         return false;
+    }
+
+    @Override
+    public int countLikeByVideoId(int video_id) {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(COUNT_LIKE);
+            preparedStatement.setInt(1,video_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return count;
     }
 }
 
