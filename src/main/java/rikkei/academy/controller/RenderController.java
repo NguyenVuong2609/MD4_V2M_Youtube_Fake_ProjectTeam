@@ -55,7 +55,7 @@ public class RenderController extends HttpServlet {
         request.setAttribute("sumOfPage", sumOfPage);
         request.setAttribute("pageNumber", pageNumber);
         List<Video> trendingList = Service.getInstance().getVideoService().showTrendingList();
-        request.setAttribute("trendingList", trendingList);
+        request.setAttribute("trendingList",trendingList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         try {
             dispatcher.forward(request, response);

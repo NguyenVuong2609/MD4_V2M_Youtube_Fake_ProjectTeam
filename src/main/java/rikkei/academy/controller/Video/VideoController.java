@@ -30,6 +30,7 @@ public class VideoController extends HttpServlet {
             case "trending":
                 showTrending(request, response);
                 break;
+
         }
     }
 
@@ -41,6 +42,9 @@ public class VideoController extends HttpServlet {
         switch (action) {
             case "create":
                 actionCreateVideo(request, response);
+                break;
+            case "search":
+                searchForVideo(request,response);
                 break;
         }
     }
@@ -78,7 +82,6 @@ public class VideoController extends HttpServlet {
     }
     private void showTrending(HttpServletRequest request, HttpServletResponse response) {
         List<Video> videoList = Service.getInstance().getVideoService().showTrendingList();
-        System.out.println(videoList);
         request.setAttribute("trendingList",videoList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/trending.jsp");
         try {
@@ -89,4 +92,21 @@ public class VideoController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    private void searchForVideo(HttpServletRequest request, HttpServletResponse response){
+        String searchContent = request.getParameter("search");
+        List<Video> videoList = Service.getInstance().getVideoService().searchForVideo(searchContent);
+        System.out.println(videoList);
+        request.setAttribute("searchVideo",videoList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/searching.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
