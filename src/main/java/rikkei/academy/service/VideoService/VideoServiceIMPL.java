@@ -23,6 +23,7 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String UPDATE_VIEW_BY_ID = "update video set view = (view + 1) where video_id = ?";
     private static final String SELECT_LIST_RELATED_VIDEO_BY_CATEGORY = "select v.video_id, v.video_name, v.video_link, v.image, v.channel_id, v.status, v.video_date, v.view from video v join video_category_connection vcc on v.video_id = vcc.video_id where vcc.category_id = ? and vcc.video_id <> ?";
     private static final String SELECT_TRENDING_VIDEO = "SELECT video_id FROM video ORDER BY view DESC;";
+    private static final String COUNT_ALL_VIDEOS = "select count(video_id) from video";
 
     @Override
     public List<Video> findAll(int start, int elementOfPage) {
@@ -44,7 +45,8 @@ public class VideoServiceIMPL implements IVideoService {
                 video.setCategory(Service.getInstance().getCategoryService().findByVideoId(resultSet.getInt("video_id")));
                 videoList.add(video);
             }
-            resultSet = statement.executeQuery("SELECT FOUND_ROWS()");
+            PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ALL_VIDEOS);
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()){
                 this.totalElement = resultSet.getInt(1);
             }
@@ -209,10 +211,10 @@ public class VideoServiceIMPL implements IVideoService {
     }
 
     @Override
-<<<<<<< HEAD
     public int getNoOfRecords() {
         return totalElement;
-=======
+    }
+
     public List<Video> showTrendingList() {
         List<Video> videoList = new ArrayList<>();
         try {
@@ -225,6 +227,5 @@ public class VideoServiceIMPL implements IVideoService {
             throw new RuntimeException(e);
         }
             return videoList;
->>>>>>> dev
     }
 }
