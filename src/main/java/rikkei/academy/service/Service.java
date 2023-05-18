@@ -6,6 +6,8 @@ import rikkei.academy.service.ChannelService.ChannelServiceIMPL;
 import rikkei.academy.service.ChannelService.IChannelService;
 import rikkei.academy.service.CommentService.CommentServiceIMPL;
 import rikkei.academy.service.CommentService.ICommentService;
+import rikkei.academy.service.HistoryService.HistoryServiceIMPL;
+import rikkei.academy.service.HistoryService.IHistoryService;
 import rikkei.academy.service.LikeService.ILikeService;
 import rikkei.academy.service.LikeService.LikeServiceIMPL;
 import rikkei.academy.service.Playlist.IPlaylist;
@@ -27,6 +29,7 @@ public class Service {
     private static final IPlaylist playlistService = new PlaylistServiceIMPL();
     private static final ICommentService commentService = new CommentServiceIMPL();
     private static final ILikeService likeService = new LikeServiceIMPL();
+    private static final IHistoryService historyService = new HistoryServiceIMPL();
 
     public IRoleService getRoleService() {
         return roleService;
@@ -58,6 +61,7 @@ public class Service {
     public ILikeService getLikeService(){
         return likeService;
     }
+    public IHistoryService getHistoryService(){return historyService;}
 
 
     public static synchronized Service getInstance() {

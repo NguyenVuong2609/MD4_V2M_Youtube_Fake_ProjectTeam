@@ -188,6 +188,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("listHavingVideo", listHavingVideo);
             request.setAttribute("listNotHavingVideo", listNotHavingVideo);
         }
+        Service.getInstance().getHistoryService().addVideo(id,user.getUser_id());
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/detail.jsp");
         try {
             dispatcher.forward(request, response);
