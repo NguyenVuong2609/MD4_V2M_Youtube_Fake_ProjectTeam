@@ -27,8 +27,8 @@
     <div class="col-md-10">
         <!-- Recommended section -->
         <div class="container-fluid">
-
-            <a href="/category">=======   CATEGORY   =======</a>
+         <div> <a href="/user?action=admin">  ADMIN  </a> </div>
+           <div><a href="/category">=======   CATEGORY   =======</a> </div>
 
             <div class="grid_title">Recommended</div>
             <div class="row">

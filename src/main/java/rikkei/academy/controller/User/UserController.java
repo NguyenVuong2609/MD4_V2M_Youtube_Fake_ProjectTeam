@@ -37,6 +37,9 @@ public class UserController extends HttpServlet {
             case "detail":
                 showDetail(request, response);
                 break;
+            case "admin":
+                showFormAdmin(request,response);
+                break;
         }
     }
 
@@ -61,6 +64,18 @@ public class UserController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/form-login/register.jsp");
         try {
             dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Hiển thị form admin
+    private void showFormAdmin(HttpServletRequest request, HttpServletResponse response){
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/form-admin/admin.jsp");
+        try {
+            dispatcher.forward(request,response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
