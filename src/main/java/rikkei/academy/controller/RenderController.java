@@ -24,6 +24,7 @@ public class RenderController extends HttpServlet {
         switch (action) {
             default:
                 listVideo(request,response);
+//                pageGridVideoRecommend(request,response);
         }
     }
     @Override
@@ -39,6 +40,30 @@ public class RenderController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         try {
             dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //! Pagination
+    private void pageGridVideoRecommend(HttpServletRequest request, HttpServletResponse response){
+        int pageNumber = 1;
+        if(request.getParameter("page")!=null){
+            pageNumber = Integer.parseInt(request.getParameter("page"));
+        }
+        System.out.println("pageNumber --->"+pageNumber);
+        int elementOfPage = 3;
+        int start = (pageNumber-1)*elementOfPage;
+        List<Video> videoList = Service.getInstance().getVideoService().findAll(start,elementOfPage);
+        int totalElement = Service.getInstance().getVideoService().getNoOfRecords();
+        int sumOfPage = (int) Math.ceil(totalElement / elementOfPage);
+        request.setAttribute("videoList", videoList);
+        request.setAttribute("sumOfPage", sumOfPage);
+        request.setAttribute("pageNumber", pageNumber);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        try {
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

@@ -12,6 +12,7 @@ import java.util.List;
 
 public class VideoServiceIMPL implements IVideoService {
     private final Connection connection = ConnectToMySQL.getConnection();
+    private int totalElement;
     private static final String SELECT_VIDEO_LIST = "SELECT * FROM video;";
     private static final String INSERT_INTO_VIDEO = "INSERT INTO video (video_name, video_link,channel_id,image) VALUES (?,?,?,?);";
     private static final String UPDATE_VIDEO = "UPDATE video SET video_name = ? AND image = ? AND status = ? WHERE video_id=?;";
@@ -21,6 +22,36 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String SELECT_CHANNEL_BY_ID = "select video.channel_id, channel_name, avatar from channel join video on channel.channel_id = video.channel_id where video_id = ?";
     private static final String UPDATE_VIEW_BY_ID = "update video set view = (view + 1) where video_id = ?";
     private static final String SELECT_LIST_RELATED_VIDEO_BY_CATEGORY = "select v.video_id, v.video_name, v.video_link, v.image, v.channel_id, v.status, v.video_date, v.view from video v join video_category_connection vcc on v.video_id = vcc.video_id where vcc.category_id = ? and vcc.video_id <> ?";
+
+    @Override
+    public List<Video> findAll(int start, int elementOfPage) {
+        List<Video> videoList = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            String PAGE_CATEGORY = "SELECT SQL_CALC_FOUND_ROWS * FROM video LIMIT "+start+","+elementOfPage;
+            ResultSet resultSet = statement.executeQuery(PAGE_CATEGORY);
+            while (resultSet.next()) {
+                Video video = new Video();
+                video.setVideo_id(resultSet.getInt("video_id"));
+                video.setVideo_name(resultSet.getString("video_name"));
+                video.setVideo_link(resultSet.getString("video_link"));
+                video.setStatus(resultSet.getBoolean("status"));
+                video.setView(resultSet.getInt("view"));
+                video.setChannel(findChannelById(resultSet.getInt("video_id")));
+                video.setImage(resultSet.getString("image"));
+                video.setVideo_date(resultSet.getDate("video_date"));
+                video.setCategory(Service.getInstance().getCategoryService().findByVideoId(resultSet.getInt("video_id")));
+                videoList.add(video);
+            }
+            resultSet = statement.executeQuery("SELECT FOUND_ROWS()");
+            if (resultSet.next()){
+                this.totalElement = resultSet.getInt(1);
+            }
+            return videoList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public List<Video> findAll() {
@@ -41,7 +72,7 @@ public class VideoServiceIMPL implements IVideoService {
                 video.setCategory(Service.getInstance().getCategoryService().findByVideoId(resultSet.getInt("video_id")));
                 videoList.add(video);
             }
-            return videoList;
+        return videoList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -174,5 +205,10 @@ public class VideoServiceIMPL implements IVideoService {
             throw new RuntimeException(e);
         }
         return relatedList;
+    }
+
+    @Override
+    public int getNoOfRecords() {
+        return totalElement;
     }
 }

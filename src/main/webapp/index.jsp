@@ -59,11 +59,58 @@
                 </c:forEach>
                 <!-- Recommended Section -->
 
+<%--                Pagination--%>
+
+<%--                    <c:forEach var="video" items="${videoList}">--%>
+<%--                        <div class="col-md-3 p-2">--%>
+<%--                            <a href="/user?action=detail&id=${video.video_id}">--%>
+<%--                                <div class="card">--%>
+<%--                                    <img src="${video.image}"--%>
+<%--                                         alt="image" height="174"/>--%>
+<%--                                    <div class="row">--%>
+<%--                                        <div class="col-2 mt-3">--%>
+<%--                                            <img width="40" height="40" style="border-radius: 50%"--%>
+<%--                                                 src="${video.channel.getAvatar()}">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="col-10 mt-3">--%>
+<%--                                            <p class="mb-2">--%>
+<%--                                                    ${video.video_name}</p>--%>
+<%--                                            <p style="color:#606060;">--%>
+<%--                                                    ${video.channel.getChannel_name()} <i--%>
+<%--                                                    class="fas fa-check-circle"></i><br>--%>
+<%--                                                    ${video.view} views - ${video.video_date}--%>
+<%--                                            </p>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </c:forEach>--%>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <c:if test="${pageNumber != 1}">
+                            <li class="page-item"><a class="page-link" href="/video?action=page_grid&page=${pageNumber-1}">Previous</a>
+                            </li>
+                        </c:if>
+                        <c:forEach begin="1" end="${sumOfPage}" var="i" varStatus="red">
+                            <c:choose>
+                                <c:when test="${pageNumber eq i}">
+                                    <li class="page-item"><a style="color: red" class="page-link" href="/video?action=page_grid&page=${i}">${i}</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item"><a  class="page-link" href="/video?action=page_grid&page=${i}">${i}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+
+                        </c:forEach>
+                        <c:if test="${pageNumber lt sumOfPage}">
+                            <li class="page-item"><a href="/video?action=page_gid&page=${pageNumber + 1}">Next</a></li>
+                        </c:if>
+                    </ul>
+                </nav>
+<%--                Pagination--%>
                 <hr>
 
-                <jsp:include page='WEB-INF/pages/pagination.jsp'>
-                    <jsp:param name="articleId" value=""/>
-                </jsp:include>
                 <!-- Trending Section -->
                 <div class="container-fluid">
                     <div class="grid_title">Trending</div>
