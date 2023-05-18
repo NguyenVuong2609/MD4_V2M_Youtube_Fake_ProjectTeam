@@ -100,6 +100,7 @@
                                             ${video.channel.getChannel_name()} <i class="fas fa-check-circle"></i><br>
                                             ${video.view} views - ${video.video_date}
                                     </p>
+                                    <p>${requestScope['countFollower']} Subscribers</p>
                                 </div>
                                 <div class="col-2 mt-3">
                                     <c:if test='${sessionScope["userLogin"]!=null}'>
