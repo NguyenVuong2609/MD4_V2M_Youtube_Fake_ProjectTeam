@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="rikkei.academy.model.Video" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -59,6 +61,9 @@
 
                 <hr>
 
+                <jsp:include page='WEB-INF/pages/pagination.jsp'>
+                    <jsp:param name="articleId" value=""/>
+                </jsp:include>
                 <!-- Trending Section -->
                 <div class="container-fluid">
                     <div class="grid_title">Trending</div>
