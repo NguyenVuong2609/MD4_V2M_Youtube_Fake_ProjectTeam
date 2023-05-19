@@ -38,7 +38,6 @@ public class RenderController extends HttpServlet {
         if (request.getParameter("page") != null) {
             pageNumber = Integer.parseInt(request.getParameter("page"));
         }
-        System.out.println("pageNumber --->" + pageNumber);
         int elementOfPage = 4;
         int sumOfPage = 1;
         int start = (pageNumber - 1) * elementOfPage;

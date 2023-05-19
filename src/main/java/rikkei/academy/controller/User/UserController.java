@@ -34,6 +34,9 @@ public class UserController extends HttpServlet {
             case "detail":
                 showDetail(request, response);
                 break;
+            case "avatar":
+                showFormChangeAvatar(request,response);
+                break;
         }
     }
 
@@ -49,6 +52,9 @@ public class UserController extends HttpServlet {
                 break;
             case "login":
                 actionLogin(request, response);
+                break;
+            case "avatar":
+                actionUpdateAvatar(request,response);
                 break;
         }
     }
@@ -235,6 +241,31 @@ public class UserController extends HttpServlet {
     //! Count follower
     private int countFollower(int channel_id){
         return Service.getInstance().getChannelService().countFollower(channel_id);
+    }
+
+    //! Change avatar
+    private void showFormChangeAvatar(HttpServletRequest request, HttpServletResponse response){
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/upload/change-avatar.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void actionUpdateAvatar(HttpServletRequest request, HttpServletResponse response){
+        String avatar = request.getParameter("avatar");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLogin");
+        Service.getInstance().getUserService().updateAvatar(avatar,user.getUser_id());
+        user.setAvatar(avatar);
+        try {
+            System.out.println("change");
+            response.sendRedirect("/");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
