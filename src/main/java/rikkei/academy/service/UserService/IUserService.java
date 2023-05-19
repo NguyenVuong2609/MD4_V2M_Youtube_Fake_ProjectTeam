@@ -1,5 +1,6 @@
 package rikkei.academy.service.UserService;
 
+import rikkei.academy.model.Channel;
 import rikkei.academy.model.Role;
 import rikkei.academy.model.User;
 import rikkei.academy.service.IGeneric;
@@ -12,4 +13,5 @@ public interface IUserService extends IGeneric<User> {
     User userLogin(String username, String password);
     Set<Role> findRoleByUserId(int user_id);
     void updateAvatar(String avatar, int id);
+    Channel findChannelByUserId(int user_id);
 }

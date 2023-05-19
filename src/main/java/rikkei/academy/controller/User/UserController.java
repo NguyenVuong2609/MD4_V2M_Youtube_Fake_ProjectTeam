@@ -40,9 +40,13 @@ public class UserController extends HttpServlet {
 
             case "avatar":
                 showFormChangeAvatar(request, response);
+                break;
             case "channel":
                 showMyChannel(request, response);
 
+                break;
+            case "active":
+                activeMoneyEarning(request,response);
                 break;
         }
     }
@@ -309,6 +313,32 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    //! Active Money Earning Ability
+    private void activeMoneyEarning(HttpServletRequest request,HttpServletResponse response){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLogin");
+        int channel_id = findChannelByUserId(user);
+        int countView = Service.getInstance().getChannelService().countTotalViewsByChannelId(channel_id);
+        int countSub = Service.getInstance().getChannelService().countSubscriberByChannelId(channel_id);
+        if (countView > 100 && countSub > 1){
+            Service.getInstance().getChannelService().changeStatusById(channel_id);
+            user.setChannel(Service.getInstance().getChannelService().findById(channel_id));
+            request.setAttribute("validate", "Success!");
+            try {
+                response.sendRedirect("/");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            request.setAttribute("validate", "Failed");
+            try {
+                response.sendRedirect("/");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

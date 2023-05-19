@@ -124,6 +124,12 @@
                             </c:if>
                             <c:if test='${sessionScope["userLogin"].getChannel()!= null}'>
                                 <a class="dropdown-item" href="/video?action=create">Create Video</a>
+                                <c:if test="${sessionScope['userLogin'].getChannel().isStatus() == false}">
+                                    <a class="dropdown-item" href="/user?action=active">Active Money Earning</a>
+                                </c:if>
+                                <c:if test="${sessionScope['userLogin'].getChannel().isStatus() == true}">
+                                    <a class="dropdown-item" href="/user?action=active">Deactivate Money Earning</a>
+                                </c:if>
                             </c:if>
                             <a class="dropdown-item" href="/playlist?action=create">Create Playlist</a>
                             <a class="dropdown-item" href="/user?action=logout">Log out</a>
@@ -280,7 +286,8 @@
                         <div class="p-2 text-center">
                             <div class="profile">
                                 <a href="/user?action=avatar">
-                                    <img src="${sessionScope['userLogin'].getAvatar()}" style="width: 140px; height: 140px"
+                                    <img src="${sessionScope['userLogin'].getAvatar()}"
+                                         style="width: 140px; height: 140px"
                                          class="rounded-circle img-thumbnail">
                                 </a>
                                 <span class="d-block mt-3 font-weight-bold">${sessionScope['userLogin'].getName()}</span>
