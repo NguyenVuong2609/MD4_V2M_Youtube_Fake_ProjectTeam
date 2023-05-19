@@ -89,7 +89,7 @@
                             </video>
                             <div class="row" style="border: 1px solid #005cbf; border-radius: 8px; margin-top: 10px">
                                 <div class="col-2 mt-3">
-                                    <img width="48"
+                                    <img width="40" height="40" style="border-radius: 50%"
                                          src="${video.channel.getAvatar()}"
                                          class="rounded-circle">
                                 </div>

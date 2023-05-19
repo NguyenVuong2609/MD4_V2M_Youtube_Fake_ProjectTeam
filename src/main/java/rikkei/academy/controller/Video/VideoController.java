@@ -73,6 +73,7 @@ public class VideoController extends HttpServlet {
         Channel channel = Service.getInstance().getChannelService().findById(channelId);
         Category category = Service.getInstance().getCategoryService().findByName(category_name);
         Video video = new Video(video_name, video_link, video_avatar, channel, category);
+        channel.getVideoList().add(video);
         Service.getInstance().getVideoService().save(video);
         try {
             response.sendRedirect("/");

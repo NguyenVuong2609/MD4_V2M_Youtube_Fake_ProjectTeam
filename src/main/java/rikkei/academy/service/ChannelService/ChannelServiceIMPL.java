@@ -2,11 +2,14 @@ package rikkei.academy.service.ChannelService;
 
 import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Channel;
+import rikkei.academy.model.User;
+import rikkei.academy.service.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChannelServiceIMPL implements IChannelService {
@@ -18,6 +21,7 @@ public class ChannelServiceIMPL implements IChannelService {
     private final String DELETE_FROM_SUBSCRIBER = "DELETE FROM subscriber WHERE channel_id = ? and user_id = ?;";
     private final String CHECK_SUBSCRIBE = "SELECT * FROM subscriber JOIN user u on u.user_id = subscriber.user_id WHERE channel_id = ? and u.user_id = ?;";
     private final String COUNT_FOLLOWER = "select count(user_id) from subscriber where channel_id = ?;";
+    private final String SELECT_SUBSCRIBER = "SELECT user_id FROM subscriber WHERE channel_id = ?;";
 
     @Override
     public List<Channel> findAll() {
@@ -134,5 +138,21 @@ public class ChannelServiceIMPL implements IChannelService {
             throw new RuntimeException(e);
         }
         return count;
+    }
+
+    @Override
+    public List<User> findSubscriberByChannelId(int channel_id) {
+        List<User> userList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_SUBSCRIBER);
+            preparedStatement.setInt(1, channel_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                userList.add(Service.getInstance().getUserService().findById(resultSet.getInt(1)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return userList;
     }
 }
