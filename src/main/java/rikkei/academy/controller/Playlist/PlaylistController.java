@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(value = "/playlist")
 public class PlaylistController extends HttpServlet {
@@ -29,7 +30,13 @@ public class PlaylistController extends HttpServlet {
                 actionAddPlaylist(request, response);
                 break;
             case "delete":
-                actionDeleteVideoFromPlaylist(request,response);
+                actionDeleteVideoFromPlaylist(request, response);
+                break;
+            case "show":
+                showListPlaylist(request, response);
+                break;
+            case "video":
+                showVideoInPlaylist(request,response);
                 break;
         }
     }
@@ -86,12 +93,48 @@ public class PlaylistController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-    private void actionDeleteVideoFromPlaylist(HttpServletRequest request, HttpServletResponse response){
+
+    private void actionDeleteVideoFromPlaylist(HttpServletRequest request, HttpServletResponse response) {
         int video_id = Integer.parseInt(request.getParameter("id"));
         int playlist_id = Integer.parseInt(request.getParameter("idPL"));
-        Service.getInstance().getPlaylistService().deleteVideoFromPlaylist(video_id,playlist_id);
+        Service.getInstance().getPlaylistService().deleteVideoFromPlaylist(video_id, playlist_id);
         try {
             response.sendRedirect("/user?action=detail&id=" + video_id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showListPlaylist(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLogin");
+        if (user != null) {
+            List<Playlist> listPlayList = Service.getInstance().getPlaylistService().showPlaylist(user.getUser_id());
+            System.out.println(listPlayList);
+            if (listPlayList != null) {
+                request.setAttribute("listPlaylist", listPlayList);
+            }
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/playlist.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void showVideoInPlaylist (HttpServletRequest request, HttpServletResponse response) {
+        int playlist_id = Integer.parseInt(request.getParameter("id"));
+        List<Video> videoList = Service.getInstance().getPlaylistService().showListVideoInPlaylist(playlist_id);
+        request.setAttribute("videoList",videoList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/playlist-detail.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
