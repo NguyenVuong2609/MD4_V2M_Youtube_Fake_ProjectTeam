@@ -19,7 +19,7 @@ public class PlaylistServiceIMPL implements IPlaylist {
     private final String SELECT_VIDEO_INCLUDED_IN_PLAYLIST = "select p.playlist_id, playlist_name from playlist p " +
             "join user u on u.user_id = p.user_id " +
             "join video_playlist_connection vpc on p.playlist_id = vpc.playlist_id where video_id = ? and p.user_id = ?;";
-    private final String SELECT_VIDEO_NOT_INCLUDED_IN_PLAYLIST = "select distinct p.playlist_id, playlist_name from playlist p join user u on u.user_id = p.user_id join video_playlist_connection vpc on p.playlist_id = vpc.playlist_id where not exists(select 1 from video_playlist_connection vpc where vpc.playlist_id = p.playlist_id and vpc.video_id = ?) and p.user_id = ?;";
+    private final String SELECT_VIDEO_NOT_INCLUDED_IN_PLAYLIST = "select distinct p.playlist_id, playlist_name from playlist p join user u on u.user_id = p.user_id where not exists(select 1 from video_playlist_connection vpc where vpc.playlist_id = p.playlist_id and vpc.video_id = ?) and p.user_id = ?";
     private final String DELETE_FROM_VIDEO_PLAYLIST_CONNECTION = "DELETE FROM video_playlist_connection WHERE video_id = ? and playlist_id = ?;";
     private final String SHOW_LIST_PLAYLIST = "SELECT playlist_id FROM playlist WHERE user_id = ?;";
     private final String SHOW_VIDEO_IN_PLAYLIST = "select video_id from video_playlist_connection where playlist_id = ?;";
