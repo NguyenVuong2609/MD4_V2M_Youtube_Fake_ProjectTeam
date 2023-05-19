@@ -117,13 +117,19 @@
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal">Account Information
+                                    data-target="#exampleModal" style="width: 100%">Account Information
                             </button>
                             <c:if test='${sessionScope["userLogin"].getChannel()== null}'>
                                 <a class="dropdown-item" href="/channel?action=create">Create your channel</a>
                             </c:if>
                             <c:if test='${sessionScope["userLogin"].getChannel()!= null}'>
                                 <a class="dropdown-item" href="/video?action=create">Create Video</a>
+                                <c:if test="${sessionScope['userLogin'].getChannel().isStatus() == false}">
+                                    <a class="dropdown-item" href="/user?action=active">Active Money Earning</a>
+                                </c:if>
+                                <c:if test="${sessionScope['userLogin'].getChannel().isStatus() == true}">
+                                    <a class="dropdown-item" href="/user?action=active">Deactivate Money Earning</a>
+                                </c:if>
                             </c:if>
                             <a class="dropdown-item" href="/playlist?action=create">Create Playlist</a>
                             <a class="dropdown-item" href="/user?action=logout">Log out</a>
@@ -193,8 +199,8 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex flex-column">
-                                            <span class="heading d-block">MeTube</span>
-                                            <span class="subheadings">Premium </span>
+                                            <span class="heading d-block">MeTube Earn Money Ability</span>
+                                            <span class="subheadings">${sessionScope['userLogin'].getChannel().isStatus() == true ? "Activate" :"Inactivate"}</span>
                                         </div>
                                     </td>
                                     <td>
@@ -280,7 +286,8 @@
                         <div class="p-2 text-center">
                             <div class="profile">
                                 <a href="/user?action=avatar">
-                                    <img src="${sessionScope['userLogin'].getAvatar()}" style="width: 140px; height: 140px"
+                                    <img src="${sessionScope['userLogin'].getAvatar()}"
+                                         style="width: 140px; height: 140px"
                                          class="rounded-circle img-thumbnail">
                                 </a>
                                 <span class="d-block mt-3 font-weight-bold">${sessionScope['userLogin'].getName()}</span>
@@ -312,6 +319,9 @@
         </div>
     </div>
 </div>
+
+<%--Toasts--%>
+
 </body>
 
 </html>

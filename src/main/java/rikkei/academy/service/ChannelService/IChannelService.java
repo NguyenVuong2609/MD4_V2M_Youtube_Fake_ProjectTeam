@@ -13,4 +13,7 @@ public interface IChannelService extends IGeneric<Channel> {
     boolean checkSubscribe(int channel_id, int user_id);
     int countFollower(int channel_id);
     List<User> findSubscriberByChannelId(int channel_id);
+    void changeStatusById(int channel_id);
+    int countTotalViewsByChannelId(int channel_id);
+    int countSubscriberByChannelId(int channel_id);
 }

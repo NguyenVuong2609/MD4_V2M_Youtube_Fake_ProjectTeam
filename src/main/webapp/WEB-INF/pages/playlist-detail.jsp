@@ -37,7 +37,7 @@
         <!-- History section -->
         <div class="container-fluid">
             <c:if test='${sessionScope["userLogin"]!=null}'>
-                <div class="grid_title">Watched Videos</div>
+                <div class="grid_title">Videos In Playlist</div>
                 <div class="row">
                     <c:forEach var="video" items='${requestScope["videoList"]}'>
                         <div class="col-md-3 col-sx-10 p-2">
