@@ -68,7 +68,7 @@ public class ChannelController extends HttpServlet {
         user.setChannel(channel);
         Service.getInstance().getChannelService().save(channel);
         try {
-            response.sendRedirect("/index.jsp");
+            response.sendRedirect("/");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

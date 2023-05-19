@@ -35,7 +35,9 @@ public class UserController extends HttpServlet {
                 showDetail(request, response);
                 break;
             case "avatar":
-                showFormChangeAvatar(request,response);
+                showFormChangeAvatar(request, response);
+            case "channel":
+                showMyChannel(request, response);
                 break;
         }
     }
@@ -54,7 +56,7 @@ public class UserController extends HttpServlet {
                 actionLogin(request, response);
                 break;
             case "avatar":
-                actionUpdateAvatar(request,response);
+                actionUpdateAvatar(request, response);
                 break;
         }
     }
@@ -130,7 +132,6 @@ public class UserController extends HttpServlet {
     //! Hiển thị page Trending
 
 
-
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLogin");
@@ -153,7 +154,7 @@ public class UserController extends HttpServlet {
         List<Comment> commentList = Service.getInstance().getCommentService().findListCommentByVideoId(id);
         List<Playlist> listHavingVideo;
         List<Playlist> listNotHavingVideo;
-        List<Video> relatedVideos = relatedVideos(video.getCategory().getId(),id);
+        List<Video> relatedVideos = relatedVideos(video.getCategory().getId(), id);
         int countLike = countLikeByVideoId(id);
         int countFollower = countFollower(video.getChannel().getChannel_id());
         videoList.add(video);
@@ -170,9 +171,9 @@ public class UserController extends HttpServlet {
             listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id, user.getUser_id());
             request.setAttribute("listHavingVideo", listHavingVideo);
             request.setAttribute("listNotHavingVideo", listNotHavingVideo);
-            checkHistory = Service.getInstance().getHistoryService().checkExistVideo(id,user.getUser_id());
+            checkHistory = Service.getInstance().getHistoryService().checkExistVideo(id, user.getUser_id());
             System.out.println(checkHistory);
-            if(!checkHistory){
+            if (!checkHistory) {
                 Service.getInstance().getHistoryService().addVideo(id, user.getUser_id());
             }
         }
@@ -239,12 +240,12 @@ public class UserController extends HttpServlet {
     }
 
     //! Count follower
-    private int countFollower(int channel_id){
+    private int countFollower(int channel_id) {
         return Service.getInstance().getChannelService().countFollower(channel_id);
     }
 
     //! Change avatar
-    private void showFormChangeAvatar(HttpServletRequest request, HttpServletResponse response){
+    private void showFormChangeAvatar(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/upload/change-avatar.jsp");
         try {
             dispatcher.forward(request, response);
@@ -254,15 +255,39 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-    private void actionUpdateAvatar(HttpServletRequest request, HttpServletResponse response){
+
+    private void actionUpdateAvatar(HttpServletRequest request, HttpServletResponse response) {
         String avatar = request.getParameter("avatar");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userLogin");
-        Service.getInstance().getUserService().updateAvatar(avatar,user.getUser_id());
+        Service.getInstance().getUserService().updateAvatar(avatar, user.getUser_id());
         user.setAvatar(avatar);
         try {
-            System.out.println("change");
             response.sendRedirect("/");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showMyChannel(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLogin");
+        if (user != null) {
+            int channel_id = Service.getInstance().getChannelService().findChannelByUserId(user.getUser_id());
+            Channel channel = Service.getInstance().getChannelService().findById(channel_id);
+            List<Video> videoList = Service.getInstance().getVideoService().findListVideoByChannelId(channel_id);
+            List<User> subscriberList = Service.getInstance().getChannelService().findSubscriberByChannelId(channel_id);
+            if (channel != null) {
+                request.setAttribute("videoList", videoList);
+                request.setAttribute("myChannel", channel);
+                request.setAttribute("subscriberList", subscriberList);
+            }
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/channel.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
