@@ -1,6 +1,7 @@
 package rikkei.academy.service.UserService;
 
 import rikkei.academy.config.ConnectToMySQL;
+import rikkei.academy.model.Channel;
 import rikkei.academy.model.Role;
 import rikkei.academy.model.User;
 
@@ -20,6 +21,7 @@ public class UserServiceIMPL implements IUserService{
     private final String SELECT_USER_LOGIN = "select * from user where (username = ? and convert(password using utf8mb4) collate utf8mb4_bin = ?)";
     private final String INSERT_INTO_HISTORY = "INSERT INTO history (user_id) VALUES (?);";
     private final String UPDATE_AVATAR = "update user set avatar = ? where user_id = ?";
+    private final String SELECT_CHANNEL_BY_USER_ID = "select channel_id, channel_name, status, avatar from channel where user_id = ?";
 
     @Override
     public List<User> findAll() {
@@ -166,6 +168,8 @@ public class UserServiceIMPL implements IUserService{
                 String avatar = resultSet.getString("avatar");
                 Set<Role> roleSet = findRoleByUserId(id);
                 user = new User(id,name,avatar,roleSet);
+                Channel channel = findChannelByUserId(id);
+                user.setChannel(channel);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -190,5 +194,24 @@ public class UserServiceIMPL implements IUserService{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Channel findChannelByUserId(int user_id) {
+        Channel channel = new Channel();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CHANNEL_BY_USER_ID);
+            preparedStatement.setInt(1,user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                channel.setChannel_id(resultSet.getInt(1));
+                channel.setChannel_name(resultSet.getString(2));
+                channel.setStatus(resultSet.getBoolean(3));
+                channel.setAvatar(resultSet.getString(4));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return channel;
     }
 }
