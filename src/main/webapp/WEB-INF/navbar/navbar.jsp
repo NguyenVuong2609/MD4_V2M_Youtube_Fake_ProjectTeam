@@ -117,7 +117,7 @@
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal">Account Information
+                                    data-target="#exampleModal" style="width: 100%">Account Information
                             </button>
                             <c:if test='${sessionScope["userLogin"].getChannel()== null}'>
                                 <a class="dropdown-item" href="/channel?action=create">Create your channel</a>
@@ -199,8 +199,8 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex flex-column">
-                                            <span class="heading d-block">MeTube</span>
-                                            <span class="subheadings">Premium </span>
+                                            <span class="heading d-block">MeTube Earn Money Ability</span>
+                                            <span class="subheadings">${sessionScope['userLogin'].getChannel().isStatus() == true ? "Activate" :"Inactivate"}</span>
                                         </div>
                                     </td>
                                     <td>
@@ -319,6 +319,9 @@
         </div>
     </div>
 </div>
+
+<%--Toasts--%>
+
 </body>
 
 </html>
