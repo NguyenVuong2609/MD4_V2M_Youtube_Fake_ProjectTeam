@@ -169,6 +169,8 @@ public class UserController extends HttpServlet {
         if (user != null) {
             listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id, user.getUser_id());
             listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id, user.getUser_id());
+            System.out.println("list having video" + listHavingVideo);
+            System.out.println("list not having video" + listNotHavingVideo);
             request.setAttribute("listHavingVideo", listHavingVideo);
             request.setAttribute("listNotHavingVideo", listNotHavingVideo);
             checkHistory = Service.getInstance().getHistoryService().checkExistVideo(id, user.getUser_id());
@@ -292,5 +294,6 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
 }
 

@@ -11,4 +11,6 @@ public interface IPlaylist extends IGeneric<Playlist> {
     List<Playlist> showListHavingVideo (int video_id, int user_id);
     List<Playlist> showListNotHavingVideo (int video_id, int user_id);
     void deleteVideoFromPlaylist (int video_int, int playlist_int);
+    List<Playlist> showPlaylist (int user_id);
+    List<Video> showListVideoInPlaylist (int playlist_id);
 }
