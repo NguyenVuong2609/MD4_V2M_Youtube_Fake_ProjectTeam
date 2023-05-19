@@ -12,19 +12,19 @@
     <title>Title</title>
 </head>
 <body>
-<h1 style="text-align: center">======= From Creat Customer =======</h1>
 <c:if test='${requestScope["validate"]!=null}'>
     <label style="color: blue">${requestScope["validate"]}</label>
 </c:if>
 <form method="post">
     <table>
         <tr>
-            <td>Name</td>
-            <td><input type="text" name="name"></td>
+            <div><th>Name</th></div>
+           <div><td><input style="border-radius: 5px" type="text" name="name"></td></div>
         </tr>
     </table>
-    <button type="submit">CREATE</button>
-    <a href="/category">Back</a>
+    <br>
+    <button style="background-color: #d39e00;border-radius: 5px" type="submit">CREATE</button>
+    <a href="/category"><button style="border-radius: 5px;background-color: #1e7e34;margin-left: 100px">Back</button></a>
 </form>
 </body>
 </html>

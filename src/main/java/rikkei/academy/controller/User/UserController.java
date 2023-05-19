@@ -1,8 +1,6 @@
 package rikkei.academy.controller.User;
-
 import rikkei.academy.model.*;
 import rikkei.academy.service.Service;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,9 +10,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-
+import javax.swing.*;
+import java.awt.*;
 @WebServlet(value = "/user")
 public class UserController extends HttpServlet {
+
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
@@ -43,7 +44,6 @@ public class UserController extends HttpServlet {
                 break;
             case "channel":
                 showMyChannel(request, response);
-
                 break;
             case "active":
                 activeMoneyEarning(request,response);
@@ -228,6 +228,7 @@ public class UserController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         } else {
+            showToast("Login failed! Please try again!", Color.GREEN,10,5);
             request.setAttribute("validate", "Login failed! Please try again!");
             showFormLogin(request, response);
         }
@@ -316,6 +317,7 @@ public class UserController extends HttpServlet {
         }
     }
 
+
     //! Active Money Earning Ability
     private void activeMoneyEarning(HttpServletRequest request,HttpServletResponse response){
         HttpSession session = request.getSession();
@@ -340,6 +342,61 @@ public class UserController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+
+    private static void showToast(String message, Color backgroundColor,int borderRadius, int borderWidth ) {
+        Toast toast = new Toast(message);
+        toast.setBackgroundColor(backgroundColor);
+        toast.setBorderRadius(borderRadius);
+        toast.display();
+    }
+}
+
+class Toast extends JDialog {
+    private static final int DISPLAY_TIME = 3000; // Thời gian hiển thị (ms)
+    private static final int POSITION_X = 1700; // Vị trí x của toast
+    private static final int POSITION_Y = 40; // Vị trí y của toast
+
+    private final JLabel label;
+
+    public Toast(String message) {
+        setLayout(new BorderLayout());
+
+        label = new JLabel(message);
+        label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+        label.setForeground(Color.WHITE);
+        label.setOpaque(true);
+        label.setBackground(Color.GRAY);
+
+        add(label, BorderLayout.CENTER);
+
+        setUndecorated(true);
+        setFocusableWindowState(false);
+        setSize(210, 50);
+        setLocation(POSITION_X, POSITION_Y);
+        setAlwaysOnTop(true);
+    }
+
+    public void display() {
+        setVisible(true);
+
+        try {
+            Thread.sleep(DISPLAY_TIME);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        dispose();
+    }
+
+
+    public void setBackgroundColor(Color color) {
+        label.setBackground(color);
+    }
+    public void setBorderRadius(int borderRadius) {
+        label.setBorder(BorderFactory.createEmptyBorder(borderRadius, borderRadius, borderRadius, borderRadius));
     }
 }
 

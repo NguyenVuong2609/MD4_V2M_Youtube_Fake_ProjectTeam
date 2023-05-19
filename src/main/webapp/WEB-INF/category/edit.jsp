@@ -12,15 +12,18 @@
 </head>
 <body>
 <form method="post">
-    <table>
-        <tr>
-            <th>NAME</th>
-        </tr>
-        <tr>
-            <td><input type="text" value="${requestScope["category"].getName()}" name="name"></td>
-        </tr>
-    </table>
-    <button type="submit">Update</button>
+
+        <table >
+            <tr>
+                <th>NAME</th>
+            </tr>
+            <tr>
+                <td><input style="border-radius: 5px" type="text" value="${requestScope["category"].getName()}" name="name"></td>
+            </tr>
+        </table>
+        <br>
+        <button style="border-radius: 5px; text-align: center; background-color: #1e7e34;margin-left: 60px" type="submit">Update</button>
+
 </form>
 </body>
 </html>
