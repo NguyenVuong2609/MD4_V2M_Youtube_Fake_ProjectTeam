@@ -190,6 +190,8 @@ public class UserController extends HttpServlet {
         if (user != null) {
             listHavingVideo = Service.getInstance().getPlaylistService().showListHavingVideo(id, user.getUser_id());
             listNotHavingVideo = Service.getInstance().getPlaylistService().showListNotHavingVideo(id, user.getUser_id());
+            System.out.println("list having video" + listHavingVideo);
+            System.out.println("list not having video" + listNotHavingVideo);
             request.setAttribute("listHavingVideo", listHavingVideo);
             request.setAttribute("listNotHavingVideo", listNotHavingVideo);
 
@@ -328,14 +330,14 @@ public class UserController extends HttpServlet {
         if (countView > 100 && countSub > 1){
             Service.getInstance().getChannelService().changeStatusById(channel_id);
             user.setChannel(Service.getInstance().getChannelService().findById(channel_id));
-            request.setAttribute("validate", "Success!");
+            session.setAttribute("validate", "Success!");
             try {
                 response.sendRedirect("/");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         } else {
-            request.setAttribute("validate", "Failed");
+            session.setAttribute("validate", "Failed! You don't have enough View or Subscribers");
             try {
                 response.sendRedirect("/");
             } catch (IOException e) {

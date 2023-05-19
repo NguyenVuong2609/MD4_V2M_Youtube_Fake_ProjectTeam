@@ -151,15 +151,15 @@
                                             <c:if test='${sessionScope["userLogin"]!=null}'>
                                                 <c:forEach var="playlist" items='${listHavingVideo}'>
                                                     <li>
-                                                        <a href="/playlist?action=delete&id=${video.video_id}&idPL=${playlist.playlist_id}">
+                                                        <a href="/playlist?action=delete&id=${video.video_id}&idPL=${playlist.getPlaylist_id()}">
                                                             Remove from ${playlist.playlist_name}
                                                         </a>
                                                     </li>
                                                 </c:forEach>
-                                                <c:forEach var="playlist" items='${listNotHavingVideo}'>
+                                                <c:forEach var="listNotHavingVideo" items='${listNotHavingVideo}'>
                                                     <li>
-                                                        <a href="/playlist?action=add&id=${video.video_id}&idPL=${playlist.playlist_id}">
-                                                                ${playlist.playlist_name}
+                                                        <a href="/playlist?action=add&id=${video.video_id}&idPL=${listNotHavingVideo.getPlaylist_id()}">
+                                                                ${listNotHavingVideo.playlist_name}
                                                         </a>
                                                     </li>
                                                 </c:forEach>
