@@ -16,9 +16,7 @@
 </head>
 <body>
 <div class="container mt-5 px-2">
-
     <div class="mb-2 d-flex justify-content-between align-items-center">
-
         <div class="position-relative">
             <span class="position-absolute search"><i class="fa fa-search"></i></span>
             <input class="form-control w-100" placeholder="Search by order#, name...">

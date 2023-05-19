@@ -100,6 +100,5 @@ public class ChannelController extends HttpServlet {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
