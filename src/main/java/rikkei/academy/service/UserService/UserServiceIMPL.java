@@ -19,7 +19,7 @@ public class UserServiceIMPL implements IUserService{
     private final String INSERT_INTO_USERROLE = "insert into user_role values (?,?)";
     private final String SELECT_USER_LOGIN = "select * from user where (username = ? and convert(password using utf8mb4) collate utf8mb4_bin = ?)";
     private final String INSERT_INTO_HISTORY = "INSERT INTO history (user_id) VALUES (?);";
-
+    private final String UPDATE_AVATAR = "update user set avatar = ? where user_id = ?";
 
     @Override
     public List<User> findAll() {
@@ -180,6 +180,15 @@ public class UserServiceIMPL implements IUserService{
 
     @Override
     public void updateAvatar(String avatar, int id) {
-
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AVATAR);
+            preparedStatement.setString(1, avatar);
+            preparedStatement.setInt(2,id);
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

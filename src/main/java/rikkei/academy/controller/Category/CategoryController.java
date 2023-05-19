@@ -38,7 +38,6 @@ public class CategoryController extends HttpServlet {
             default:
                 showListCategory(req,resp);
         }
-        showListCategory(req,resp);
     }
 
     @Override

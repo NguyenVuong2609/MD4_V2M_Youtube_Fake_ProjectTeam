@@ -89,7 +89,7 @@
                             </video>
                             <div class="row" style="border: 1px solid #005cbf; border-radius: 8px; margin-top: 10px">
                                 <div class="col-2 mt-3">
-                                    <img width="48"
+                                    <img width="40" height="40" style="border-radius: 50%"
                                          src="${video.channel.getAvatar()}"
                                          class="rounded-circle">
                                 </div>
@@ -210,7 +210,7 @@
             <div class="card p-3 mt-2 comment-card">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="user d-flex flex-row align-items-center">
-                        <img src="${comment.getUser().getAvatar()}" width="30" class="user-img rounded-circle mr-2">
+                        <img src="${comment.getUser().getAvatar()}" style="width: 30px;height: 30px" class="user-img rounded-circle mr-2">
                         <span><small class="font-weight-bold text-primary">${comment.getUser().getName()}</small>
                             <small class="font-weight-bold">${comment.getComment_content()} </small></span>
                     </div>

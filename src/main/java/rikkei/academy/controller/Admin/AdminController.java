@@ -1,17 +1,17 @@
 package rikkei.academy.controller.Admin;
 
+import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Category;
 import rikkei.academy.service.CategoryService.CategoryServiceIMPL;
 import rikkei.academy.service.CategoryService.ICategoryService;
 
+import java.io.*;
+import java.sql.Connection;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 
 @WebServlet(value = "/admin")
 public class AdminController extends HttpServlet {
@@ -38,7 +38,6 @@ public class AdminController extends HttpServlet {
             default:
                 showListCategory(req,resp);
         }
-        showListCategory(req,resp);
     }
 
     @Override

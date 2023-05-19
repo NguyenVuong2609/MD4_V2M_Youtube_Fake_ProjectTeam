@@ -25,6 +25,7 @@ public class VideoServiceIMPL implements IVideoService {
     private static final String SELECT_TRENDING_VIDEO = "SELECT video_id FROM video ORDER BY view DESC;";
     private static final String COUNT_ALL_VIDEOS = "select count(video_id) from video";
     private static final String SEARCH_FOR_VIDEO = "SELECT * FROM video WHERE video_name LIKE ?;";
+    private static final String FIND_VIDEO_BY_CHANNEL_ID = "SELECT * FROM video WHERE channel_id = ?;";
 
     @Override
     public List<Video> findAll(int start, int elementOfPage) {
@@ -245,4 +246,21 @@ public class VideoServiceIMPL implements IVideoService {
         }
         return videoList;
     }
+
+    @Override
+    public List<Video> findListVideoByChannelId(int channel_id) {
+        List<Video> videoList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_VIDEO_BY_CHANNEL_ID);
+            preparedStatement.setInt(1,channel_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                videoList.add(findById(resultSet.getInt(1)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return videoList;
+    }
+
 }

@@ -47,7 +47,7 @@
                                          height="174"/>
                                     <div class="row">
                                         <div class="col-2 mt-3">
-                                            <img width="48"
+                                            <img width="40" height="40" style="border-radius: 50%"
                                                  src="${video.getChannel().getAvatar()}"
                                                  class="rounded-circle">
                                         </div>

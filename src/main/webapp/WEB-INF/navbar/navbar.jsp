@@ -22,10 +22,58 @@
             height: 50px;
             border-radius: 50%;
         }
+
         .navbar-brand {
             text-decoration: none;
             color: #000;
             font-weight: 700;
+        }
+
+        .modal {
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .close:focus {
+            outline: 1px dotted #fff !important;
+        }
+
+        .modal-body {
+            padding: 0rem !important;
+        }
+
+        .modal-title {
+            color: #fff;
+        }
+
+        .modal-header {
+            background: #e1251d;
+            color: #fff !important;
+        }
+
+        .bi-x {
+            color: #fff;
+        }
+
+        .heading {
+            font-weight: 500 !important;
+        }
+
+        .subheadings {
+            font-size: 12px;
+            color: #e1251d;
+        }
+
+        .dots {
+            height: 10px;
+            width: 10px;
+            background-color: green;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .gallery img {
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -68,7 +116,9 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="">Account information</a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal">Account Information
+                            </button>
                             <c:if test='${sessionScope["userLogin"].getChannel()== null}'>
                                 <a class="dropdown-item" href="/channel?action=create">Create your channel</a>
                             </c:if>
@@ -120,5 +170,148 @@
     });
 </script>
 <!-- mobile top navbar -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Account Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                  fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+</svg></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-0">
+                    <div class="col-md-8 border-right">
+                        <div class="status p-3">
+                            <table class="table table-borderless">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">MeTube</span>
+                                            <span class="subheadings">Premium </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Time Created</span>
+                                            <span class="subheadings">5:00PM 19-03-2023</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Rank</span>
+                                            <span class="subheadings"><i class="dots"></i> User</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">About</span>
+                                            <span class="subheadings">Coder</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Name</span>
+                                            <span class="subheadings">${sessionScope['userLogin'].getName()}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Contact</span>
+                                            <span class="subheadings">Ha Noi, Viet Nam</span>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Mobile Phone</span>
+                                            <span class="subheadings">0988686789</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Direction</span>
+                                            <span class="d-block subheadings">Get direction by using</span>
+                                            <span class="d-flex flex-row">
+                                        <img src="https://img.icons8.com/color/100/000000/google-maps.png"
+                                             class="rounded" width="30"/>
+                                        <img src="https://img.icons8.com/color/100/000000/pittsburgh-map.png"
+                                             class="rounded" width="30"/>
+                                    </span>
+
+                                        </div>
+                                    </td>
+
+                                    <td colspan="2">
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Achievements</span>
+                                            <span class="d-flex flex-row gallery">
+                                        <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/ach1.png?alt=media&token=54db746c-fa45-42d7-a6e2-b9656f9b2cd7"
+                                             width="50" class="rounded">
+                                        <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/ach2.png?alt=media&token=f0451951-b166-4d64-860b-50f9046d101d"
+                                             width="50" class="rounded">
+                                        <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/ach3.jpg?alt=media&token=9131627a-f043-426b-817c-4d959d79a27e"
+                                             width="50" class="rounded">
+                                    </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 text-center">
+                            <div class="profile">
+                                <a href="/user?action=avatar">
+                                    <img src="${sessionScope['userLogin'].getAvatar()}" style="width: 140px; height: 140px"
+                                         class="rounded-circle img-thumbnail">
+                                </a>
+                                <span class="d-block mt-3 font-weight-bold">${sessionScope['userLogin'].getName()}</span>
+                            </div>
+                            <div class="about-doctor">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <span class="heading d-block">Age:</span>
+                                                <span class="subheadings">25</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <span class="heading d-block">Nationality</span>
+                                                <span class="subheadings">Viet Nam</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>

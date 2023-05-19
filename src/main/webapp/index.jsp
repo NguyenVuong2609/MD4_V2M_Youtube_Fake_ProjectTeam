@@ -63,7 +63,7 @@
                 </c:forEach>
                 <div class="col-md-12 p-2">
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination">
+                        <ul class="pagination justify-content-center">
                             <c:if test="${pageNumber != 1}">
                                 <li class="page-item"><a class="page-link"
                                                          href="/?action=page_grid&page=${pageNumber-1}">Previous</a>
@@ -83,7 +83,7 @@
 
                             </c:forEach>
                             <c:if test="${pageNumber lt sumOfPage}">
-                                <li class="page-item"><a href="?action=page_gid&page=${pageNumber + 1}">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="?action=page_gid&page=${pageNumber + 1}">Next</a></li>
                             </c:if>
                         </ul>
                     </nav>
