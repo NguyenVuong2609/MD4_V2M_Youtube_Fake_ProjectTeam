@@ -29,43 +29,67 @@
     };
 </script>
 <body>
-<form class="row g-3" method="post" style="max-width: 1100px">
-    <h3 style="text-align: center">Create Video</h3>
-    <div class="col-md-12 uploadFile">
-        <div class="col-md-1"></div>
-        <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Video Name</label>
-            <input type="text" class="form-control" id="inputEmail4" name="videoName">
-        </div>
-    </div>
-    <div class="col-md-4 uploadFile">
-        <label for="inputState" class="form-label">Category</label>
-        <select name="category" id="inputState" class="form-select">
-            <option selected>Choose...</option>
-            <c:forEach var="category" items="${categoryList}">
-                <option value="${category.getName()}" style="text-transform: capitalize">${category.getName()}</option>
-            </c:forEach>
-        </select>
-    </div>
-    <div class="col-md-12">
-        <div class="col-md-1"></div>
-        <div class="col-md-10 uploadFile">
-            <label>Image for Video</label>
-            <jsp:include page='./upload-img.jsp'>
-                <jsp:param name="articleId" value=""/>
-            </jsp:include>
-            <label>Video</label>
-            <jsp:include page='./upload-video.jsp'>
-                <jsp:param name="articleId" value=""/>
-            </jsp:include>
-            <div class="col-md-1"></div>
+<section class="vh-100" style="background-color: #9A616D;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/youtube2.png?alt=media&token=9f49fd1e-fdde-4266-a553-f0835603a257"
+                                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;"/>
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
 
+                                <form class="row g-3" method="post" style="max-width: 1100px">
+                                    <h3 style="text-align: center">Create Video</h3>
+                                    <div class="col-md-12 uploadFile">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-6">
+                                            <label for="inputEmail4" class="form-label">Video Name</label>
+                                            <input type="text" class="form-control" id="inputEmail4" name="videoName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 uploadFile">
+                                        <label for="inputState" class="form-label">Category</label>
+                                        <select name="category" id="inputState" class="form-select">
+                                            <option selected>Choose...</option>
+                                            <c:forEach var="category" items="${categoryList}">
+                                                <option value="${category.getName()}"
+                                                        style="text-transform: capitalize">${category.getName()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-10 uploadFile">
+                                            <label>Image for Video</label>
+                                            <jsp:include page='./upload-img.jsp'>
+                                                <jsp:param name="articleId" value=""/>
+                                            </jsp:include>
+                                            <label>Video</label>
+                                            <jsp:include page='./upload-video.jsp'>
+                                                <jsp:param name="articleId" value=""/>
+                                            </jsp:include>
+                                            <div class="col-md-1"></div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="text-align: center">
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-12" style="text-align: center">
-        <button type="submit" class="btn btn-primary">Create</button>
-    </div>
-</form>
+</section>
+
 
 </body>
 

@@ -67,10 +67,12 @@ public class HistoryServiceIMPL implements IHistoryService {
     @Override
     public void addVideo(int video_id, int user_id) {
         try {
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_VIDEO_HISTORY_CONNECTION);
             preparedStatement.setInt(1, video_id);
             preparedStatement.setInt(2, findHistoryByUserId(user_id));
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
