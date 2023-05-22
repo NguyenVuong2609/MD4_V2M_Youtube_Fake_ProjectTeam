@@ -100,6 +100,7 @@ public class PlaylistServiceIMPL implements IPlaylist {
     public void insertVideoList(Playlist playlist) {
         try {
             int playlistID = playlist.getPlaylist_id();
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_VIDEO_PLAYLIST_CONNECTION);
             List<Video> videoList = playlist.getVideoList();
             List<Integer> videoIDList = new ArrayList<>();
@@ -111,6 +112,7 @@ public class PlaylistServiceIMPL implements IPlaylist {
                 preparedStatement.setInt(2, playlistID);
                 preparedStatement.executeUpdate();
             }
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -202,6 +204,4 @@ public class PlaylistServiceIMPL implements IPlaylist {
         }
         return videoList;
     }
-
-    ;
 }
