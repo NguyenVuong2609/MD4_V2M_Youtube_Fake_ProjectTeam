@@ -39,9 +39,11 @@ public class CategoryServiceIMPL implements ICategoryService{
     @Override
     public void save(Category category) {
         try {
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_CATEGORY);
             preparedStatement.setString(1,category.getName());
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
