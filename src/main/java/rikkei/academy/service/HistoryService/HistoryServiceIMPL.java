@@ -96,7 +96,6 @@ public class HistoryServiceIMPL implements IHistoryService {
             preparedStatement.setInt(2, video_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                System.out.println(1234);
                 return true;
             }
         } catch (SQLException e) {
