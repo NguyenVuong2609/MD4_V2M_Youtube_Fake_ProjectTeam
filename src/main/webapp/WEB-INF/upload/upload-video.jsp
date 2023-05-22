@@ -20,7 +20,7 @@ To change this template use File | Settings | File Templates.
     <progress value="0" max="100" id="uploaderVideo" style="width: 100%;">0%</progress><br>
     <input type="file" value="uploadVideo" accept=".mp4" id="fileButtonVideo">
     <input name="videoLink" type="text" id="videoLink" style="display: none">
-    <div id="videoDiv"></div>
+<%--    <div id="videoDiv"></div>--%>
 <%--    <button type="submit">Upload</button>--%>
 <%--</form>--%>
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
@@ -137,7 +137,7 @@ To change this template use File | Settings | File Templates.
 
                 x.setAttribute("controls", downloadURL);
                 document.body.appendChild(x);
-                divLocation.append(x);
+                // divLocation.append(x);
                 document.getElementById('videoLink').value = downloadURL;
             });
 

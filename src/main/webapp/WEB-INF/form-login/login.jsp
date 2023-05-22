@@ -10,7 +10,7 @@
 <html>
 
 <head>
-    <title>Title</title>
+    <title>Log In</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
@@ -25,8 +25,12 @@
                 </c:if>
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
-                        <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="https://cdn.pixabay.com/photo/2020/11/01/03/08/youtube-5702765_960_720.jpg"
+                        <div style="margin-top: 150px" class="col-md-6 col-lg-5 d-none d-md-block">
+
+
+
+                            <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/logometube.jpg?alt=media&token=2d9ea93e-0bcb-47ba-aad6-8fc9396c195b"
+
                                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">

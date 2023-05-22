@@ -32,7 +32,7 @@ public class VideoServiceIMPL implements IVideoService {
         List<Video> videoList = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            String PAGE_CATEGORY = "SELECT SQL_CALC_FOUND_ROWS * FROM video LIMIT "+start+","+elementOfPage;
+            String PAGE_CATEGORY = "SELECT SQL_CALC_FOUND_ROWS * FROM video order by RAND() LIMIT "+start+","+elementOfPage;
             ResultSet resultSet = statement.executeQuery(PAGE_CATEGORY);
             while (resultSet.next()) {
                 Video video = new Video();
