@@ -46,8 +46,13 @@
         .comment-card {
             font-size: 16px;
         }
-        .related-videos img{
+
+        .related-videos img {
             max-height: 140px;
+        }
+        .dropdown-menu button {
+            width: 100%;
+            border-color: transparent;
         }
     </style>
 </head>
@@ -152,20 +157,29 @@
                                                 <c:forEach var="playlist" items='${listHavingVideo}'>
                                                     <li>
                                                         <a href="/playlist?action=delete&id=${video.video_id}&idPL=${playlist.getPlaylist_id()}">
-                                                            Remove from ${playlist.playlist_name}
+                                                            <button class="btn btn-danger">
+                                                                Remove from ${playlist.playlist_name}
+                                                            </button>
                                                         </a>
                                                     </li>
                                                 </c:forEach>
                                                 <c:forEach var="listNotHavingVideo" items='${listNotHavingVideo}'>
                                                     <li>
                                                         <a href="/playlist?action=add&id=${video.video_id}&idPL=${listNotHavingVideo.getPlaylist_id()}">
-                                                                ${listNotHavingVideo.playlist_name}
+                                                            <button class="btn btn-success">
+                                                                    ${listNotHavingVideo.playlist_name}
+                                                            </button>
                                                         </a>
                                                     </li>
                                                 </c:forEach>
                                             </c:if>
                                             <c:if test='${sessionScope["userLogin"]==null}'>
-                                                <li><a href="/user?action=login">Please Login First</a></li>
+                                                <li>
+                                                    <a href="/user?action=login">
+                                                        <button class="btn">
+                                                            Please Login First
+                                                        </button>
+                                                    </a></li>
                                             </c:if>
                                         </ul>
                                     </div>
@@ -210,7 +224,8 @@
             <div class="card p-3 mt-2 comment-card">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="user d-flex flex-row align-items-center">
-                        <img src="${comment.getUser().getAvatar()}" style="width: 30px;height: 30px" class="user-img rounded-circle mr-2">
+                        <img src="${comment.getUser().getAvatar()}" style="width: 30px;height: 30px"
+                             class="user-img rounded-circle mr-2">
                         <span><small class="font-weight-bold text-primary">${comment.getUser().getName()}</small>
                             <small class="font-weight-bold">${comment.getComment_content()} </small></span>
                     </div>
@@ -248,8 +263,9 @@
                                 <div class="row">
                                     <div class="col-12 mt-3">
                                         <p class="mb-2" style="font-weight: bold; font-size: 16px">
-                                            ${video.video_name}</p>
-                                        <p class="mb-2" style="font-size: 14px; color:#606060;">${video.channel.getChannel_name()}</p>
+                                                ${video.video_name}</p>
+                                        <p class="mb-2"
+                                           style="font-size: 14px; color:#606060;">${video.channel.getChannel_name()}</p>
                                         <p class="mb-2" style="color:#606060;">${video.view} views</p>
                                     </div>
                                 </div>

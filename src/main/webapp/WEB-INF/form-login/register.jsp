@@ -83,7 +83,7 @@
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                                <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/youtube1.jpg?alt=media&token=b07e2681-9240-4123-87c8-f004f2ea2fa9"
+                                <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/metuberegister.jpg?alt=media&token=95d43750-f925-4119-991b-4b52dd53cb34"
                                      class="img-fluid" alt="Sample image">
 
                             </div>
