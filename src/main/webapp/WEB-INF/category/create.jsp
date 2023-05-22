@@ -24,7 +24,7 @@
     </table>
     <br>
     <button style="background-color: #d39e00;border-radius: 5px" type="submit">CREATE</button>
-    <a href="/category"><button style="border-radius: 5px;background-color: #1e7e34;margin-left: 100px">Back</button></a>
+    <a href="/category"><button type="button" style="border-radius: 5px;background-color: #1e7e34;margin-left: 100px">Back</button></a>
 </form>
 </body>
 </html>

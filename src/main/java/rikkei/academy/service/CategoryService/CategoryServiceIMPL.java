@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryServiceIMPL implements ICategoryService{
+    public static List<Category> categoryList = new ArrayList<>();
     private Connection connection = ConnectToMySQL.getConnection();
     private static final String INSERT_INTO_CATEGORY = "insert into category (category_name) values (?)";
     private static final String SELECT_CATEGORY_BY_NAME = "SELECT  * FROM category WHERE category_name = ?";
@@ -50,11 +51,17 @@ public class CategoryServiceIMPL implements ICategoryService{
 
     @Override
     public Category findById(int id) {
+        for (int i = 0; i < categoryList.size(); i++) {
+            if (categoryList.get(i).getId()==id){
+                return categoryList.get(i);
+            }
+        }
         return null;
     }
 
     @Override
     public void deleteById(int id) {
+        categoryList.remove(findById(id));
     }
 
     @Override

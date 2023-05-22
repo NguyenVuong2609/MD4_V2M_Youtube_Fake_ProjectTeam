@@ -1,12 +1,10 @@
 package rikkei.academy.controller.Category;
 
-import rikkei.academy.config.ConnectToMySQL;
 import rikkei.academy.model.Category;
 import rikkei.academy.service.CategoryService.CategoryServiceIMPL;
 import rikkei.academy.service.CategoryService.ICategoryService;
 
 import java.io.*;
-import java.sql.Connection;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,8 +31,10 @@ public class CategoryController extends HttpServlet {
                 break;
             case "edit":
                 showFormEdit(req,resp);
+                break;
             case "delete":
                 actionDelete(req,resp);
+                break;
             default:
                 showListCategory(req,resp);
         }
@@ -54,6 +54,10 @@ public class CategoryController extends HttpServlet {
                 break;
             case "edit":
                 actionEdit(req,resp);
+                break;
+            case "delete":
+                actionDelete(req,resp);
+                break;
         }
     }
     // SHOW LIST R-CRUD
