@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="Assets/css/loadersmile.css">
 </head>
 <body>
 <jsp:include page='../navbar/navbar.jsp'>
@@ -70,7 +71,14 @@
                 </c:if>
             </c:if>
             <c:if test="${sessionScope['userLogin']==null}">
-                <h3>Please login first</h3>
+                <div class="right-wrapper">
+                    <h3 class="spinnerIconWrapper">
+                        <div class="spinnerIcon"></div>
+                    </h3>
+                    <h3 class="finished-text">
+                        Please login first
+                    </h3>
+                </div>
             </c:if>
         </div>
     </div>
