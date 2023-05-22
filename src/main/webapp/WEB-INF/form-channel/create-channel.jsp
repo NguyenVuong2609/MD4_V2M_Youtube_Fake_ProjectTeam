@@ -35,7 +35,7 @@
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/youtube2.png?alt=media&token=9f49fd1e-fdde-4266-a553-f0835603a257"
+                            <img src="https://firebasestorage.googleapis.com/v0/b/vuongcuti-6ce58.appspot.com/o/ada16846d3640d3a5475.jpg?alt=media&token=101c8026-84ed-4653-9b4b-209194ca3236"
                                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;"/>
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
