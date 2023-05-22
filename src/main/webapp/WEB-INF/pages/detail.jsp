@@ -24,6 +24,14 @@
             crossorigin="anonymous"></script>
     <%--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>--%>
     <%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>--%>
+
+    <!-- Buttons Core -->
+    <link rel="stylesheet" href="Assets/css/pushy-buttons.css">
+
+    <!-- Or -->
+
+    <!-- Minified Version -->
+    <link rel="stylesheet" href="Assets/css/pushy-buttons.min.css">
     <style>
         .card video {
             max-width: 100%;
@@ -111,18 +119,18 @@
                                     <c:if test='${sessionScope["userLogin"]!=null}'>
                                         <c:if test="${requestScope['checkSubscribe']==false}">
                                             <a href="/channel?action=add&id=${video.video_id}&idc=${video.channel.getChannel_id()}">
-                                                <button type="button">Subscribe</button>
+                                                <button type="button" class="pushy__btn pushy__btn--sm pushy__btn--blue">Subscribe</button>
                                             </a>
                                         </c:if>
                                         <c:if test="${requestScope['checkSubscribe']}">
                                             <a href="/channel?action=remove&id=${video.video_id}&idc=${video.channel.getChannel_id()}">
-                                                <button type="button">Unsubscribe</button>
+                                                <button type="button" class="pushy__btn pushy__btn--sm pushy__btn--blue">Subscribe</button>
                                             </a>
                                         </c:if>
                                     </c:if>
                                     <c:if test='${sessionScope["userLogin"]==null}'>
                                         <a href="/user?action=login">
-                                            <button type="button">Subscribe</button>
+                                            <button type="button" class="pushy__btn pushy__btn--sm pushy__btn--blue">Subscribe</button>
                                         </a>
                                     </c:if>
                                 </div>
@@ -130,18 +138,18 @@
                                     <span>${requestScope['countLike']}</span>
                                     <c:if test="${sessionScope['userLogin'] == null}">
                                         <a href="/user?action=login">
-                                            <button type="button">Like</button>
+                                            <button type="button" class="pushy__btn pushy__btn--sm pushy__btn--green">Like</button>
                                         </a>
                                     </c:if>
                                     <c:if test="${sessionScope['userLogin'] != null}">
                                         <c:if test='${requestScope["checkLike"]!=true}'>
                                             <a href="/like?action=like&id=${video.video_id}">
-                                                <button type="button">Like</button>
+                                                <button type="button" class="pushy__btn pushy__btn--sm pushy__btn--green">Like</button>
                                             </a>
                                         </c:if>
                                         <c:if test='${requestScope["checkLike"]==true}'>
                                             <a href="/like?action=unlike&id=${video.video_id}">
-                                                <button type="button">Unlike</button>
+                                                <button type="button" class="pushy__btn pushy__btn--sm pushy__btn--red">Unlike</button>
                                             </a>
                                         </c:if>
                                     </c:if>
