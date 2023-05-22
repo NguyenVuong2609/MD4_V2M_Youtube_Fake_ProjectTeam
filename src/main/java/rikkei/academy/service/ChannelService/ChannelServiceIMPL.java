@@ -92,10 +92,12 @@ public class ChannelServiceIMPL implements IChannelService {
     @Override
     public void addSubscriber(int channel_id, int user_id) {
         try {
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_SUBSCRIBER);
             preparedStatement.setInt(1, channel_id);
             preparedStatement.setInt(2, user_id);
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -104,10 +106,12 @@ public class ChannelServiceIMPL implements IChannelService {
     @Override
     public void unSubscribe(int channel_id, int user_id) {
         try {
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_SUBSCRIBER);
             preparedStatement.setInt(1, channel_id);
             preparedStatement.setInt(2, user_id);
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -165,6 +169,7 @@ public class ChannelServiceIMPL implements IChannelService {
     public void changeStatusById(int channel_id) {
         Channel channel = findById(channel_id);
         try {
+            connection.setAutoCommit(false);
             if (!channel.isStatus()) {
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CHANNEL_STATUS_TRUE_BY_ID);
                 preparedStatement.setInt(1, channel_id);
@@ -174,6 +179,7 @@ public class ChannelServiceIMPL implements IChannelService {
                 preparedStatement.setInt(1, channel_id);
                 preparedStatement.executeUpdate();
             }
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

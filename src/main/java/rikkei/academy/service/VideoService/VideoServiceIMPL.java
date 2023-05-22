@@ -176,9 +176,11 @@ public class VideoServiceIMPL implements IVideoService {
     @Override
     public void updateViewById(int id) {
         try {
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_VIEW_BY_ID);
             preparedStatement.setInt(1,id);
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

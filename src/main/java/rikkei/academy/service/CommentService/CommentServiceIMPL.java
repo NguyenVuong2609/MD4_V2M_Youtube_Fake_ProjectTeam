@@ -20,11 +20,13 @@ public class CommentServiceIMPL implements ICommentService{
     @Override
     public void save(Comment comment) {
         try {
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_COMMENT);
             preparedStatement.setString(1,comment.getComment_content());
             preparedStatement.setInt(2,comment.getUser().getUser_id());
             preparedStatement.setInt(3,comment.getVideo().getVideo_id());
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

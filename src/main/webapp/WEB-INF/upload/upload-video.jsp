@@ -127,16 +127,16 @@ To change this template use File | Settings | File Templates.
                 // imgElement.width = 100;
                 // imgElement.height = 100;
                 // console.log('pic ==', downloadURL)
-                var x = document.createElement("video");
+                // var x = document.createElement("video");
 
-                if (x.canPlayType("video/mp4")) {
-                    x.setAttribute("src",downloadURL);
-                } else {
-                    x.setAttribute("src",downloadURL);
-                }
+                // if (x.canPlayType("video/mp4")) {
+                //     x.setAttribute("src",downloadURL);
+                // } else {
+                //     x.setAttribute("src",downloadURL);
+                // }
 
-                x.setAttribute("controls", downloadURL);
-                document.body.appendChild(x);
+                // x.setAttribute("controls", downloadURL);
+                // document.body.appendChild(x);
                 // divLocation.append(x);
                 document.getElementById('videoLink').value = downloadURL;
             });

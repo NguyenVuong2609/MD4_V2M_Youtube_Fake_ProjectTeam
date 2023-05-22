@@ -21,10 +21,12 @@ public class LikeServiceIMPL implements ILikeService{
     @Override
     public void save(Like like) {
         try {
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_LIKE);
             preparedStatement.setInt(1,like.getUser().getUser_id());
             preparedStatement.setInt(2,like.getVideo().getVideo_id());
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
