@@ -44,7 +44,7 @@
 <body>
 <div class="container mt-5 px-2">
 
-    <a href="/category?action=create"> CREATE CATEGORY </a>
+    <a href="/category?action=create"><button style="background-color:#1e7e34; border-radius: 5px"> CREATE CATEGORY</button> </a>
     <div class="table-responsive">
         <table class="table table-responsive table-borderless">
 

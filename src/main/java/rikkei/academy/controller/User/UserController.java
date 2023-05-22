@@ -230,7 +230,7 @@ public class UserController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         } else {
-            showToast("Login failed! Please try again!", Color.GREEN,10,5);
+            showToast("Login failed! Please try again!", Color.red,10,5);
             request.setAttribute("validate", "Login failed! Please try again!");
             showFormLogin(request, response);
         }
