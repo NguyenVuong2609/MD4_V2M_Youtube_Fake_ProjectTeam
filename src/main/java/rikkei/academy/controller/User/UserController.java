@@ -118,6 +118,7 @@ public class UserController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
+        showFormRegister(request,response);
     }
 
 

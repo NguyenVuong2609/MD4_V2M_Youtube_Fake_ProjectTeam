@@ -124,7 +124,7 @@
                                         </c:if>
                                         <c:if test="${requestScope['checkSubscribe']}">
                                             <a href="/channel?action=remove&id=${video.video_id}&idc=${video.channel.getChannel_id()}">
-                                                <button type="button" class="pushy__btn pushy__btn--sm pushy__btn--blue">Subscribe</button>
+                                                <button type="button" class="pushy__btn pushy__btn--sm pushy__btn--red">Unsubscribe</button>
                                             </a>
                                         </c:if>
                                     </c:if>
